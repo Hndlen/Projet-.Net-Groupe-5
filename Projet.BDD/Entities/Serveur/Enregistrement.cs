@@ -12,6 +12,7 @@ namespace Projet.BDD.Entities.Serveur
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         public string NumeroCarteBancaire { get; set; }
         public double MontantOperation { get; set; }
         public EnumOperation TypeOperation { get; set; }

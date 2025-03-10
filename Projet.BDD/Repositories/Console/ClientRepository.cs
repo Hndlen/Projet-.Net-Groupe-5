@@ -18,19 +18,19 @@ namespace Projet.BDD.Repositories.Console
 
             private void InitializeDatabase()
             {
-                using var context = new MyDbContext();
+                using var context = new MyDbContextConsole();
                 context.Database.EnsureCreated();
             }
             public async Task<List<Client>> getAll()
             {
-                using var context = new MyDbContext();
+                using var context = new MyDbContextConsole();
                 var clients = await context.Clients.ToListAsync<Client>();
                 return clients;
             }
 
             public async Task<Client?> GetbyId(int id)
             {
-                using var context = new MyDbContext();
+                using var context = new MyDbContextConsole();
                 var client = await context.Clients
                                 .Where<Client>(c => c.Id == id)
                                 .SingleOrDefaultAsync<Client>();
@@ -39,7 +39,7 @@ namespace Projet.BDD.Repositories.Console
 
             public async Task<Client?> GetbyType(string type)
             {
-                using var context = new MyDbContext();
+                using var context = new MyDbContextConsole();
                 var client = await context.Clients
                                 .Where<Client>(c => c.Type == type)
                                 .SingleOrDefaultAsync<Client>();
@@ -48,7 +48,7 @@ namespace Projet.BDD.Repositories.Console
 
         public async Task<int> Add(Client catEntity)
             {
-                using var context = new MyDbContext();
+                using var context = new MyDbContextConsole();
                 context.Clients.Add(catEntity);
                 var cliSaved = await context.SaveChangesAsync();
                 return cliSaved;

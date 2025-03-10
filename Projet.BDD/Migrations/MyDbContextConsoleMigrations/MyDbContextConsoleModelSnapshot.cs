@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projet.BDD;
 
 #nullable disable
 
-namespace Projet.BDD.Migrations
+namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
 {
-    [DbContext(typeof(MyDbContext))]
-    [Migration("20250310141911_init")]
-    partial class init
+    [DbContext(typeof(MyDbContextConsole))]
+    partial class MyDbContextConsoleModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,57 +237,6 @@ namespace Projet.BDD.Migrations
                         .IsUnique();
 
                     b.ToTable("ComptesBancaire");
-                });
-
-            modelBuilder.Entity("Projet.BDD.Entities.Serveur.Anomalie", b =>
-                {
-                    b.Property<string>("NumeroCarteBancaire")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("DateOperation")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Devise")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Erreur")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("MontantOperation")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("TypeOperation")
-                        .HasColumnType("int");
-
-                    b.HasKey("NumeroCarteBancaire");
-
-                    b.ToTable("Anomalies");
-                });
-
-            modelBuilder.Entity("Projet.BDD.Entities.Serveur.Enregistrement", b =>
-                {
-                    b.Property<string>("NumeroCarteBancaire")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateOperation")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Devise")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("MontantOperation")
-                        .HasColumnType("float");
-
-                    b.Property<int>("TypeOperation")
-                        .HasColumnType("int");
-
-                    b.HasKey("NumeroCarteBancaire");
-
-                    b.ToTable("Enregistrements");
                 });
 
             modelBuilder.Entity("Projet.BDD.Entities.Console.ClientParticulier", b =>

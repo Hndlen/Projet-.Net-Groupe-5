@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Projet.BDD.Migrations
+namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitConsole : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,37 +27,6 @@ namespace Projet.BDD.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Adresses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Anomalies",
-                columns: table => new
-                {
-                    NumeroCarteBancaire = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MontantOperation = table.Column<double>(type: "float", nullable: true),
-                    TypeOperation = table.Column<int>(type: "int", nullable: true),
-                    DateOperation = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Devise = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Erreur = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Anomalies", x => x.NumeroCarteBancaire);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Enregistrements",
-                columns: table => new
-                {
-                    NumeroCarteBancaire = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MontantOperation = table.Column<double>(type: "float", nullable: false),
-                    TypeOperation = table.Column<int>(type: "int", nullable: false),
-                    DateOperation = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Devise = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Enregistrements", x => x.NumeroCarteBancaire);
                 });
 
             migrationBuilder.CreateTable(
@@ -232,13 +201,7 @@ namespace Projet.BDD.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Anomalies");
-
-            migrationBuilder.DropTable(
                 name: "CartesBancaire");
-
-            migrationBuilder.DropTable(
-                name: "Enregistrements");
 
             migrationBuilder.DropTable(
                 name: "ComptesBancaire");

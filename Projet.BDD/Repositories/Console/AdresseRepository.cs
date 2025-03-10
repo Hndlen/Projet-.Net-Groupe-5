@@ -17,19 +17,19 @@ namespace Projet.BDD.Repositories.Console
 
         private void InitializeDatabase()
         {
-            using var context = new MyDbContext();
+            using var context = new MyDbContextConsole();
             context.Database.EnsureCreated();
         }
         public async Task<List<Adresse>> getAll()
         {
-            using var context = new MyDbContext();
+            using var context = new MyDbContextConsole();
             var adresses = await context.Adresses.ToListAsync<Adresse>();
             return adresses;
         }
 
         public async Task<int> Add(Adresse addEntity)
         {
-            using var context = new MyDbContext();
+            using var context = new MyDbContextConsole();
             context.Adresses.Add(addEntity);
             var adrSaved = await context.SaveChangesAsync();
             return adrSaved;

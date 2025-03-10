@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Projet.BDD
 {
-    class MyDbContext : DbContext
+    class MyDbContextConsole : DbContext
     {
         public DbSet<Client> Clients { get; set; }
         public DbSet<ClientParticulier> ClientsParticulier { get; set; }
         public DbSet<ClientProfessionnel> ClientsProfessionnel { get; set; }
         public DbSet<CompteBancaire> ComptesBancaire { get; set; }
         public DbSet<CarteBancaire> CartesBancaire { get; set; }
-        public DbSet<Enregistrement> Enregistrements { get; set; }
-        public DbSet<Anomalie> Anomalies { get; set; }
+        //public DbSet<Enregistrement> Enregistrements { get; set; }
+        //public DbSet<Anomalie> Anomalies { get; set; }
 
         public DbSet<Adresse> Adresses { get; set; }
 
@@ -26,7 +26,7 @@ namespace Projet.BDD
             //base.OnConfiguring(optionsBuilder);
 
             optionsBuilder.UseSqlServer(
-                "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=dbProjetGrp5;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+                "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=dbProjetConsole;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
         }
 

@@ -18,19 +18,19 @@ namespace Projet.BDD.Repositories.Serveur
 
         private void InitializeDatabase()
         {
-            using var context = new MyDbContext();
+            using var context = new MyDbContextServeur();
             context.Database.EnsureCreated();
         }
         public async Task<List<Enregistrement>> getAll()
         {
-            using var context = new MyDbContext();
+            using var context = new MyDbContextServeur();
             var enregistrements = await context.Enregistrements.ToListAsync<Enregistrement>();
             return enregistrements;
         }
 
         public async Task<Enregistrement?> GetbyNumCarte(string numero)
         {
-            using var context = new MyDbContext();
+            using var context = new MyDbContextServeur();
             var enregistrement = await context.Enregistrements
                             .Where<Enregistrement>(e => e.NumeroCarteBancaire == numero)
                             .SingleOrDefaultAsync<Enregistrement>();
@@ -39,7 +39,7 @@ namespace Projet.BDD.Repositories.Serveur
 
         public async Task<List<Enregistrement?>> GetbyTypeOp(EnumOperation typeOp)
         {
-            using var context = new MyDbContext();
+            using var context = new MyDbContextServeur();
             var enregistrement = await context.Enregistrements
                             .Where<Enregistrement>(e => e.TypeOperation == typeOp)
                             .ToListAsync<Enregistrement>();
@@ -48,7 +48,7 @@ namespace Projet.BDD.Repositories.Serveur
 
         public async Task<int> Add(Enregistrement catEntity)
         {
-            using var context = new MyDbContext();
+            using var context = new MyDbContextServeur();
             context.Enregistrements.Add(catEntity);
             var enrSaved = await context.SaveChangesAsync();
             return enrSaved;
