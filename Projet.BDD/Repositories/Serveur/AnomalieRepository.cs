@@ -30,7 +30,7 @@ namespace Projet.BDD.Repositories.Serveur
         {
             using var context = new MyDbContext();
             var enregistrement = await context.Anomalies
-                            .Where<Anomalies>(a => a.numCB == numero)
+                            .Where<Anomalie>(a => a.numCB == numero)
                             .ToListAsync<Anomalie>();
             return enregistrement;
         }
@@ -44,7 +44,7 @@ namespace Projet.BDD.Repositories.Serveur
             return enregistrement;
         }
 
-        public async Task<int> Add(Anomalie anoEntity)
+        public async Task<int> Add(entity anoEntity)
         {
             using var context = new MyDbContext();
             context.Anomalies.Add(anoEntity);
