@@ -18,5 +18,7 @@ namespace Projet.BDD.Entities.Console
         public string Mail { get; set; }
 
         public abstract string Type { get; }
+
+        public CompteBancaire CompteBancaire { get; set; }
     }
 }
