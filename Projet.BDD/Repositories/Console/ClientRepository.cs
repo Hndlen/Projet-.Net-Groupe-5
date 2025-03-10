@@ -1,4 +1,5 @@
-﻿using Projet.BDD.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Projet.BDD.Entities;
 using Projet.BDD.Entities.Console;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Projet.BDD.Repositories.Console
 {
-    public class ClientRepository : IRepository<Client>
+    public class ClientRepository : Irepository<Client>
     {
             public ClientRepository()
             {
@@ -48,7 +49,7 @@ namespace Projet.BDD.Repositories.Console
         public async Task<int> Add(Client catEntity)
             {
                 using var context = new MyDbContext();
-                context.clients.Add(catEntity);
+                context.Clients.Add(catEntity);
                 var cliSaved = await context.SaveChangesAsync();
                 return cliSaved;
 

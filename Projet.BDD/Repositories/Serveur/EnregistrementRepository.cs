@@ -1,4 +1,5 @@
-﻿using Projet.BDD.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Projet.BDD.Entities;
 using Projet.BDD.Entities.Serveur;
 using System;
 using System.Collections.Generic;
@@ -31,16 +32,16 @@ namespace Projet.BDD.Repositories.Serveur
         {
             using var context = new MyDbContext();
             var enregistrement = await context.Enregistrements
-                            .Where<Enregistrement>(e => e.numCB == numero)
-                            .ToListAsync<Enregistrement>();
+                            .Where<Enregistrement>(e => e.NumeroCarteBancaire == numero)
+                            .SingleOrDefaultAsync<Enregistrement>();
             return enregistrement;
         }
 
-        public async Task<Enregistrement?> GetbyTypeOp(string typeOp)
+        public async Task<List<Enregistrement?>> GetbyTypeOp(EnumOperation typeOp)
         {
             using var context = new MyDbContext();
             var enregistrement = await context.Enregistrements
-                            .Where<Enregistrement>(e => e.typeOp == typeOp)
+                            .Where<Enregistrement>(e => e.TypeOperation == typeOp)
                             .ToListAsync<Enregistrement>();
             return enregistrement;
         }

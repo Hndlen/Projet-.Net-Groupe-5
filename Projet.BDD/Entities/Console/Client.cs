@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Projet.BDD.Entities.Console
 {
-    public class Client
+    public abstract class Client
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -15,5 +15,7 @@ namespace Projet.BDD.Entities.Console
 
         public Adresse AdresseClient { get; set; }
         public string Mail { get; set; }
+
+        public abstract string Type { get; }
     }
 }

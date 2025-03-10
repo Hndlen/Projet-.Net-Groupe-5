@@ -1,4 +1,5 @@
-﻿using Projet.BDD.Entities.Console;
+﻿using Microsoft.EntityFrameworkCore;
+using Projet.BDD.Entities.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +25,6 @@ namespace Projet.BDD.Repositories.Console
             using var context = new MyDbContext();
             var adresses = await context.Adresses.ToListAsync<Adresse>();
             return adresses;
-        }
-
-        public async Task<Adresse?> GetbyId(int id)
-        {
-            using var context = new MyDbContext();
-            var adresse = await context.Adresses
-                            .Where<Adresse>(a => a.Id == id)
-                            .SingleOrDefaultAsync<Adresse>();
-            return adresse;
         }
 
         public async Task<int> Add(Adresse addEntity)
