@@ -48,7 +48,7 @@ namespace Projet.BDD
                   {
                       Id = 1,
                       Nom = "BETY",
-                      AdresseClient = new Adresse("12, rue des Oliviers", "", "CRETEIL", 94000),
+                      AdresseClient = new Adresse("12, rue des Oliviers", "", 94000, "CRETEIL"),
                       Mail = "bety@gmail.com",
                       Prenom = "Daniel",
                       Sexe = EnumSexe.Masculin,
@@ -60,11 +60,11 @@ namespace Projet.BDD
                   {
                       Id = 2,
                       Nom = "AXA",
-                      AdresseClient = new Adresse("12, rue des Oliviers", "", "CRETEIL", 94000),
-                      Mail = "bety@gmail.com",
-                      Prenom = "Daniel",
-                      Sexe = EnumSexe.Masculin,
-                      DateNaissance = new DateTime(1985, 11, 12)
+                      AdresseClient = new Adresse("125, rue LaFayette", "Digicode 1432", 94120, "FONTENAY SOUS BOIS"),
+                      Mail = "info@axa.fr",
+                      Siret = "12548795641122",
+                      StatutJuridique = EnumStatutJuridique.SARL,
+                      AdresseSiege = new Adresse("125, rue LaFayette", "Digicode 1432", 94120, "FONTENAY SOUS BOIS")
                   });
 
         }

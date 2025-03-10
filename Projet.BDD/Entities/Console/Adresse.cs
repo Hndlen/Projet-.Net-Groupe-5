@@ -14,15 +14,17 @@ namespace Projet.BDD.Entities.Console
 
         public string Libelle { get; set; }
         public string Complement { get; set; }
-        public string Ville { get; set; }
         public int CodePostal { get; set; }
+        public string Ville { get; set; }
+        
 
-        public Adresse(string libelle, string complement, string ville, int codePostal)
+        public Adresse(string libelle, string complement,  int codePostal, string ville)
         {
             this.Libelle = libelle;
             this.Complement = complement;
-            this.Ville = ville;
             this.CodePostal = codePostal;
+            this.Ville = ville;
+            
         }
 
     }
