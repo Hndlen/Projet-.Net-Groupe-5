@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Projet.BDD.Entities.Console
 {
-    public abstract class ClientDto
+    public class ClientDto
     {
         public int Id { get; set; }
 
@@ -17,7 +17,7 @@ namespace Projet.BDD.Entities.Console
         [Required(AllowEmptyStrings = false, ErrorMessage = "le mail du client est requis")]
         public string Mail { get; set; }
 
-        public abstract string Type { get; }
+        public virtual string Type { get; }
 
         public CompteBancaireDto CompteBancaire { get; set; }
     }

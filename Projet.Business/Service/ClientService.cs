@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Projet.Business.Service
 {
-    class ClientService
+    public class ClientService
     {
         private readonly ClientRepository _repo;
         private readonly IMapper _mapper;
