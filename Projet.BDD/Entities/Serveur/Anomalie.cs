@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Projet.BDD.Entities.Serveur
 {
-    class Anomalie
+    public class Anomalie
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
