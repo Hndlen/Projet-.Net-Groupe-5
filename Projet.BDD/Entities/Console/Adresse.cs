@@ -13,20 +13,26 @@ namespace Projet.BDD.Entities.Console
 
 
         [Key]
+        public string Id { get; set; }
         public string Libelle { get; set; }
         public string Complement { get; set; }
         public int CodePostal { get; set; }
         public string Ville { get; set; }
-        
 
-        /*public Adresse(string libelle, string complement,  int codePostal, string ville)
+        public int ClientId { get; set; }
+
+        public Client Client { get; set; }
+
+
+
+        public Adresse(string libelle, string complement,  int codePostal, string ville)
         {
             this.Libelle = libelle;
             this.Complement = complement;
             this.CodePostal = codePostal;
             this.Ville = ville;
             
-        }*/
+        }
 
     }
 }
