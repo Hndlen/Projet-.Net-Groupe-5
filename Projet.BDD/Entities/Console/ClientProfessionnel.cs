@@ -12,6 +12,7 @@ namespace Projet.BDD.Entities.Console
 
         public EnumStatutJuridique StatutJuridique { get; set; }
 
+        public int AdresseSiegeId { get; set; }
         public Adresse AdresseSiege { get; set; }
 
         public override string Type => "Professionnel";

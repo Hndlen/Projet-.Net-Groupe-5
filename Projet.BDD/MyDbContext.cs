@@ -58,6 +58,7 @@ namespace Projet.BDD
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 1,
                       Libelle = "12, rue des Oliviers",
                       Complement = "",
                       CodePostal = 94000,
@@ -68,6 +69,7 @@ namespace Projet.BDD
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 3,
                       Libelle = "10, rue des Olivies",
                       Complement = "Etage 2",
                       CodePostal = 94300,
@@ -78,6 +80,7 @@ namespace Projet.BDD
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 5,
                       Libelle = "15, rue de la République",
                       Complement = "",
                       CodePostal = 94120,
@@ -88,26 +91,29 @@ namespace Projet.BDD
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 7,
                       Libelle = "25, rue de la Paix",
                       Complement = "",
                       CodePostal = 92100,
                       Ville = "LA DEFENSE"
                   });
 
-            //Adresse 9 _ 25, 3, avenue des Parcs
+            //Adresse 9 _ 3, avenue des Parcs
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 9,
                       Libelle = "3, avenue des Parcs",
                       Complement = "",
                       CodePostal = 93500,
                       Ville = "ROISSY EN France"
                   });
 
-            //Adresse 9 _ 25, 3, avenue des Parcs
+            //Adresse 11 _ 3, rue Lecourbe
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 11,
                       Libelle = "3, rue Lecourbe",
                       Complement = "",
                       CodePostal = 93200,
@@ -122,6 +128,7 @@ namespace Projet.BDD
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 2,
                       Libelle = "125, rue LaFayette",
                       Complement = "Digicode 1432",
                       CodePostal = 94120,
@@ -134,6 +141,7 @@ namespace Projet.BDD
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 4,
                       Libelle = "36, quai des Orfèvres",
                       Complement = "",
                       CodePostal = 93500,
@@ -143,6 +151,7 @@ namespace Projet.BDD
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 12,
                       Libelle = "10, esplanade de la Défense",
                       Complement = "",
                       CodePostal = 92060,
@@ -153,42 +162,52 @@ namespace Projet.BDD
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 6,
                       Libelle = "32, rue E. Renan",
                       Complement = "Bat. C",
                       CodePostal = 75002,
                       Ville = "PARIS"
                   });
             //Siege _ 32, rue E. Renan
+
+            //Adresse 8 _ 23, av P. Valery
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 8,
                       Libelle = "23, av P. Valery",
                       Complement = "",
                       CodePostal = 92100,
                       Ville = "LA DEFENSE"
                   });
 
+            //Siege _ 24, esplanade de la Défense
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 13,
                       Libelle = "24, esplanade de la Défense",
                       Complement = "Tour Franklin",
                       CodePostal = 92060,
                       Ville = "LA DEFENSE"
                   });
 
+            //Adresse 10 _ 15, Place de la Bastille
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 10,
                       Libelle = "15, Place de la Bastille",
                       Complement = "Fond de Cour",
                       CodePostal = 75003,
                       Ville = "PARIS"
                   });
 
+            //Siege _ 10, rue de la Paix
             modelBuilder.Entity<Adresse>()
                   .HasData(new Adresse
                   {
+                      Id = 14,
                       Libelle = "10, rue de la Paix",
                       Complement = "",
                       CodePostal = 75008,
@@ -197,30 +216,96 @@ namespace Projet.BDD
 
 
 
-
+            //**************************************
+            //* Clients Particulier
+            //**************************************
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
                   {
                       Id = 1,
                       Nom = "BETY",
-                      AdresseClientId = "12, rue des Oliviers",
+                      AdresseClientId = 1,
                       Mail = "bety@gmail.com",
                       Prenom = "Daniel",
                       Sexe = EnumSexe.Masculin,
                       DateNaissance = new DateTime(1985, 11, 12)
                   });
 
-            /*modelBuilder.Entity<ClientProfessionnel>()
+            modelBuilder.Entity<ClientParticulier>()
+                  .HasData(new ClientParticulier
+                  {
+                      Id = 3,
+                      Nom = "BODIN",
+                      AdresseClientId = 3,
+                      Mail = "bodin@gmail.com",
+                      Prenom = "Justin",
+                      Sexe = EnumSexe.Masculin,
+                      DateNaissance = new DateTime(1965, 5, 5)
+                  });
+
+            modelBuilder.Entity<ClientParticulier>()
+                  .HasData(new ClientParticulier
+                  {
+                      Id = 5,
+                      Nom = "BERRIS",
+                      AdresseClientId = 5,
+                      Mail = "berris@gmail.com",
+                      Prenom = "Karine",
+                      Sexe = EnumSexe.Feminin,
+                      DateNaissance = new DateTime(1977, 6, 6)
+                  });
+
+            modelBuilder.Entity<ClientParticulier>()
+                  .HasData(new ClientParticulier
+                  {
+                      Id = 7,
+                      Nom = "ABENIR",
+                      AdresseClientId = 7,
+                      Mail = "abenir@gmail.com",
+                      Prenom = "Alexandra",
+                      Sexe = EnumSexe.Feminin,
+                      DateNaissance = new DateTime(1977, 4, 12)
+                  });
+
+            modelBuilder.Entity<ClientParticulier>()
+                  .HasData(new ClientParticulier
+                  {
+                      Id = 9,
+                      Nom = "BENSAID",
+                      AdresseClientId = 9,
+                      Mail = "bensaid@gmail.com",
+                      Prenom = "Georgia",
+                      Sexe = EnumSexe.Feminin,
+                      DateNaissance = new DateTime(1976, 4, 16)
+                  });
+
+            modelBuilder.Entity<ClientParticulier>()
+                  .HasData(new ClientParticulier
+                  {
+                      Id = 11,
+                      Nom = "ABABOU",
+                      AdresseClientId = 11,
+                      Mail = "ababou@gmail.com",
+                      Prenom = "Teddy",
+                      Sexe = EnumSexe.Masculin,
+                      DateNaissance = new DateTime(1970, 10, 10)
+                  });
+
+            //**************************************
+            //* Clients Professionnel
+            //**************************************
+
+            modelBuilder.Entity<ClientProfessionnel>()
                   .HasData(new ClientProfessionnel
                   {
                       Id = 2,
                       Nom = "AXA",
-                      AdresseClient = new Adresse("125, rue LaFayette", "Digicode 1432", 94120, "FONTENAY SOUS BOIS"),
+                      AdresseClientId = 2,
                       Mail = "info@axa.fr",
                       Siret = "12548795641122",
                       StatutJuridique = EnumStatutJuridique.SARL,
-                      AdresseSiege = new Adresse("125, rue LaFayette", "Digicode 1432", 94120, "FONTENAY SOUS BOIS")
-                  });*/
+                      AdresseSiegeId = 2
+                  });
 
         }
     }

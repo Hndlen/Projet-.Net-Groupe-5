@@ -13,6 +13,7 @@ namespace Projet.BDD.Entities.Console
 
 
         [Key]
+        public int Id { get; set; }
         public string Libelle { get; set; }
         public string Complement { get; set; }
         public int CodePostal { get; set; }
