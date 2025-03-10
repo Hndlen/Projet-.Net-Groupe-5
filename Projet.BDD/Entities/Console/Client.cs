@@ -13,6 +13,7 @@ namespace Projet.BDD.Entities.Console
         [StringLength(50, MinimumLength = 1)]
         public string Nom { get; set; }
 
+        public string AdresseClientId { get; set; }
         public Adresse AdresseClient { get; set; }
         public string Mail { get; set; }
 
