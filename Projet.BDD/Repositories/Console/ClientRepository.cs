@@ -1,4 +1,5 @@
-﻿using Projet.BDD.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Projet.BDD.Entities;
 using Projet.BDD.Entities.Console;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Projet.BDD.Repositories.Console
 {
-    public class ClientRepository : IRepository<Client>
+    public class ClientRepository : Irepository<Client>
     {
             public ClientRepository()
             {

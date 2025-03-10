@@ -1,4 +1,5 @@
-﻿using Projet.BDD.Entities.Console;
+﻿using Microsoft.EntityFrameworkCore;
+using Projet.BDD.Entities.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,15 +23,15 @@ namespace Projet.BDD.Repositories.Console
         public async Task<List<CompteBancaire>> getAll()
         {
             using var context = new MyDbContext();
-            var compteBancaires = await context.CompteBancaires.ToListAsync<CompteBancaire>();
+            var compteBancaires = await context.ComptesBancaire.ToListAsync<CompteBancaire>();
             return compteBancaires;
         }
 
-        public async Task<CompteBancaire?> GetbyId(int id)
+        public async Task<CompteBancaire?> GetbyId(string numero)
         {
             using var context = new MyDbContext();
-            var compteBancaire = await context.CompteBancaires
-                            .Where<CompteBancaire>(cb => cb.Id == id)
+            var compteBancaire = await context.ComptesBancaire
+                            .Where<CompteBancaire>(cb => cb.Numero == numero)
                             .SingleOrDefaultAsync<CompteBancaire>();
             return compteBancaire;
         }
@@ -39,7 +40,7 @@ namespace Projet.BDD.Repositories.Console
         public async Task<int> Add(CompteBancaire catEntity)
         {
             using var context = new MyDbContext();
-            context.CompteBancaires.Add(catEntity);
+            context.ComptesBancaire.Add(catEntity);
             var cbSaved = await context.SaveChangesAsync();
             return cbSaved;
 

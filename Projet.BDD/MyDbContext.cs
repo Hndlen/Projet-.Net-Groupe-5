@@ -19,6 +19,8 @@ namespace Projet.BDD
         public DbSet<Enregistrement> Enregistrements { get; set; }
         public DbSet<Anomalie> Anomalies { get; set; }
 
+        public DbSet<Adresse> Adresses { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //base.OnConfiguring(optionsBuilder);

@@ -1,4 +1,5 @@
-﻿using Projet.BDD.Entities.Console;
+﻿using Microsoft.EntityFrameworkCore;
+using Projet.BDD.Entities.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,15 +23,15 @@ namespace Projet.BDD.Repositories.Console
         public async Task<List<CarteBancaire>> getAll()
         {
             using var context = new MyDbContext();
-            var carteBancaires = await context.CarteBancaires.ToListAsync<CarteBancaire>();
+            var carteBancaires = await context.CartesBancaire.ToListAsync<CarteBancaire>();
             return carteBancaires;
         }
 
-        public async Task<CarteBancaire?> GetbyId(int id)
+        public async Task<CarteBancaire?> GetbyId(string num)
         {
             using var context = new MyDbContext();
-            var carteBancaire = await context.CarteBancaires
-                            .Where<CarteBancaire>(cb => cb.Id == id)
+            var carteBancaire = await context.CartesBancaire
+                            .Where<CarteBancaire>(cb => cb.Numero == num)
                             .SingleOrDefaultAsync<CarteBancaire>();
             return carteBancaire;
         }

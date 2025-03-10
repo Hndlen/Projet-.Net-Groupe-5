@@ -15,5 +15,7 @@ namespace Projet.BDD.Entities.Console
         public string Prenom { get; set; }
 
         public EnumSexe Sexe { get; set; }
+
+        public override string Type => "Particulier";
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Projet.BDD.Entities.Serveur
 {
-    class Enregistrement
+    public class Enregistrement
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

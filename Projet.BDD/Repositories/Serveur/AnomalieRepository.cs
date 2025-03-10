@@ -1,4 +1,5 @@
-﻿using Projet.BDD.Entities.Serveur;
+﻿using Microsoft.EntityFrameworkCore;
+using Projet.BDD.Entities.Serveur;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,21 +31,21 @@ namespace Projet.BDD.Repositories.Serveur
         {
             using var context = new MyDbContext();
             var enregistrement = await context.Anomalies
-                            .Where<Anomalie>(a => a.numCB == numero)
-                            .ToListAsync<Anomalie>();
+                            .Where<Anomalie>(a => a.NumeroCarteBancaire == numero)
+                            .SingleOrDefaultAsync<Anomalie>();
             return enregistrement;
         }
 
-        public async Task<Anomalie?> GetbyTypeOp(string typeOp)
+        public async Task<List<Anomalie?>> GetbyTypeOp(EnumOperation typeOp)
         {
             using var context = new MyDbContext();
             var enregistrement = await context.Anomalies
-                            .Where<Anomalie>(a => a.typeOp == typeOp)
+                            .Where<Anomalie>(a => a.TypeOperation == typeOp)
                             .ToListAsync<Anomalie>();
             return enregistrement;
         }
 
-        public async Task<int> Add(entity anoEntity)
+        public async Task<int> Add(Anomalie anoEntity)
         {
             using var context = new MyDbContext();
             context.Anomalies.Add(anoEntity);
