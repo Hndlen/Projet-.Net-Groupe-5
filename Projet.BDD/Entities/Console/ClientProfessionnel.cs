@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projet.BDD.Entities.Console
 {
-    public class ClientProfessionnel
+    public class ClientProfessionnel : Client
     {
         public string Siret { get; set; }
 

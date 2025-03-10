@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Projet.BDD.Repositories.Console
 {
-    public class ClientRepository : Irepository<Client>
+    public class ClientRepository : IRepository<Client>
     {
             public ClientRepository()
             {
