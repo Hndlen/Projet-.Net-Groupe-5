@@ -39,7 +39,7 @@ namespace Projet.BDD.Repositories.Console
         public async Task<int> Add(CarteBancaire catEntity)
         {
             using var context = new MyDbContext();
-            context.CarteBancaires.Add(catEntity);
+            context.CartesBancaire.Add(catEntity);
             var cbSaved = await context.SaveChangesAsync();
             return cbSaved;
 

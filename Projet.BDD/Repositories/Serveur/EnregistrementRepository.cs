@@ -33,7 +33,7 @@ namespace Projet.BDD.Repositories.Serveur
             using var context = new MyDbContext();
             var enregistrement = await context.Enregistrements
                             .Where<Enregistrement>(e => e.NumeroCarteBancaire == numero)
-                            .ToListAsync<Enregistrement>();
+                            .SingleOrDefaultAsync<Enregistrement>();
             return enregistrement;
         }
 

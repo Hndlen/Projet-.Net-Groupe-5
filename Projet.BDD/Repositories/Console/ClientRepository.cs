@@ -49,7 +49,7 @@ namespace Projet.BDD.Repositories.Console
         public async Task<int> Add(Client catEntity)
             {
                 using var context = new MyDbContext();
-                context.clients.Add(catEntity);
+                context.Clients.Add(catEntity);
                 var cliSaved = await context.SaveChangesAsync();
                 return cliSaved;
 
