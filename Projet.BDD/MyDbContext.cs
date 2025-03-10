@@ -49,6 +49,17 @@ namespace Projet.BDD
                 .WithOne(c => c.Client)
                 .HasForeignKey<Client>(c => c.AdresseId);*/
 
+            modelBuilder.Entity<ClientProfessionnel>()
+                .HasOne(c => c.AdresseClient)
+                .WithMany()
+                .HasForeignKey(c => c.AdresseClientId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ClientProfessionnel>()
+                .HasOne(c => c.AdresseSiege)
+                .WithMany()
+                .HasForeignKey(c => c.AdresseSiegeId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             //**************************************
             //* Adresse Clients Particulier
@@ -305,6 +316,54 @@ namespace Projet.BDD
                       Siret = "12548795641122",
                       StatutJuridique = EnumStatutJuridique.SARL,
                       AdresseSiegeId = 2
+                  });
+
+            modelBuilder.Entity<ClientProfessionnel>()
+                  .HasData(new ClientProfessionnel
+                  {
+                      Id = 4,
+                      Nom = "PAUL",
+                      AdresseClientId = 4,
+                      Mail = "info@paul.fr",
+                      Siret = "87459564455444",
+                      StatutJuridique = EnumStatutJuridique.EURL,
+                      AdresseSiegeId = 12
+                  });
+
+            modelBuilder.Entity<ClientProfessionnel>()
+                  .HasData(new ClientProfessionnel
+                  {
+                      Id = 6,
+                      Nom = "PRIMARK",
+                      AdresseClientId = 6,
+                      Mail = "contact@primark.fr",
+                      Siret = "08755897458455",
+                      StatutJuridique = EnumStatutJuridique.SARL,
+                      AdresseSiegeId = 6
+                  });
+
+            modelBuilder.Entity<ClientProfessionnel>()
+                  .HasData(new ClientProfessionnel
+                  {
+                      Id = 8,
+                      Nom = "ZARA",
+                      AdresseClientId = 8,
+                      Mail = "info@zara.fr",
+                      Siret = "65895874587854",
+                      StatutJuridique = EnumStatutJuridique.SA,
+                      AdresseSiegeId = 13
+                  });
+
+            modelBuilder.Entity<ClientProfessionnel>()
+                  .HasData(new ClientProfessionnel
+                  {
+                      Id = 10,
+                      Nom = "LEONIDAS",
+                      AdresseClientId = 10,
+                      Mail = "contact@leonidas.fr",
+                      Siret = "91235987456832",
+                      StatutJuridique = EnumStatutJuridique.SAS,
+                      AdresseSiegeId = 14
                   });
 
         }

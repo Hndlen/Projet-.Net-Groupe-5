@@ -13,7 +13,7 @@ namespace Projet.BDD.Entities.Console
 
 
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Libelle { get; set; }
         public string Complement { get; set; }
         public int CodePostal { get; set; }
@@ -21,14 +21,14 @@ namespace Projet.BDD.Entities.Console
         
 
 
-        public Adresse(string libelle, string complement,  int codePostal, string ville)
+        /*public Adresse(string libelle, string complement,  int codePostal, string ville)
         {
             this.Libelle = libelle;
             this.Complement = complement;
             this.CodePostal = codePostal;
             this.Ville = ville;
             
-        }
+        }*/
 
     }
 }
