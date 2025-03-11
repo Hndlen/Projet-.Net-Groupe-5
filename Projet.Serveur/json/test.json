@@ -1,0 +1,82 @@
+[
+  {
+    "numeroCarteBancaire": "4974 0185 0223 7570",
+    "Montant": 6704.53,
+    "Type": 1,
+    "Date": "2025-03-11T12:24:03.2839534+01:00",
+    "Devise": "USD",
+    "TauxConversion": 0
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 6228",
+    "Montant": -1406.92,
+    "Type": 2,
+    "Date": "2025-03-11T12:24:03.2890982+01:00",
+    "Devise": "USD",
+    "TauxConversion": 0
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 4923",
+    "Montant": -1554.97,
+    "Type": 2,
+    "Date": "2025-03-11T12:24:03.2891018+01:00",
+    "Devise": "YUAN",
+    "TauxConversion": 0
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 2921",
+    "Montant": -2417.52,
+    "Type": 2,
+    "Date": "2025-03-11T12:24:03.2891026+01:00",
+    "Devise": "YEN",
+    "TauxConversion": 0
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 4042",
+    "Montant": -5289.5,
+    "Type": 2,
+    "Date": "2025-03-11T12:24:03.2891033+01:00",
+    "Devise": "YEN",
+    "TauxConversion": 0
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 7588",
+    "Montant": 7604.23,
+    "Type": 1,
+    "Date": "2025-03-11T12:24:03.2891043+01:00",
+    "Devise": "EUR",
+    "TauxConversion": 0
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 8685",
+    "Montant": -301.8,
+    "Type": 0,
+    "Date": "2025-03-11T12:24:03.2891048+01:00",
+    "Devise": "YUAN",
+    "TauxConversion": 0
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 5996",
+    "Montant": -7887.92,
+    "Type": 0,
+    "Date": "2025-03-11T12:24:03.2891053+01:00",
+    "Devise": "USD",
+    "TauxConversion": 0
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 2843",
+    "Montant": -4073.36,
+    "Type": 2,
+    "Date": "2025-03-11T12:24:03.2891058+01:00",
+    "Devise": "YUAN",
+    "TauxConversion": 0
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 4384",
+    "Montant": 3970.43,
+    "Type": 1,
+    "Date": "2025-03-11T12:24:03.2891064+01:00",
+    "Devise": "USD",
+    "TauxConversion": 0
+  }
+]

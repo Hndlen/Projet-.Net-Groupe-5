@@ -23,7 +23,10 @@ namespace Projet.BDD.Repositories.Console
         public async Task<List<CarteBancaire>> getAll()
         {
             using var context = new MyDbContextConsole();
-            var carteBancaires = await context.CartesBancaire.ToListAsync<CarteBancaire>();
+            var carteBancaires = await context.CartesBancaire
+                                            .Include("CompteBancaire")
+                                            .AsNoTracking()
+                                            .ToListAsync<CarteBancaire>();
             return carteBancaires;
         }
 
