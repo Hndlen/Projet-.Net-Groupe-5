@@ -10,7 +10,7 @@ namespace Projet.Console.InfoJSON
     {
         public int Id { get; set; }
         public string NumeroCarteBancaire { get; set; }
-        public decimal MontantOperation { get; set; }
+        public double MontantOperation { get; set; }
         public string TypeOperation { get; set; }
         public string DateOperation { get; set; }
         public string Devise { get; set; }
