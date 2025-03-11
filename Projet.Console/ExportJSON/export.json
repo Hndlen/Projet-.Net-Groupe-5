@@ -1,0 +1,12 @@
+{
+  "Enregistrements": [
+    {
+      "Id": 1,
+      "NumeroCarteBancaire": "4974 0185 0223 0000",
+      "MontantOperation": 500,
+      "TypeOperation": "Depot",
+      "DateOperation": "2024/03/10",
+      "Devise": "€"
+    }
+  ]
+}
