@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Projet.BDD.Repositories.Serveur
 {
@@ -21,10 +22,19 @@ namespace Projet.BDD.Repositories.Serveur
             using var context = new MyDbContextServeur();
             context.Database.EnsureCreated();
         }
+
         public async Task<List<Enregistrement>> getAll()
         {
             using var context = new MyDbContextServeur();
             var enregistrements = await context.Enregistrements.ToListAsync<Enregistrement>();
+            return enregistrements;
+        }
+        public async Task<Enregistrement> getById(int id)
+        {
+            using var context = new MyDbContextServeur();
+            var enregistrements = await context.Enregistrements
+                                    .Where<Enregistrement>(e => e.Id == id)
+                                    .SingleOrDefaultAsync<Enregistrement>();
             return enregistrements;
         }
 

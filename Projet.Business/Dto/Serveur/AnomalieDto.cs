@@ -1,17 +1,15 @@
-﻿using System;
+﻿using Projet.BDD.Entities.Serveur;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projet.BDD.Entities.Serveur
+namespace Projet.Business.Dto
 {
-    public class Anomalie
+    public class AnomalieDto
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string NumeroCarteBancaire { get; set; }
         public double? MontantOperation { get; set; }
@@ -19,5 +17,17 @@ namespace Projet.BDD.Entities.Serveur
         public DateTime? DateOperation { get; set; }
         public string? Devise { get; set; }
         public string Erreur { get; set; }
+
+
+
+        /*public Adresse(string libelle, string complement,  int codePostal, string ville)
+        {
+            this.Libelle = libelle;
+            this.Complement = complement;
+            this.CodePostal = codePostal;
+            this.Ville = ville;
+            
+        }*/
+
     }
 }

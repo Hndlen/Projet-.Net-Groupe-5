@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Projet.BDD.Entities.Console;
 using Projet.Business.Dto;
-using Projet.Business.Service;
+using Projet.Business.Dto.Console;
+using Projet.Business.Service.Console;
 
 namespace Projet.API.Controllers
 {
@@ -20,9 +20,15 @@ namespace Projet.API.Controllers
 
         // GET: ProductsController
         [HttpGet("all")]
-        public async Task<ActionResult<IEnumerable<ClientDto>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ClientDto>>> GetClient()
         {
             return await ClientsService.GetClients();
+        }
+
+        [HttpGet("/{id}")]
+        public async Task<ActionResult<ClientDto>> GetClientById(int id)
+        {
+            return await ClientsService.GetClientById(id);
         }
         // GET: ClientssController
 

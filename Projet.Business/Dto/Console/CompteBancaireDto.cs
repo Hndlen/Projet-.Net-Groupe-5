@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projet.BDD.Entities.Console
+namespace Projet.Business.Dto.Console
 {
     public class CompteBancaireDto
     {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Projet.BDD.Entities.Console;
 using Projet.BDD.Repositories.Console;
+using Projet.Business.Dto.Console;
 using Recap.Business;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projet.Business.Service
+namespace Projet.Business.Service.Console
 {
     public class CompteBancaireService
     {
@@ -25,16 +26,16 @@ namespace Projet.Business.Service
         public async Task<List<CompteBancaireDto>> GetCompteBancaires()
         {
             var addEntities = await _repo.getAll();
-            var addDto = addEntities.Select(cat => _mapper.Map<CompteBancaireDto>(cat)).ToList<CompteBancaireDto>();
+            var addDto = addEntities.Select(cat => _mapper.Map<CompteBancaireDto>(cat)).ToList();
             return addDto;
         }
 
-        //public async Task<CategoryDto> GetCompteBancairessById(int id)
-        //{
-        //    var addEntities = await _repo.GetbyId(id);
-        //    var catDto = _mapper.Map<CategoryDto>(catEntity);
-        //    return catDto;
-        //}
+        public async Task<CompteBancaireDto> GetCompteBancairessById(string id)
+        {
+            var addEntities = await _repo.GetbyId(id);
+            var catDto = _mapper.Map<CompteBancaireDto>(addEntities);
+            return catDto;
+        }
 
         public async Task<int> AddCompteBancaire(CompteBancaireDto addDto)
         {

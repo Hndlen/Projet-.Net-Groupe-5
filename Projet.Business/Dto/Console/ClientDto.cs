@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Projet.BDD.Entities.Console;
 
-namespace Projet.BDD.Entities.Console
+namespace Projet.Business.Dto.Console
 {
     public class ClientDto
     {

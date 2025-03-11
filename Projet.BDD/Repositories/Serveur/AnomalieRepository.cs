@@ -27,6 +27,14 @@ namespace Projet.BDD.Repositories.Serveur
             return anomalies;
         }
 
+        public async Task<Anomalie> getById(int id)
+        {
+            using var context = new MyDbContextServeur();
+            var enregistrements = await context.Anomalies
+                                    .Where<Anomalie>(e => e.Id == id)
+                                    .SingleOrDefaultAsync<Anomalie>();
+            return enregistrements;
+        }
         public async Task<Anomalie?> GetbyNumCarte(string numero)
         {
             using var context = new MyDbContextServeur();

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Projet.BDD.Entities.Console;
 using Projet.BDD.Repositories.Console;
-using Projet.Business.Dto;
+using Projet.Business.Dto.Console;
 using Recap.Business;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projet.Business.Service
+namespace Projet.Business.Service.Console
 {
     public class AdresseService
     {
@@ -27,7 +27,7 @@ namespace Projet.Business.Service
         public async Task<List<AdresseDto>> GetAdresses()
         {
             var addEntities = await _repo.getAll();
-            var addDto = addEntities.Select(cat => _mapper.Map<AdresseDto>(cat)).ToList<AdresseDto>();
+            var addDto = addEntities.Select(cat => _mapper.Map<AdresseDto>(cat)).ToList();
             return addDto;
         }
 
