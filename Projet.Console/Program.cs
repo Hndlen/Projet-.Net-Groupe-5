@@ -1,15 +1,16 @@
-﻿using Projet.BDD.Entities.Serveur;
-using Projet.Console;
+﻿using Projet.BDD.Entities.Console;
+using Projet.BDD.Entities.Serveur;
+using Projet.Console.InfoJSON;
 using System.Text.Json;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    static async void LectureJSON()
     {
         //string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "ExportJSON", "export.json");
         //string filePath = @"C:\Users\lhand\source\repos\Projet-.Net-Groupe-5\Projet.Console\ExportJSON";
         string filePath = @"C:\Users\lhand\Source\Repos\Projet-.Net-Groupe-5\Projet.Console\jsontest.json";
-        
+
         string jsonString = File.ReadAllText(filePath);
 
         try
@@ -45,5 +46,76 @@ internal class Program
         {
             Console.WriteLine($"Erreur de désérialisation JSON: {ex.Message}");
         }
+    }
+
+    static async void GetAllClient()
+    {
+        //string url = "http://localhost:5155/api/Products/";
+        string url = "http://localhost:5187/api/Clients/all/";
+
+        using (HttpClient client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(url);
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = client.GetAsync($"{url}").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonInfo = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(jsonInfo);
+                var objInfo = JsonSerializer.Deserialize<List<ClientJSON>>(jsonInfo);
+                foreach (var o in objInfo)
+                {
+                    Console.WriteLine($"{o.Id} {o.Nom} {o.AdresseClientId} {o.AdresseClient} {o.Mail} {o.Type} {o.CompteBancaire}");
+                }
+                
+            }
+            else
+            {
+                Console.WriteLine($"Err not found");
+            }
+        }
+    }
+
+    /*static async Task GetClientById(int id)
+    {
+        string url = $"http://localhost:5187/api/Clients/{id}";
+
+        using (HttpClient client = new HttpClient())
+        {
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonInfo = await response.Content.ReadAsStringAsync();
+                    Client clientInfo = JsonSerializer.Deserialize<Client>(jsonInfo, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    Console.WriteLine($"ID: {clientInfo.Id}");
+                    Console.WriteLine($"Nom: {clientInfo.Nom}");
+                    Console.WriteLine($"Email: {clientInfo.Email}");
+                    Console.WriteLine($"Téléphone: {clientInfo.Telephone}");
+                }
+                else
+                {
+                    Console.WriteLine($"❌ Erreur : Client avec ID {id} non trouvé.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Erreur lors de la récupération : {ex.Message}");
+            }
+        }
+    }*/
+
+
+    private static void Main(string[] args)
+    {
+        LectureJSON();
+        GetAllClient();
     }
 }
