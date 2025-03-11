@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projet.BDD", "Projet.BDD\Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projet.Business", "Projet.Business\Projet.Business.csproj", "{481076D6-6DA0-456A-BA05-B859FF20E811}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projet.Console", "Projet.Console\Projet.Console.csproj", "{6FF40CB3-FFB2-4725-A6C1-A6EBA60A5F33}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projet.API", "Projet.API\Projet.API.csproj", "{FD7459A3-B49C-4964-8852-DEB14EC2B0C4}"
 EndProject
 Global
@@ -23,6 +25,10 @@ Global
 		{481076D6-6DA0-456A-BA05-B859FF20E811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{481076D6-6DA0-456A-BA05-B859FF20E811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{481076D6-6DA0-456A-BA05-B859FF20E811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FF40CB3-FFB2-4725-A6C1-A6EBA60A5F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FF40CB3-FFB2-4725-A6C1-A6EBA60A5F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FF40CB3-FFB2-4725-A6C1-A6EBA60A5F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FF40CB3-FFB2-4725-A6C1-A6EBA60A5F33}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD7459A3-B49C-4964-8852-DEB14EC2B0C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD7459A3-B49C-4964-8852-DEB14EC2B0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD7459A3-B49C-4964-8852-DEB14EC2B0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU

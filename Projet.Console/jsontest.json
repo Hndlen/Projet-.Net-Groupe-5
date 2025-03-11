@@ -1,0 +1,44 @@
+{
+  "Enregistrements": [
+    {
+      "Id": 1,
+      "NumeroCarteBancaire": "4974 0185 0223 0000",
+      "MontantOperation": 500,
+      "TypeOperation": "Depot",
+      "DateOperation": "2024/03/10",
+      "Devise": "€"
+    },
+    {
+      "Id": 2,
+      "NumeroCarteBancaire": "4974 0185 0223 1234",
+      "MontantOperation": 300,
+      "TypeOperation": "Retrait",
+      "DateOperation": "2024/03/11",
+      "Devise": "€"
+    },
+    {
+      "Id": 3,
+      "NumeroCarteBancaire": "4974 0185 0223 5678",
+      "MontantOperation": 750,
+      "TypeOperation": "Depot",
+      "DateOperation": "2024/03/12",
+      "Devise": "€"
+    },
+    {
+      "Id": 4,
+      "NumeroCarteBancaire": "4974 0185 0223 9876",
+      "MontantOperation": 1200,
+      "TypeOperation": "Retrait",
+      "DateOperation": "2024/03/13",
+      "Devise": "€"
+    },
+    {
+      "Id": 5,
+      "NumeroCarteBancaire": "4974 0185 0223 4321",
+      "MontantOperation": 450,
+      "TypeOperation": "Depot",
+      "DateOperation": "2024/03/14",
+      "Devise": "€"
+    }
+  ]
+}
