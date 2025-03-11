@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Projet.BDD
 {
-    class MyDbContextServeur : DbContext
+    public class MyDbContextServeur : DbContext
     {
         public DbSet<Enregistrement> Enregistrements { get; set; }
         public DbSet<Anomalie> Anomalies { get; set; }

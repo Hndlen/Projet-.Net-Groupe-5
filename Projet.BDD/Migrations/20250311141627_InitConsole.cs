@@ -179,9 +179,11 @@ namespace Projet.BDD.Migrations
                 columns: new[] { "Numero", "ClientId", "DateOuverture", "Solde" },
                 values: new object[,]
                 {
-                    { "HNTB 0000", 1, new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
-                    { "HNTB 0001", 2, new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
-                    { "HNTB 0002", 3, new DateTime(2010, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 }
+                    { "HNTB 1999 0416 1976 0416 9350", 9, new DateTime(1999, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 2000 1112 1985 1112 9400", 1, new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 2005 1112 1965 0505 9430", 3, new DateTime(2005, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 2014 1212 1977 0606 9412", 5, new DateTime(2014, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 2022 1212 1977 0412 9210", 7, new DateTime(2022, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -189,10 +191,13 @@ namespace Projet.BDD.Migrations
                 columns: new[] { "Numero", "CompteCarteId" },
                 values: new object[,]
                 {
-                    { "4974 0185 0223 0000", "HNTB 0000" },
-                    { "4974 0185 0223 0001", "HNTB 0000" },
-                    { "4974 0185 0223 0003", "HNTB 0001" },
-                    { "4974 0185 0223 0004", "HNTB 0002" }
+                    { "4974 0185 0223 0001", "HNTB 2000 1112 1985 1112 9400" },
+                    { "4974 0185 0223 0002", "HNTB 2005 1112 1965 0505 9430" },
+                    { "4974 0185 0223 0003", "HNTB 2005 1112 1965 0505 9430" },
+                    { "4974 0185 0223 0004", "HNTB 2014 1212 1977 0606 9412" },
+                    { "4974 0185 0223 0005", "HNTB 2014 1212 1977 0606 9412" },
+                    { "4974 0185 0223 0006", "HNTB 2022 1212 1977 0412 9210" },
+                    { "4974 0185 0223 0007", "HNTB 1999 0416 1976 0416 9350" }
                 });
 
             migrationBuilder.CreateIndex(

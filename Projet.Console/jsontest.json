@@ -6,7 +6,7 @@
       "MontantOperation": 500,
       "TypeOperation": "Depot",
       "DateOperation": "2024/03/10",
-      "Devise": "€"
+      "Devise": "EU"
     },
     {
       "Id": 2,
@@ -14,7 +14,7 @@
       "MontantOperation": 300,
       "TypeOperation": "Retrait",
       "DateOperation": "2024/03/11",
-      "Devise": "€"
+      "Devise": "EU"
     },
     {
       "Id": 3,
@@ -22,7 +22,7 @@
       "MontantOperation": 750,
       "TypeOperation": "Depot",
       "DateOperation": "2024/03/12",
-      "Devise": "€"
+      "Devise": "EU"
     },
     {
       "Id": 4,
@@ -30,7 +30,7 @@
       "MontantOperation": 1200,
       "TypeOperation": "Retrait",
       "DateOperation": "2024/03/13",
-      "Devise": "€"
+      "Devise": "EU"
     },
     {
       "Id": 5,
@@ -38,7 +38,7 @@
       "MontantOperation": 450,
       "TypeOperation": "Depot",
       "DateOperation": "2024/03/14",
-      "Devise": "€"
+      "Devise": "EU"
     }
   ]
 }

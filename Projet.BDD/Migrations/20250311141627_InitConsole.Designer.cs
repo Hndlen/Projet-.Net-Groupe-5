@@ -12,7 +12,7 @@ using Projet.BDD;
 namespace Projet.BDD.Migrations
 {
     [DbContext(typeof(MyDbContextConsole))]
-    [Migration("20250311111153_InitConsole")]
+    [Migration("20250311141627_InitConsole")]
     partial class InitConsole
     {
         /// <inheritdoc />
@@ -184,23 +184,38 @@ namespace Projet.BDD.Migrations
                     b.HasData(
                         new
                         {
-                            Numero = "4974 0185 0223 0000",
-                            CompteCarteId = "HNTB 0000"
+                            Numero = "4974 0185 0223 0001",
+                            CompteCarteId = "HNTB 2000 1112 1985 1112 9400"
                         },
                         new
                         {
-                            Numero = "4974 0185 0223 0001",
-                            CompteCarteId = "HNTB 0000"
+                            Numero = "4974 0185 0223 0002",
+                            CompteCarteId = "HNTB 2005 1112 1965 0505 9430"
                         },
                         new
                         {
                             Numero = "4974 0185 0223 0003",
-                            CompteCarteId = "HNTB 0001"
+                            CompteCarteId = "HNTB 2005 1112 1965 0505 9430"
                         },
                         new
                         {
                             Numero = "4974 0185 0223 0004",
-                            CompteCarteId = "HNTB 0002"
+                            CompteCarteId = "HNTB 2014 1212 1977 0606 9412"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0005",
+                            CompteCarteId = "HNTB 2014 1212 1977 0606 9412"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0006",
+                            CompteCarteId = "HNTB 2022 1212 1977 0412 9210"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0007",
+                            CompteCarteId = "HNTB 1999 0416 1976 0416 9350"
                         });
                 });
 
@@ -265,23 +280,37 @@ namespace Projet.BDD.Migrations
                     b.HasData(
                         new
                         {
-                            Numero = "HNTB 0000",
+                            Numero = "HNTB 2000 1112 1985 1112 9400",
                             ClientId = 1,
                             DateOuverture = new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Solde = 1000.0
                         },
                         new
                         {
-                            Numero = "HNTB 0001",
-                            ClientId = 2,
-                            DateOuverture = new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Numero = "HNTB 2005 1112 1965 0505 9430",
+                            ClientId = 3,
+                            DateOuverture = new DateTime(2005, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Solde = 1000.0
                         },
                         new
                         {
-                            Numero = "HNTB 0002",
-                            ClientId = 3,
-                            DateOuverture = new DateTime(2010, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Numero = "HNTB 2014 1212 1977 0606 9412",
+                            ClientId = 5,
+                            DateOuverture = new DateTime(2014, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Solde = 1000.0
+                        },
+                        new
+                        {
+                            Numero = "HNTB 2022 1212 1977 0412 9210",
+                            ClientId = 7,
+                            DateOuverture = new DateTime(2022, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Solde = 1000.0
+                        },
+                        new
+                        {
+                            Numero = "HNTB 1999 0416 1976 0416 9350",
+                            ClientId = 9,
+                            DateOuverture = new DateTime(1999, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Solde = 1000.0
                         });
                 });

@@ -1,11 +1,50 @@
-﻿using Projet.BDD.Entities.Console;
+﻿using Microsoft.EntityFrameworkCore;
+using Projet.BDD;
+using Projet.BDD.Entities.Console;
 using Projet.BDD.Entities.Serveur;
 using Projet.Console.InfoJSON;
+using System.Reflection.Emit;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 internal class Program
 {
+    public static string GenererNumeroCompte(DateTime dateOuverture)
+    {
+        // Générer un numéro de compte basé sur la date
+        string date = dateOuverture.ToString("yyyy MMdd");
+        string compte = "1234";  // Remplacer par une valeur fixe ou générée
 
+        return $"HNTB-{date}-{compte}";
+    }
+    public static void NouveauCompteBancaire()
+    {
+
+        using (var context = new MyDbContextConsole())
+        {
+            // Appliquer les migrations à la base de données
+            context.Database.Migrate();  // Cela applique toutes les migrations en attente
+
+            // Maintenant, initialise les données après la migration
+            DateTime dateOuverture = new DateTime(2000, 11, 12);
+            string numeroCompteTest = GenererNumeroCompte(dateOuverture);
+
+            // Ajouter ces données dans la base de données
+            context.ComptesBancaire.Add(new CompteBancaire
+            {
+                Numero = numeroCompteTest,
+                DateOuverture = dateOuverture,
+                Solde = 1000,
+                ClientId = 1
+            });
+            
+            
+
+            // Sauvegarder les modifications dans la base de données
+            context.SaveChanges();
+        }
+    }
+    
     static async void LectureJSON()
     {
         //string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "ExportJSON", "export.json");
@@ -126,5 +165,7 @@ internal class Program
         //GetAllClient();
         Console.WriteLine("__");
         GetClientById(1);
+        NouveauCompteBancaire();
+        Console.WriteLine("Fini");
     }
 }

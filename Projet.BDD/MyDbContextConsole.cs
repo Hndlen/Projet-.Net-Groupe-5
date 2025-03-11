@@ -5,12 +5,15 @@ using Projet.BDD.Entities.Serveur;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Projet.BDD
 {
-    class MyDbContextConsole : DbContext
+    public class MyDbContextConsole : DbContext
     {
         public DbSet<Client> Clients { get; set; }
         public DbSet<ClientParticulier> ClientsParticulier { get; set; }
@@ -21,6 +24,9 @@ namespace Projet.BDD
         //public DbSet<Anomalie> Anomalies { get; set; }
 
         public DbSet<Adresse> Adresses { get; set; }
+        public int countCarte=0;
+        public List<int> listCarte = new List<int> {};
+        public HashSet<int> listCarteTest = new HashSet<int> {};
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,13 +36,39 @@ namespace Projet.BDD
                 "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=dbProjetConsole;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
         }
+        protected void GenerationCarteBancaire()
+        {
 
+            for (int i = 0; i < 10000; i++)
+            {
+                this.listCarte.Add(i);
+            }
+        }
+        protected int RandomCarteBancaire()
+        {
+            if (this.listCarte.Count > 0) // Vérifier que la liste n'est pas vide
+            {
+                //Random random = new Random();
+                //int index = random.Next(this.listCarte.Count); // Sélection aléatoire d'un index
+                int index = 1; // Sélection aléatoire d'un index
+                int valeurSupprimee = this.listCarte[index];  // Récupérer la valeur avant suppression
+
+                this.listCarte.RemoveAt(index); // Supprimer l'élément
+                return valeurSupprimee;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /*
         protected void GenerationCarteBancaire(ModelBuilder modelBuilder)
         {
 
             
 
-            for (int i = 0; i <= 10000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 modelBuilder.Entity<CarteBancaire>()
                       .HasData(new CarteBancaire
@@ -44,6 +76,34 @@ namespace Projet.BDD
                           Numero = $"4974 0185 0223 {i.ToString("D4")}"
 
                       });
+            }
+        }*/
+
+        protected void OuvertureCompteClient(ModelBuilder modelBuilder,int idClient, int CP, DateTime dateNaissance, DateTime dateOuverture, int nbCarte)
+        {
+            string dateO = dateOuverture.ToString("yyyy MMdd");
+            string dateN = dateNaissance.ToString("yyyy MMdd");
+            string newNumero = $"HNTB {dateO} {dateN} {CP.ToString().Substring(0,4)}";
+            int numCarte = 0;
+            modelBuilder.Entity<CompteBancaire>()
+                  .HasData(new CompteBancaire
+                  {
+                      Numero = newNumero,
+                      DateOuverture = dateOuverture,
+                      Solde = 1000,
+                      ClientId = idClient
+                  });
+            for (int i = 0; i < nbCarte; i++)
+            {
+                numCarte = RandomCarteBancaire();
+                modelBuilder.Entity<CarteBancaire>()
+                      .HasData(new CarteBancaire
+                      {
+                          Numero = $"4974 0185 0223 {numCarte.ToString("D4")}",
+                          CompteCarteId = newNumero,
+
+                      });
+                //this.countCarte++;
             }
         }
 
@@ -60,7 +120,9 @@ namespace Projet.BDD
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
+            //Random random = new Random();
+            //string compte = random.Next(1000, 9999).ToString(); // 4 chiffres aléatoires
             //TPT
             //modelBuilder.Entity<Product>().ToTable<Product>("Products");
             //modelBuilder.Entity<ElectronicsProduct>().ToTable("ElectronicsProducts");
@@ -92,15 +154,21 @@ namespace Projet.BDD
             //* TEST COMPTE BANCAIRE + CARTE
             //**************************************
             //GenerationCarteBancaire(modelBuilder);
-            
+
             //DateTime dateOuverture = new DateTime(2000, 11, 12);
             //string test = GenererNumeroCompte(dateOuverture);
-            
-            modelBuilder.Entity<CompteBancaire>()
+
+           /* byte[] randomBytes = new byte[4];
+            RandomNumberGenerator.Fill(randomBytes);
+            int randomNumber = BitConverter.ToInt32(randomBytes, 0) & int.MaxValue; // Valeur positive
+            randomNumber = randomNumber % 10000;*/
+            //string randomNumber = "HNTB 0000";
+
+            /*modelBuilder.Entity<CompteBancaire>()
                   .HasData(new CompteBancaire
                   {
-                      Numero = "HNTB 0000",
-                      //Numero = test,
+                      //Numero = "HNTB 0000",
+                      Numero = randomNumber.ToString(),
                       DateOuverture = new DateTime(2000, 11, 12),
                       //DateOuverture = new DateTime(2000, 11, 12),
                       Solde = 1000,
@@ -112,10 +180,11 @@ namespace Projet.BDD
                       .HasData(new CarteBancaire
                       {
                           Numero = $"4974 0185 0223 0000",
-                          //CompteCarteId = test,
-                          CompteCarteId = "HNTB 0000",
+                          //CompteCarteId = "HNTB 0000"
+                          CompteCarteId = randomNumber.ToString(),
 
-                      });
+                      });*/
+            /*
             modelBuilder.Entity<CarteBancaire>()
                       .HasData(new CarteBancaire
                       {
@@ -162,8 +231,8 @@ namespace Projet.BDD
 
                       });
 
-
-            
+            //************************************
+            */
 
 
             /*modelBuilder.Entity<CompteBancaire>()
@@ -342,6 +411,8 @@ namespace Projet.BDD
             //**************************************
             //* Clients Particulier
             //**************************************
+            GenerationCarteBancaire();
+
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
                   {
@@ -353,6 +424,7 @@ namespace Projet.BDD
                       Sexe = EnumSexe.Masculin,
                       DateNaissance = new DateTime(1985, 11, 12)
                   });
+            OuvertureCompteClient(modelBuilder, 1, 94000, new DateTime(1985, 11, 12), new DateTime(2000, 11, 12), 1);
 
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
@@ -365,6 +437,7 @@ namespace Projet.BDD
                       Sexe = EnumSexe.Masculin,
                       DateNaissance = new DateTime(1965, 5, 5)
                   });
+            OuvertureCompteClient(modelBuilder, 3, 94300, new DateTime(1965, 5, 5), new DateTime(2005, 11, 12), 2);
 
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
@@ -377,6 +450,7 @@ namespace Projet.BDD
                       Sexe = EnumSexe.Feminin,
                       DateNaissance = new DateTime(1977, 6, 6)
                   });
+            OuvertureCompteClient(modelBuilder, 5, 94120, new DateTime(1977, 6, 6), new DateTime(2014, 12, 12), 2);
 
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
@@ -389,7 +463,7 @@ namespace Projet.BDD
                       Sexe = EnumSexe.Feminin,
                       DateNaissance = new DateTime(1977, 4, 12)
                   });
-
+            OuvertureCompteClient(modelBuilder, 7, 92100, new DateTime(1977, 4, 12), new DateTime(2022, 12, 12), 1);
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
                   {
@@ -401,7 +475,7 @@ namespace Projet.BDD
                       Sexe = EnumSexe.Feminin,
                       DateNaissance = new DateTime(1976, 4, 16)
                   });
-
+            OuvertureCompteClient(modelBuilder, 9, 93500, new DateTime(1976, 4, 16), new DateTime(1999, 4, 16), 1);
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
                   {

@@ -21,6 +21,6 @@ namespace Projet.BDD.Entities.Console
         public ICollection<CarteBancaire> CartesBancaire { get; set; }
         public int ClientId { get; set; }
         public Client Titulaire { get; set; }
-
+        //public string CompteCarteId { get; set; }
     }
 }
