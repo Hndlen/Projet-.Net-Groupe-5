@@ -25,17 +25,47 @@ namespace Projet.Business.Service.Console
 
         public async Task<List<ClientDto>> GetClients()
         {
-            var addEntities = await _repo.getAll();
-            var addDto = addEntities.Select(cat => _mapper.Map<ClientDto>(cat)).ToList();
-            return addDto;
+            var cliEntities = await _repo.getAll();
+
+            var cliDto = cliEntities.Select(cli =>
+            {
+                if (cli is ClientParticulier)
+                {
+                    return _mapper.Map<ClientParticulierDto>(cli);
+                }
+                else if (cli is ClientProfessionnel)
+                {
+                    return _mapper.Map<ClientProfessionnelDto>(cli);
+                }
+                else
+                {
+                    return _mapper.Map<ClientDto>(cli);
+                }
+            }).ToList();
+
+            return cliDto;
         }
+
+
 
         public async Task<ClientDto> GetClientById(int id)
         {
             var addEntities = await _repo.GetbyId(id);
-            var catDto = _mapper.Map<ClientDto>(addEntities);
-            return catDto;
+
+            if (addEntities is ClientParticulier clientParticulier)
+            {
+                return _mapper.Map<ClientParticulierDto>(clientParticulier);
+            }
+            else if (addEntities is ClientProfessionnel clientProfessionnel)
+            {
+                return _mapper.Map<ClientProfessionnelDto>(clientProfessionnel);
+            }
+            else
+            {
+                return _mapper.Map<ClientDto>(addEntities);
+            }
         }
+
 
         public async Task<int> AddClient(ClientDto addDto)
         {

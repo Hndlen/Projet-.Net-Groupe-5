@@ -24,8 +24,8 @@ namespace Projet.BDD.Repositories.Console
         {
             using var context = new MyDbContextConsole();
             var carteBancaires = await context.CartesBancaire
-                                            .Include("CompteBancaire")
-                                            .AsNoTracking()
+                                            //.Include("CompteCarte")
+                                            //.AsNoTracking()
                                             .ToListAsync<CarteBancaire>();
             return carteBancaires;
         }
