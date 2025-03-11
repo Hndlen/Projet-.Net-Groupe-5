@@ -47,12 +47,12 @@ namespace Projet.Serveur.Generation
         // Méthode pour générer un numéro de carte bancaire aléatoire
         private void SetNumeroCarteBancaire()
         {
-            string numeroCB = "4974 0185 0223 ";
+            string numeroCB = "4000 0000 0000 1091";
 
-            for (int i = 0; i < 4; i++)
-            {
-                numeroCB += random.Next(0, 10).ToString();
-            }
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    numeroCB += random.Next(0, 10).ToString();
+            //}
 
             this.NumeroCarteBancaire = numeroCB;
         }

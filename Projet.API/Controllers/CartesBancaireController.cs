@@ -24,10 +24,10 @@ namespace Projet.API.Controllers
             return await CartesBancaireService.GetCarteBancaires();
         }
 
-        [HttpGet("{num}")]
-        public async Task<ActionResult<CarteBancaireDto>> GetCarteBancaireById(string id)
+        [HttpGet("{numero}")]
+        public async Task<ActionResult<CarteBancaireDto>> GetCarteBancaireById(string numero)
         {
-            return await CartesBancaireService.GetCarteBancaireById(id);
+            return await CartesBancaireService.GetCarteBancaireById(numero);
         }
         // GET: CartesBancaireController
 

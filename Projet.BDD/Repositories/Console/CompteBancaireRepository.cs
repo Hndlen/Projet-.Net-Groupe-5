@@ -23,7 +23,9 @@ namespace Projet.BDD.Repositories.Console
         public async Task<List<CompteBancaire>> getAll()
         {
             using var context = new MyDbContextConsole();
-            var compteBancaires = await context.ComptesBancaire.ToListAsync<CompteBancaire>();
+            var compteBancaires = await context.ComptesBancaire
+                                        .Include(cb => cb.CartesBancaire)
+                                        .ToListAsync<CompteBancaire>();
             return compteBancaires;
         }
 
@@ -32,6 +34,7 @@ namespace Projet.BDD.Repositories.Console
             using var context = new MyDbContextConsole();
             var compteBancaire = await context.ComptesBancaire
                             .Where<CompteBancaire>(cb => cb.Numero == numero)
+                            .Include(cb => cb.CartesBancaire)
                             .SingleOrDefaultAsync<CompteBancaire>();
             return compteBancaire;
         }

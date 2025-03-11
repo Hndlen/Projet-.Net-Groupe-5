@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Projet.Business.Dto.Console
 {
@@ -17,6 +18,7 @@ namespace Projet.Business.Dto.Console
         public double Solde { get; set; }
         public ICollection<CarteBancaireDto> CartesBancaire { get; set; }
         public int ClientId { get; set; }
+        [JsonIgnore]
         public ClientDto Titulaire { get; set; }
 
     }

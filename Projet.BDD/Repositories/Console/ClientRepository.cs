@@ -24,7 +24,10 @@ namespace Projet.BDD.Repositories.Console
             public async Task<List<Client>> getAll()
             {
                 using var context = new MyDbContextConsole();
-                var clients = await context.Clients.ToListAsync<Client>();
+                var clients = await context.Clients
+                                    .Include(c => c.CompteBancaire)
+                                    .Include(c => c.AdresseClient)
+                                    .ToListAsync<Client>();
                 return clients;
             }
 
@@ -33,6 +36,8 @@ namespace Projet.BDD.Repositories.Console
                 using var context = new MyDbContextConsole();
                 var client = await context.Clients
                                 .Where<Client>(c => c.Id == id)
+                                .Include(c => c.CompteBancaire)
+                                .Include(c => c.AdresseClient)
                                 .SingleOrDefaultAsync<Client>();
                 return client;
             }
@@ -42,6 +47,8 @@ namespace Projet.BDD.Repositories.Console
                 using var context = new MyDbContextConsole();
                 var client = await context.Clients
                                 .Where<Client>(c => c.Type == type)
+                                .Include(c => c.CompteBancaire)
+                                .Include(c => c.AdresseClient)
                                 .SingleOrDefaultAsync<Client>();
                 return client;
             }
