@@ -11,6 +11,7 @@ namespace Projet.BDD.Entities.Console
     {
         [Key]
         public string Numero { get; set; }
-        public CompteBancaire CompteCarte { get; set; }
+        public string? CompteCarteId { get; set; }
+        public CompteBancaire? CompteCarte { get; set; }
     }
 }

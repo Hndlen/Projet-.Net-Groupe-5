@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
+namespace Projet.BDD.Migrations
 {
     /// <inheritdoc />
     public partial class InitConsole : Migration
@@ -86,17 +86,16 @@ namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
                 columns: table => new
                 {
                     Numero = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CompteCarteNumero = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    CompteCarteId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CartesBancaire", x => x.Numero);
                     table.ForeignKey(
-                        name: "FK_CartesBancaire_ComptesBancaire_CompteCarteNumero",
-                        column: x => x.CompteCarteNumero,
+                        name: "FK_CartesBancaire_ComptesBancaire_CompteCarteId",
+                        column: x => x.CompteCarteId,
                         principalTable: "ComptesBancaire",
-                        principalColumn: "Numero",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Numero");
                 });
 
             migrationBuilder.InsertData(
@@ -175,10 +174,31 @@ namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
                 columns: new[] { "Id", "AdresseClientId", "DateNaissance", "Discriminator", "Mail", "Nom", "Prenom", "Sexe" },
                 values: new object[] { 11, 11, new DateTime(1970, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "ClientParticulier", "ababou@gmail.com", "ABABOU", "Teddy", 0 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_CartesBancaire_CompteCarteNumero",
+            migrationBuilder.InsertData(
+                table: "ComptesBancaire",
+                columns: new[] { "Numero", "ClientId", "DateOuverture", "Solde" },
+                values: new object[,]
+                {
+                    { "HNTB 0000", 1, new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0001", 2, new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0002", 3, new DateTime(2010, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "CartesBancaire",
-                column: "CompteCarteNumero");
+                columns: new[] { "Numero", "CompteCarteId" },
+                values: new object[,]
+                {
+                    { "4974 0185 0223 0000", "HNTB 0000" },
+                    { "4974 0185 0223 0001", "HNTB 0000" },
+                    { "4974 0185 0223 0003", "HNTB 0001" },
+                    { "4974 0185 0223 0004", "HNTB 0002" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartesBancaire_CompteCarteId",
+                table: "CartesBancaire",
+                column: "CompteCarteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_AdresseClientId",

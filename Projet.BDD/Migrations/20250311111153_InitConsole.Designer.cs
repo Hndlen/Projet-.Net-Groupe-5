@@ -9,10 +9,10 @@ using Projet.BDD;
 
 #nullable disable
 
-namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
+namespace Projet.BDD.Migrations
 {
     [DbContext(typeof(MyDbContextConsole))]
-    [Migration("20250310151504_InitConsole")]
+    [Migration("20250311111153_InitConsole")]
     partial class InitConsole
     {
         /// <inheritdoc />
@@ -172,15 +172,36 @@ namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
                     b.Property<string>("Numero")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CompteCarteNumero")
-                        .IsRequired()
+                    b.Property<string>("CompteCarteId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Numero");
 
-                    b.HasIndex("CompteCarteNumero");
+                    b.HasIndex("CompteCarteId");
 
                     b.ToTable("CartesBancaire");
+
+                    b.HasData(
+                        new
+                        {
+                            Numero = "4974 0185 0223 0000",
+                            CompteCarteId = "HNTB 0000"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0001",
+                            CompteCarteId = "HNTB 0000"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0003",
+                            CompteCarteId = "HNTB 0001"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0004",
+                            CompteCarteId = "HNTB 0002"
+                        });
                 });
 
             modelBuilder.Entity("Projet.BDD.Entities.Console.Client", b =>
@@ -240,6 +261,29 @@ namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
                         .IsUnique();
 
                     b.ToTable("ComptesBancaire");
+
+                    b.HasData(
+                        new
+                        {
+                            Numero = "HNTB 0000",
+                            ClientId = 1,
+                            DateOuverture = new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Solde = 1000.0
+                        },
+                        new
+                        {
+                            Numero = "HNTB 0001",
+                            ClientId = 2,
+                            DateOuverture = new DateTime(2021, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Solde = 1000.0
+                        },
+                        new
+                        {
+                            Numero = "HNTB 0002",
+                            ClientId = 3,
+                            DateOuverture = new DateTime(2010, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Solde = 1000.0
+                        });
                 });
 
             modelBuilder.Entity("Projet.BDD.Entities.Console.ClientParticulier", b =>
@@ -397,9 +441,7 @@ namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
                 {
                     b.HasOne("Projet.BDD.Entities.Console.CompteBancaire", "CompteCarte")
                         .WithMany("CartesBancaire")
-                        .HasForeignKey("CompteCarteNumero")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CompteCarteId");
 
                     b.Navigation("CompteCarte");
                 });

@@ -16,6 +16,8 @@ namespace Projet.BDD.Entities.Console
 
         public DateTime DateOuverture { get; set; }
         public double Solde { get; set; }
+        [NotMapped]
+        public int Count { get { return CartesBancaire.Count(); } }
         public ICollection<CarteBancaire> CartesBancaire { get; set; }
         public int ClientId { get; set; }
         public Client Titulaire { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Projet.BDD.Entities.Console;
 using Projet.BDD.Entities.Serveur;
 using System;
@@ -30,9 +31,35 @@ namespace Projet.BDD
 
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected void GenerationCarteBancaire(ModelBuilder modelBuilder)
         {
 
+            
+
+            for (int i = 0; i <= 10000; i++)
+            {
+                modelBuilder.Entity<CarteBancaire>()
+                      .HasData(new CarteBancaire
+                      {
+                          Numero = $"4974 0185 0223 {i.ToString("D4")}"
+
+                      });
+            }
+        }
+
+        protected string GenererNumeroCompte(DateTime dateOuverture)
+        {
+            string date = dateOuverture.ToString("yyyy MMdd");
+            Random random = new Random();
+            string compte = random.Next(1000, 9999).ToString(); // 4 chiffres aléatoires
+            
+            return $"HNTB-{date}-{compte}";
+        }
+
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
             //TPT
             //modelBuilder.Entity<Product>().ToTable<Product>("Products");
@@ -60,6 +87,91 @@ namespace Projet.BDD
                 .WithMany()
                 .HasForeignKey(c => c.AdresseSiegeId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            //**************************************
+            //* TEST COMPTE BANCAIRE + CARTE
+            //**************************************
+            //GenerationCarteBancaire(modelBuilder);
+            
+            //DateTime dateOuverture = new DateTime(2000, 11, 12);
+            //string test = GenererNumeroCompte(dateOuverture);
+            
+            modelBuilder.Entity<CompteBancaire>()
+                  .HasData(new CompteBancaire
+                  {
+                      Numero = "HNTB 0000",
+                      //Numero = test,
+                      DateOuverture = new DateTime(2000, 11, 12),
+                      //DateOuverture = new DateTime(2000, 11, 12),
+                      Solde = 1000,
+                      ClientId = 1
+
+                  });
+            
+            modelBuilder.Entity<CarteBancaire>()
+                      .HasData(new CarteBancaire
+                      {
+                          Numero = $"4974 0185 0223 0000",
+                          //CompteCarteId = test,
+                          CompteCarteId = "HNTB 0000",
+
+                      });
+            modelBuilder.Entity<CarteBancaire>()
+                      .HasData(new CarteBancaire
+                      {
+                          Numero = $"4974 0185 0223 0001",
+                          CompteCarteId = "HNTB 0000",
+
+                      });
+            DateTime dateOuverture1 = new DateTime(2021, 11, 12);
+            string test1 = "HNTB 0001";
+            modelBuilder.Entity<CompteBancaire>()
+                  .HasData(new CompteBancaire
+                  {
+                      
+                      Numero = "HNTB 0001",
+                      DateOuverture = dateOuverture1,
+                      Solde = 1000,
+                      ClientId = 2
+
+                  });
+            modelBuilder.Entity<CarteBancaire>()
+                      .HasData(new CarteBancaire
+                      {
+                          Numero = $"4974 0185 0223 0003",
+                          CompteCarteId = test1,
+
+                      });
+            DateTime dateOuverture2 = new DateTime(2010, 11, 12);
+            string test2 = "HNTB 0002";
+            modelBuilder.Entity<CompteBancaire>()
+                  .HasData(new CompteBancaire
+                  {
+
+                      Numero = test2,
+                      DateOuverture = dateOuverture2,
+                      Solde = 1000,
+                      ClientId = 3
+
+                  });
+            modelBuilder.Entity<CarteBancaire>()
+                      .HasData(new CarteBancaire
+                      {
+                          Numero = $"4974 0185 0223 0004",
+                          CompteCarteId = test2,
+
+                      });
+
+
+            
+
+
+            /*modelBuilder.Entity<CompteBancaire>()
+                  .HasData(new CompteBancaire
+                  {
+                      
+                  });*/
+
 
             //**************************************
             //* Adresse Clients Particulier

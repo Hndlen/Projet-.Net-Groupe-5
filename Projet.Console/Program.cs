@@ -5,6 +5,7 @@ using System.Text.Json;
 
 internal class Program
 {
+
     static async void LectureJSON()
     {
         //string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "ExportJSON", "export.json");
@@ -78,27 +79,31 @@ internal class Program
         }
     }
 
-    /*static async Task GetClientById(int id)
+    static async Task GetClientById(int id)
     {
-        string url = $"http://localhost:5187/api/Clients/{id}";
-
+        string url = $"http://localhost:5187/{id}";
+        Console.WriteLine("test1");
         using (HttpClient client = new HttpClient())
         {
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             try
             {
-                HttpResponseMessage response = await client.GetAsync(url);
+                Console.WriteLine("test2");
+                HttpResponseMessage response = client.GetAsync($"{url}").Result;
 
                 if (response.IsSuccessStatusCode)
                 {
-                    string jsonInfo = await response.Content.ReadAsStringAsync();
-                    Client clientInfo = JsonSerializer.Deserialize<Client>(jsonInfo, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    Console.WriteLine("test3");
+                    string jsonInfo = response.Content.ReadAsStringAsync().Result;
+                    Console.WriteLine(jsonInfo);
+                    //var clientInfo = JsonSerializer.Deserialize<Client>(jsonInfo, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    var clientInfo = JsonSerializer.Deserialize<ClientJSON>(jsonInfo);
 
                     Console.WriteLine($"ID: {clientInfo.Id}");
                     Console.WriteLine($"Nom: {clientInfo.Nom}");
-                    Console.WriteLine($"Email: {clientInfo.Email}");
-                    Console.WriteLine($"Téléphone: {clientInfo.Telephone}");
+                    //Console.WriteLine($"Email: {clientInfo.Email}");
+                    //Console.WriteLine($"Téléphone: {clientInfo.Telephone}");
                 }
                 else
                 {
@@ -109,13 +114,17 @@ internal class Program
             {
                 Console.WriteLine($"❌ Erreur lors de la récupération : {ex.Message}");
             }
+            Console.WriteLine("test4");
         }
-    }*/
+        Console.WriteLine("test5");
+    }
 
 
     private static void Main(string[] args)
     {
         LectureJSON();
-        GetAllClient();
+        //GetAllClient();
+        Console.WriteLine("__");
+        GetClientById(1);
     }
 }
