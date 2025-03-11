@@ -5,15 +5,19 @@ using Projet.Serveur.Traitement;
 using System.Buffers;
 using System.Text.Json;
 using System.Transactions;
+using Projet.Serveur.Controllers;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
+        var controllerAno = new EnregistrementController();
+        var controllerEnr = new AnomalieController();
+
         string filename = @"C:\Users\bosso\Documents\Thierry\Ajc_formation\c#\Projet .Net\projet\Projet-.Net-Groupe-5\Projet.Serveur\json\test.json";
         List<Operation> operations = CreateOperations(10);
         WriteOperationsToFile(operations, filename);
-        AddOperationFromFile(filename);
+        AddOperationFromFileAsync(filename);
 
 
 
@@ -42,13 +46,19 @@ internal class Program
         Console.WriteLine($"Fichier JSON '{filename}' créé avec succès.");
     }
 
-    private static void AddOperationFromFile(string filepath)
+    private static async Task AddOperationFromFileAsync(string filepath)
     {
+        var controllerEnr = new EnregistrementController();
+        var controllerAno = new AnomalieController();
         string jsonString = File.ReadAllText(filepath);
+        
         List<Operation> operations = JsonSerializer.Deserialize<List<Operation>>(jsonString);
-        List<EnregistrementDto> enregistrements = new List<EnregistrementDto>();
+        Random rand = new Random();
+
         foreach (Operation op in operations)
         {
+            op.AfficherTransaction();
+            Console.WriteLine();
             if (VerifOperation.CheckOperation(op))
             {
                 var enregistrement = new EnregistrementDto
@@ -59,7 +69,26 @@ internal class Program
                     DateOperation = op.Date,
                     Devise = op.Devise
                 };
-                enregistrements.Add(enregistrement);
+                
+                Console.WriteLine("insertion enregistrement");
+                await controllerEnr.AddEnregistrement(enregistrement);
+                
+            }
+            else
+            {
+                var anomalie = new AnomalieDto
+                {
+                    NumeroCarteBancaire = op.NumeroCarteBancaire,
+                    MontantOperation = op.Montant,
+                    TypeOperation = (Projet.Business.Dto.Serveur.EnumOperation)op.Type,
+                    DateOperation = op.Date,
+                    Devise = op.Devise,
+                    Erreur = "Opération non valide selon les règles de vérification." // Message d'erreur par défaut
+                };
+                Console.WriteLine("insertion anomalie");
+                await controllerAno.AddAnomalie(anomalie);
+               
+
             }
            
            
