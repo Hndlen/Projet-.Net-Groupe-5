@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Projet.Business.Service
 {
-    class CarteBancaireService
+    public class CarteBancaireService
     {
         private readonly CarteBancaireRepository _repo;
         private readonly IMapper _mapper;
@@ -37,7 +37,7 @@ namespace Projet.Business.Service
         //    return catDto;
         //}
 
-        public async Task<int> AddAdress(CarteBancaireDto addDto)
+        public async Task<int> AddCarteBancaire(CarteBancaireDto addDto)
         {
             var addEntity = _mapper.Map<CarteBancaire>(addDto);
             var addSaved = await _repo.Add(addEntity);

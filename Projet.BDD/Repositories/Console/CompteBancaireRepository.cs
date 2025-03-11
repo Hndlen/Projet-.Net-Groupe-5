@@ -45,6 +45,29 @@ namespace Projet.BDD.Repositories.Console
             return cbSaved;
 
         }
+
+        public async Task<int> MajSolde(string numero, double montant)
+        {
+            using var context = new MyDbContextConsole();
+
+            var compteBancaire = await context.ComptesBancaire
+                .Where(cb => cb.Numero == numero)
+                .SingleOrDefaultAsync();
+
+            if (compteBancaire == null)
+            {
+                // Si le compte n'existe pas, retourne une valeur indiquant l'échec (par exemple -1)
+                return -1;
+            }
+
+            // Mettre à jour le solde du compte
+            compteBancaire.Solde += montant;
+
+            // Enregistrer les changements dans la base de données
+            var result = await context.SaveChangesAsync();
+
+            return result;
+        }
     }
 
 }

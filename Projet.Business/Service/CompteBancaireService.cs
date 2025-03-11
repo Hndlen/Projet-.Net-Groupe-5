@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Projet.Business.Service
 {
-    class CompteBancaireService
+    public class CompteBancaireService
     {
         private readonly CompteBancaireRepository _repo;
         private readonly IMapper _mapper;
@@ -36,11 +36,19 @@ namespace Projet.Business.Service
         //    return catDto;
         //}
 
-        public async Task<int> AddAdress(CompteBancaireDto addDto)
+        public async Task<int> AddCompteBancaire(CompteBancaireDto addDto)
         {
             var addEntity = _mapper.Map<CompteBancaire>(addDto);
             var addSaved = await _repo.Add(addEntity);
             return addSaved;
         }
+
+        public async Task<int> MajSolde(string numero, double montant)
+        {
+            //var addEntity = _mapper.Map<CompteBancaire>(addDto);
+            var majSaved = await _repo.MajSolde(numero, montant);
+            return majSaved;
+        }
+
     }
 }
