@@ -26,9 +26,9 @@ namespace Projet.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<CompteBancaireDto>>> GetCompteBancaireById()
+        public async Task<ActionResult<CompteBancaireDto>> GetCompteBancaireById(string id)
         {
-            return await CompteBancaireService.GetCompteBancaires();
+            return await CompteBancaireService.GetCompteBancairessById(id);
         }
 
         [HttpPut("{numero},{montant}")]

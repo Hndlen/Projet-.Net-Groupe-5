@@ -1,4 +1,5 @@
-﻿using Projet.BDD.Entities.Serveur;
+﻿
+using Projet.Business.Dto.Serveur;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
