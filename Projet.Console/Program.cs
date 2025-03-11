@@ -68,6 +68,7 @@ internal class Program
                     // Affichage des données
                     foreach (var enregistrement in enregistrements)
                     {
+                        Console.WriteLine(">>> LECTURE JSON");
                         Console.WriteLine($"ID: {enregistrement.Id}");
                         Console.WriteLine($"Numéro de Carte Bancaire: {enregistrement.NumeroCarteBancaire}");
                         Console.WriteLine($"Montant de l'Opération: {enregistrement.MontantOperation}");
@@ -193,7 +194,7 @@ internal class Program
 
                 if (response.IsSuccessStatusCode)
                 {
-                    
+                    Console.WriteLine(">>> LECTURE Carte Bancaire par ID");
                     string jsonInfo = response.Content.ReadAsStringAsync().Result;
                     //Console.WriteLine(jsonInfo);
                     //var clientInfo = JsonSerializer.Deserialize<Client>(jsonInfo, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -203,18 +204,20 @@ internal class Program
                     Console.WriteLine($"Nom: {carteInfo.CompteCarteId}");
                     Console.WriteLine();
                     double NouveauSolde = montant * (Signe ? 1 : -1);
-                    //GetCartesByNumero(carteInfo.CompteCarteId);
+                    //Console.WriteLine("test1");
+                    GetCompteByNumero(carteInfo.CompteCarteId);
+                    //Console.WriteLine("test2");
                     PutCompteByNumeroAndMontant(carteInfo.CompteCarteId, NouveauSolde);
                     
                 }
                 else
                 {
-                    Console.WriteLine($"❌ Erreur : Client avec ID {numero} non trouvé.");
+                    Console.WriteLine($"Erreur : Client avec ID {numero} non trouvé.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Erreur lors de la récupération : {ex.Message}");
+                Console.WriteLine($"Erreur lors de la récupération : {ex.Message}");
             }
             
         }
@@ -236,22 +239,22 @@ internal class Program
 
                 if (response.IsSuccessStatusCode)
                 {
-
+                    Console.WriteLine(">>> Get Compte Bancaire par Carte");
                     string jsonInfo = response.Content.ReadAsStringAsync().Result;
                     var compteInfo = JsonSerializer.Deserialize<CompteBancaireJSON>(jsonInfo);
 
                     Console.WriteLine($"ID: {compteInfo.Numero}");
-                    Console.WriteLine($"Nom: {compteInfo.Solde}");
+                    Console.WriteLine($"Montant: {compteInfo.Solde}");
 
                 }
                 else
                 {
-                    Console.WriteLine($"❌ Erreur : Client avec ID {numero} non trouvé.");
+                    Console.WriteLine($"Erreur : Client avec ID {numero} non trouvé.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Erreur lors de la récupération : {ex.Message}");
+                Console.WriteLine($"Erreur lors de la récupération : {ex.Message}");
             }
 
         }
@@ -274,21 +277,21 @@ internal class Program
 
             try
             {
-
+                Console.WriteLine(">>> Put Compte Bancaire par Carte");
                 //HttpResponseMessage response = client.GetAsync($"{url}").Result;
                 HttpResponseMessage response =  client.PutAsync(url, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine($"✅ Mise à jour réussie pour la carte {numero} avec un montant de {montant}");
+                    Console.WriteLine($"Mise à jour réussie pour la carte {numero} avec un montant de {montant}");
                 }
                 else
                 {
-                    Console.WriteLine($"❌ Erreur : Impossible de mettre à jour la carte {numero}. Code : {response.StatusCode}");
+                    Console.WriteLine($"Erreur : Impossible de mettre à jour la carte {numero}. Code : {response.StatusCode}");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Erreur lors de la mise à jour : {ex.Message}");
+                Console.WriteLine($"Erreur lors de la mise à jour : {ex.Message}");
             }
 
         }
