@@ -4,6 +4,7 @@ using Projet.BDD.Entities.Console;
 using Projet.BDD.Entities.Serveur;
 using Projet.Console.InfoJSON;
 using System.Reflection.Emit;
+using System.Text;
 using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -52,7 +53,7 @@ internal class Program
         string filePath = @"C:\Users\lhand\Source\Repos\Projet-.Net-Groupe-5\Projet.Console\jsontest.json";
 
         string jsonString = File.ReadAllText(filePath);
-
+        bool Signe = true;
         try
         {
             using (JsonDocument doc = JsonDocument.Parse(jsonString))
@@ -67,6 +68,7 @@ internal class Program
                     // Affichage des données
                     foreach (var enregistrement in enregistrements)
                     {
+                        Console.WriteLine(">>> LECTURE JSON");
                         Console.WriteLine($"ID: {enregistrement.Id}");
                         Console.WriteLine($"Numéro de Carte Bancaire: {enregistrement.NumeroCarteBancaire}");
                         Console.WriteLine($"Montant de l'Opération: {enregistrement.MontantOperation}");
@@ -74,6 +76,25 @@ internal class Program
                         Console.WriteLine($"Date de l'Opération: {enregistrement.DateOperation}");
                         Console.WriteLine($"Devise: {enregistrement.Devise}");
                         Console.WriteLine();
+
+                        if(enregistrement.TypeOperation == "Depot")
+                        {
+                            Console.WriteLine("DEPOT");
+                            Signe = true;
+                            GetCartesByNumero(enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation,Signe);
+                        }
+                        else if(enregistrement.TypeOperation == "Retrait")
+                        {
+                            Console.WriteLine("RETRAIT");
+                            Signe = false;
+                            GetCartesByNumero(enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, Signe);
+                        }
+                        else
+                        {
+                            Console.WriteLine("FACTURE");
+                        }
+                            
+                            Console.WriteLine("__________________________________________________________");
                     }
                 }
                 else
@@ -158,14 +179,134 @@ internal class Program
         Console.WriteLine("test5");
     }
 
+    static async Task GetCartesByNumero(string numero,double montant,bool Signe)
+    {
+        string url = $"http://localhost:5187/api/CartesBancaire/{numero}";
+        
+        using (HttpClient client = new HttpClient())
+        {
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+                
+                HttpResponseMessage response = client.GetAsync($"{url}").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine(">>> LECTURE Carte Bancaire par ID");
+                    string jsonInfo = response.Content.ReadAsStringAsync().Result;
+                    //Console.WriteLine(jsonInfo);
+                    //var clientInfo = JsonSerializer.Deserialize<Client>(jsonInfo, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    var carteInfo = JsonSerializer.Deserialize<CarteBancaireJSON>(jsonInfo);
+
+                    Console.WriteLine($"ID: {carteInfo.Numero}");
+                    Console.WriteLine($"Nom: {carteInfo.CompteCarteId}");
+                    Console.WriteLine();
+                    double NouveauSolde = montant * (Signe ? 1 : -1);
+                    //Console.WriteLine("test1");
+                    GetCompteByNumero(carteInfo.CompteCarteId);
+                    //Console.WriteLine("test2");
+                    PutCompteByNumeroAndMontant(carteInfo.CompteCarteId, NouveauSolde);
+                    
+                }
+                else
+                {
+                    Console.WriteLine($"Erreur : Client avec ID {numero} non trouvé.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la récupération : {ex.Message}");
+            }
+            
+        }
+        
+    }
+
+    static async Task GetCompteByNumero(string numero)
+    {
+        string url = $"http://localhost:5187/api/ComptesBancaire/{numero}";
+
+        using (HttpClient client = new HttpClient())
+        {
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+
+                HttpResponseMessage response = client.GetAsync($"{url}").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine(">>> Get Compte Bancaire par Carte");
+                    string jsonInfo = response.Content.ReadAsStringAsync().Result;
+                    var compteInfo = JsonSerializer.Deserialize<CompteBancaireJSON>(jsonInfo);
+
+                    Console.WriteLine($"ID: {compteInfo.Numero}");
+                    Console.WriteLine($"Montant: {compteInfo.Solde}");
+
+                }
+                else
+                {
+                    Console.WriteLine($"Erreur : Client avec ID {numero} non trouvé.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la récupération : {ex.Message}");
+            }
+
+        }
+
+    }
+    static async Task PutCompteByNumeroAndMontant(string numero, double montant)
+    {
+        string url = $"http://localhost:5187/api/ComptesBancaire/{numero},{montant}";
+
+        using (HttpClient client = new HttpClient())
+        {
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            var testDT = new
+            {
+                CompteCarteId = numero,
+                Montant = montant
+            };
+            string jsonData = JsonSerializer.Serialize(testDT);
+            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            try
+            {
+                Console.WriteLine(">>> Put Compte Bancaire par Carte");
+                //HttpResponseMessage response = client.GetAsync($"{url}").Result;
+                HttpResponseMessage response =  client.PutAsync(url, content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine($"Mise à jour réussie pour la carte {numero} avec un montant de {montant}");
+                }
+                else
+                {
+                    Console.WriteLine($"Erreur : Impossible de mettre à jour la carte {numero}. Code : {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la mise à jour : {ex.Message}");
+            }
+
+        }
+
+    }
+
 
     private static void Main(string[] args)
     {
         LectureJSON();
         //GetAllClient();
         Console.WriteLine("__");
-        GetClientById(1);
-        NouveauCompteBancaire();
+        //GetCartesByNumero("4974 0185 0223 0007");
+        //GetClientById(1);
+        //NouveauCompteBancaire();
         Console.WriteLine("Fini");
     }
 }
