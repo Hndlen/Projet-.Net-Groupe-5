@@ -32,6 +32,12 @@ namespace Projet.API.Controllers
         }
         // GET: ClientssController
 
+        [HttpGet("/{debut}/{fin}/{id}")]
+        public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetweenByNumCB(DateTime debut, DateTime fin, string numCB)
+        {
+            return Ok(await transactionHistoriqueService.GetByDateBetweenByNumCB(debut, fin, numCB));
+        }
+
         [HttpPost("/{transaction}")]
         public async Task<ActionResult<int>> PostTransaction(TransactionHistoriqueDto transaction)
         {
