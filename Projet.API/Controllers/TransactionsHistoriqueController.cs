@@ -32,7 +32,7 @@ namespace Projet.API.Controllers
         }
         // GET: ClientssController
 
-        [HttpGet("/{debut}/{fin}/{id}")]
+        [HttpGet("/{debut}/{fin}/{numCB}")]
         public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetweenByNumCB(DateTime debut, DateTime fin, string numCB)
         {
             return Ok(await transactionHistoriqueService.GetByDateBetweenByNumCB(debut, fin, numCB));

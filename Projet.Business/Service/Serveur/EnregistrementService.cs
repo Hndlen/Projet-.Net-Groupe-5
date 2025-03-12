@@ -27,27 +27,27 @@ namespace Projet.Business.Service.Serveur
 
         public async Task<EnregistrementDto> GetEnregistrementsById(int id)
         {
-            var addEntities = await _repo.getById(id);
-            var addDto = _mapper.Map<EnregistrementDto>(addEntities);
-            return addDto;
+            var entities = await _repo.getById(id);
+            var dto = _mapper.Map<EnregistrementDto>(entities);
+            return dto;
         }
         public async Task<List<EnregistrementDto>> GetEnregistrements()
         {
-            var addEntities = await _repo.getAll();
-            var addDto = addEntities.Select(cat => _mapper.Map<EnregistrementDto>(cat)).ToList<EnregistrementDto>();
-            return addDto;
+            var entities = await _repo.getAll();
+            var dto = entities.Select(cat => _mapper.Map<EnregistrementDto>(cat)).ToList<EnregistrementDto>();
+            return dto;
         }
 
         public async Task<List<EnregistrementDto>> GetEnregistrementsByDate(DateTime date)
         {
-            var addEntities = await _repo.GetbyDate(date);
-            var addDto = addEntities.Select(cat => _mapper.Map<EnregistrementDto>(cat)).ToList<EnregistrementDto>();
-            return addDto;
+            var entities = await _repo.GetbyDate(date);
+            var dto = entities.Select(cat => _mapper.Map<EnregistrementDto>(cat)).ToList<EnregistrementDto>();
+            return dto;
         }
 
-        public async Task<int> AddEnregistrement(EnregistrementDto addDto)
+        public async Task<int> AddEnregistrement(EnregistrementDto dto)
         {
-            var addEntity = _mapper.Map<Enregistrement>(addDto);
+            var addEntity = _mapper.Map<Enregistrement>(dto);
             var addSaved = await _repo.Add(addEntity);
             return addSaved;
         }

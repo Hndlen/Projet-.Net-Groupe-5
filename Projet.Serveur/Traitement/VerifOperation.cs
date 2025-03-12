@@ -9,8 +9,10 @@ namespace Projet.Serveur.Traitement
 {
     public static class VerifOperation
     {
-
+        //variable statique pour récupérer la dernière erreur obtenue
         public static string LastError { get; set; }
+
+        //vérifie si l'opération est valide
         public static bool CheckOperation(Operation op)
         {
             if (!Enum.IsDefined(typeof(EnumOperation), op.Type))
@@ -18,7 +20,6 @@ namespace Projet.Serveur.Traitement
                 LastError = "Opération de type invalide.";
                 return false;
             }
-
 
             if (op.Montant == 0)
             {
@@ -51,23 +52,21 @@ namespace Projet.Serveur.Traitement
 
             numeroCarteBancaire = numeroCarteBancaire.Replace(" ", "");
 
-            // Initialiser la somme
             int somme = 0;
-            bool paire = false; // Démarre à la fin du numéro (donc on commence à doubler à partir de l'avant-dernier chiffre)
+            bool paire = false; 
 
-            // Parcourir le numéro de carte de droite à gauche
+            //additionne les chiffres du numéro de la carte bancaire selon les règles de l'algorithme de luhn
             for (int i = numeroCarteBancaire.Length - 1; i >= 0; i--)
             {
                 int chiffre = int.Parse(numeroCarteBancaire[i].ToString());
 
-                // Si la position est une position à doubler
                 if (paire)
                 {
                     chiffre *= 2;
-                    // Si le résultat est supérieur ou égal à 10, on additionne les chiffres du produit
+
                     if (chiffre >= 10)
                     {
-                        somme += (chiffre - 9); // Ce qui est équivalent à additionner les chiffres du produit
+                        somme += (chiffre - 9);
                     }
                     else
                     {
@@ -78,12 +77,9 @@ namespace Projet.Serveur.Traitement
                 {
                     somme += chiffre;
                 }
-
-                // Alterner entre doubler et ne pas doubler
                 paire = !paire;
             }
 
-            // Si la somme est divisible par 10, le numéro de carte est valide
             bool nbValide = (somme % 10 == 0);
             if (nbValide)
             {

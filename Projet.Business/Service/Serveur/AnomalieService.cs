@@ -27,21 +27,21 @@ namespace Projet.Business.Service.Serveur
 
         public async Task<List<AnomalieDto>> GetAnomalies()
         {
-            var addEntities = await _repo.getAll();
-            var addDto = addEntities.Select(cat => _mapper.Map<AnomalieDto>(cat)).ToList<AnomalieDto>();
-            return addDto;
+            var entities = await _repo.getAll();
+            var dto = entities.Select(cat => _mapper.Map<AnomalieDto>(cat)).ToList<AnomalieDto>();
+            return dto;
         }
 
         public async Task<AnomalieDto> GetAnomaliesById(int id)
         {
-            var addEntities = await _repo.getById(id);
-            var addDto =  _mapper.Map<AnomalieDto>(addEntities);
-            return addDto;
+            var entities = await _repo.getById(id);
+            var dto =  _mapper.Map<AnomalieDto>(entities);
+            return dto;
         }
 
-        public async Task<int> AddAnomalie(AnomalieDto addDto)
+        public async Task<int> AddAnomalie(AnomalieDto dto)
         {
-            var addEntity = _mapper.Map<Anomalie>(addDto);
+            var addEntity = _mapper.Map<Anomalie>(dto);
             var addSaved = await _repo.Add(addEntity);
             return addSaved;
         }

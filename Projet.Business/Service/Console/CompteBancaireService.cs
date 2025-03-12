@@ -25,16 +25,16 @@ namespace Projet.Business.Service.Console
 
         public async Task<List<CompteBancaireDto>> GetCompteBancaires()
         {
-            var addEntities = await _repo.getAll();
-            var addDto = addEntities.Select(cat => _mapper.Map<CompteBancaireDto>(cat)).ToList();
-            return addDto;
+            var entities = await _repo.getAll();
+            var dto = entities.Select(cat => _mapper.Map<CompteBancaireDto>(cat)).ToList();
+            return dto;
         }
 
         public async Task<CompteBancaireDto> GetCompteBancairessById(string id)
         {
-            var addEntities = await _repo.GetbyId(id);
-            var catDto = _mapper.Map<CompteBancaireDto>(addEntities);
-            return catDto;
+            var entities = await _repo.GetbyId(id);
+            var dto = _mapper.Map<CompteBancaireDto>(entities);
+            return dto;
         }
 
         public async Task<int> AddCompteBancaire(CompteBancaireDto addDto)
@@ -46,7 +46,6 @@ namespace Projet.Business.Service.Console
 
         public async Task<int> MajSolde(string numero, double montant)
         {
-            //var addEntity = _mapper.Map<CompteBancaire>(addDto);
             var majSaved = await _repo.MajSolde(numero, montant);
             return majSaved;
         }

@@ -26,9 +26,9 @@ namespace Projet.Business.Service.Console
 
         public async Task<List<AdresseDto>> GetAdresses()
         {
-            var addEntities = await _repo.getAll();
-            var addDto = addEntities.Select(cat => _mapper.Map<AdresseDto>(cat)).ToList();
-            return addDto;
+            var entities = await _repo.getAll();
+            var dto = entities.Select(cat => _mapper.Map<AdresseDto>(cat)).ToList();
+            return dto;
         }
 
         //public async Task<CategoryDto> GetAdressessById(int id)
