@@ -324,7 +324,58 @@ public class Program
         }
 
     }
+    static async Task GetTransactionByPeriode(string numero, string dateDebut, string dateFin)
+    {
+        string url = $"http://localhost:5187/{dateDebut}/{dateFin}/{numero}";
+        //string url = $"http://localhost:5187/{dateDebut}/{dateFin}";
 
+        using (HttpClient client = new HttpClient())
+        {
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+
+                HttpResponseMessage response = client.GetAsync($"{url}").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    //Console.WriteLine(">>> LECTURE Carte Bancaire par ID");
+                    string jsonInfo = response.Content.ReadAsStringAsync().Result;
+                    //Console.WriteLine(jsonInfo);
+                    //var clientInfo = JsonSerializer.Deserialize<Client>(jsonInfo, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    //var carteInfo = JsonSerializer.Deserialize<List<TransactionJSON>>(enregistrementsElement.GetRawText());
+                    var objInfo = JsonSerializer.Deserialize<List<TransactionJSON>>(jsonInfo);
+                    //var carteInfo = JsonSerializer.Deserialize<TransactionJSON>(jsonInfo);
+                    foreach (var o in objInfo)
+                    {
+                        Console.WriteLine($"{o.Id} {o.NumeroCarteBancaire} {o.MontantOperation}");
+                        Console.WriteLine();
+                    }
+                    
+                    
+                    //double NouveauSolde = montant * (Signe ? 1 : -1);
+                    //Console.WriteLine("test1");
+                    //NumeroCompteGlobal.numeroCompte = carteInfo.CompteCarteId;
+                    //GetCompteByNumero(carteInfo.CompteCarteId);
+                    //Console.WriteLine("test2");
+                    //PutCompteByNumeroAndMontant(carteInfo.CompteCarteId, NouveauSolde);
+
+                }
+                else
+                {
+                    Console.WriteLine(response);
+                    Console.WriteLine($"Erreur : Client avec ID {numero} non trouvé.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la récupération : {ex.Message}");
+            }
+
+        }
+
+    }
     static string LireMotDePasse()
     {
         string motDePasse = "";
@@ -403,7 +454,7 @@ public class Program
 
         //Authentification();
 
-        LectureJSON();
+        //LectureJSON();
         /*
         string filePath = "C:\\Users\\lhand\\Source\\Repos\\Projet-.Net-Groupe-5\\Projet.Console\\ExtractionsXML\\personnes.xml"; // Chemin du fichier XML
         ExtractionXML.CreerXml(filePath);
@@ -413,6 +464,17 @@ public class Program
 
         PdfCreator.CreerPdf(filePath2, texte);*/
         //GetAllClient();
+        /*DateTime Debut =  new DateTime(2000, 11, 12);
+        DateTime Fin = new DateTime(2026, 11, 12);
+        string dateString = "2025-03-12";
+        DateTime date = DateTime.ParseExact(dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        Console.WriteLine(date);
+        Console.WriteLine(Debut);
+        Console.WriteLine(Fin);*/
+        string Debut = "2000-10-10";
+        string Fin = "2030-10-10";
+        GetTransactionByPeriode("4974 0185 0223 4053",Debut,Fin );
+
         Console.WriteLine("__");
         //GetCartesByNumero("4974 0185 0223 0007");
         //GetClientById(1);
