@@ -26,22 +26,22 @@ namespace Projet.Business.Service.Console
 
         public async Task<List<CarteBancaireDto>> GetCarteBancaires()
         {
-            var addEntities = await _repo.getAll();
-            var addDto = addEntities.Select(cat => _mapper.Map<CarteBancaireDto>(cat)).ToList();
-            return addDto;
+            var entities = await _repo.getAll();
+            var dto = entities.Select(cat => _mapper.Map<CarteBancaireDto>(cat)).ToList();
+            return dto;
         }
 
         public async Task<CarteBancaireDto> GetCarteBancaireById(string id)
         {
-            var addEntities = await _repo.GetbyId(id);
-            var catDto = _mapper.Map<CarteBancaireDto>(addEntities);
-            return catDto;
+            var entities = await _repo.GetbyId(id);
+            var dto = _mapper.Map<CarteBancaireDto>(entities);
+            return dto;
         }
 
         public async Task<int> AddCarteBancaire(CarteBancaireDto addDto)
         {
-            var addEntity = _mapper.Map<CarteBancaire>(addDto);
-            var addSaved = await _repo.Add(addEntity);
+            var entity = _mapper.Map<CarteBancaire>(addDto);
+            var addSaved = await _repo.Add(entity);
             return addSaved;
         }
     }

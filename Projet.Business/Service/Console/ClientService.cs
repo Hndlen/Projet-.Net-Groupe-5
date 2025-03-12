@@ -54,18 +54,18 @@ namespace Projet.Business.Service.Console
 
         public async Task<ClientDto> GetClientById(int id)
         {
-            var addEntities = await _repo.GetbyId(id);
-            if (addEntities is ClientParticulier clientParticulier)
+            var entities = await _repo.GetbyId(id);
+            if (entities is ClientParticulier clientParticulier)
             {
                 return _mapper.Map<ClientParticulierDto>(clientParticulier);
             }
-            else if (addEntities is ClientProfessionnel clientProfessionnel)
+            else if (entities is ClientProfessionnel clientProfessionnel)
             {
                 return _mapper.Map<ClientProfessionnelDto>(clientProfessionnel);
             }
             else
             {
-                return _mapper.Map<ClientDto>(addEntities);
+                return _mapper.Map<ClientDto>(entities);
             }
         }
 

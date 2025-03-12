@@ -32,10 +32,10 @@ namespace Projet.Serveur.Generation
 
         public double TauxConversion { get; set; }
 
-        // Générateur de nombres aléatoires
+        
         private static Random random = new Random();
 
-        // Constructeur
+        // Constructeur, initialise les attributs via les méthodes
         public Operation()
         {
             SetNumeroCarteBancaire();
@@ -46,7 +46,7 @@ namespace Projet.Serveur.Generation
             SetTauxConvertion();
         }
 
-        // Méthode pour générer un numéro de carte bancaire aléatoire
+        //  choisi un numéro de carte bancaire aléatoirement
         private void SetNumeroCarteBancaire()
         {
             //string numeroCB = "4000 0000 0000 1091";
@@ -74,16 +74,11 @@ namespace Projet.Serveur.Generation
                 "4974 0185 0223 0895"   // Mauvais dernier chiffre
             };
 
-
-            //for (int i = 0; i < 4; i++)
-            //{
-            //    numeroCB += random.Next(0, 10).ToString();
-            //}
             int index = random.Next(numsCB.Length);
             this.NumeroCarteBancaire = numsCB[index];
         }
 
-        // Méthode pour générer un montant aléatoire
+        // génère un montant aléatoire
         private void SetMontant()
         {
             double randomMontant = random.NextDouble() * 10000;
@@ -98,21 +93,22 @@ namespace Projet.Serveur.Generation
             }
         }
 
-        // Méthode pour générer une devise aléatoire
+        // choisi une devise aléatoirement
         private void SetDevise()
         {
-            string[] devises = { "EUR", "USD", "CAD", "JPY", "CNY" };
+            string[] devises = { "EUR", "USD", "CAD", "JPY", "CNY", "???" };
             int index = random.Next(devises.Length);
             this.Devise = devises[index];
         }
 
-        // Méthode pour définir le type d'opération aléatoire
+        // choisi un type d'opération aléatoirement
         private void SetType()
         {
             Array types = Enum.GetValues(typeof(EnumOperation));
             this.Type = (EnumOperation)types.GetValue(random.Next(types.Length));
         }
 
+        //récupère le taux de convertion et l'affecte à l'attribut TauxConversion
         public  void SetTauxConvertion()
         {
             string url = "https://api.exchangerate-api.com/v4/latest/EUR";
@@ -152,11 +148,7 @@ namespace Projet.Serveur.Generation
         }
 
 
-        // Méthode pour afficher les informations de la transaction
-        public void AfficherTransaction()
-        {
-            Console.WriteLine($"Numéro CB : {NumeroCarteBancaire}, Type : {Type}, Montant : {Montant} {Devise}, Date : {Date}");
-        }
+
     }
 
 }

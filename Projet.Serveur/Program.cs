@@ -13,18 +13,26 @@ internal class Program
     static AnomalieController controllerAno = new AnomalieController();
     private static void Main(string[] args)
     {
-
+        //chemins fichiers
         string filename = @"..\..\..\json\Operations.json";
         string filename2 = @"..\..\..\..\Projet.Serveur.Extract\extract\extractEnregistrements.json";
 
+        //création de 10 opérations aléatoires
         List<Operation> operations = CreateOperations(10);
+
+        //écriture des opérations sur le fichier qui sera traité
         WriteToFile(operations, filename);
+
+        //traitement et insertion des enregistrements/anomalies
         AddOperationFromFileAsync(filename);
+
+        //création du fichier extract utilisé par le client
         CreateFileFromDatabase(filename2);
 
 
 
     }
+    //crée un nombre d'opérations spécifié par le paramètre nb
     private static List<Operation> CreateOperations(int nb)
     {
         List<Operation> operations = new List<Operation>();
@@ -38,6 +46,7 @@ internal class Program
         return operations;
     }
 
+    //écrit un object sous forme de json dans le fichier donné en paramètre
     private static void WriteToFile<T>(T data, string filename)
     {
         // Sérialisation de l'objet en JSON
@@ -52,20 +61,20 @@ internal class Program
         Console.WriteLine($"Fichier JSON '{filename}' créé avec succès.");
     }
 
-
+    //Trie et insère les opérations dans la base de données depuis un fichier
     private static async Task AddOperationFromFileAsync(string filepath)
     {
         string jsonString = File.ReadAllText(filepath);
 
+        //liste opérations renseignéees sur le fichier
         List<Operation> operations = JsonSerializer.Deserialize<List<Operation>>(jsonString);
-        Random rand = new Random();
 
         foreach (Operation op in operations)
         {
-            op.AfficherTransaction();
-            Console.WriteLine();
+            //si l'opération est valide
             if (VerifOperation.CheckOperation(op))
             {
+                //crée un enregistrement et l'insère dans la base de données
                 var enregistrement = new EnregistrementDto
                 {
                     NumeroCarteBancaire = op.NumeroCarteBancaire,
@@ -82,6 +91,7 @@ internal class Program
             }
             else
             {
+                //crée une anomalie et l'insère dans la base de données
                 var anomalie = new AnomalieDto
                 {
                     NumeroCarteBancaire = op.NumeroCarteBancaire,
@@ -104,8 +114,8 @@ internal class Program
     private static void CreateFileFromDatabase(string filepath)
     {
         var enregistrements = controllerEnr.GetEnregistrementsBydate(DateTime.Now).Result;
-        //Map data = Collections.singletoneMap("scuole", result);
-        //Console.WriteLine(anomalies);
+
+        //Encapsule la liste pour avoir un tritre "Enregistrements" sur le fichier Json
         var JsonEnregistrement = new
         {
             Enregistrements = enregistrements // Liste récupérée
