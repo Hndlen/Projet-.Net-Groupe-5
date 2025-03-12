@@ -22,7 +22,7 @@ namespace Projet.API.Controllers
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<AdresseDto>>> GetAdresses()
         {
-            return await adresseService.GetAdresses();
+            return Ok(await adresseService.GetAdresses());
         }
         // GET: AdressesController
 

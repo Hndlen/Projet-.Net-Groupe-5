@@ -11,24 +11,31 @@ namespace Projet.API.Controllers
     public class ClientsController : Controller
     {
 
-        private readonly ClientService ClientsService;
+        private readonly ClientService clientsService;
 
         public ClientsController()
         {
-            this.ClientsService = new ClientService();
+            this.clientsService = new ClientService();
         }
 
         // GET: ProductsController
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<ClientDto>>> GetClient()
         {
-            return await ClientsService.GetClients();
+            return Ok(await clientsService.GetClients());
         }
 
         [HttpGet("/{id}")]
         public async Task<ActionResult<ClientDto>> GetClientById(int id)
         {
-            return await ClientsService.GetClientById(id);
+            var res = clientsService.GetClientById(id);
+            if (res == null)
+            {
+                return NotFound("No Products !");
+
+            }
+            return Ok(res);
+
         }
         // GET: ClientssController
 

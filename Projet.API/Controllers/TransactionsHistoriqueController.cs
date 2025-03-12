@@ -22,13 +22,26 @@ namespace Projet.API.Controllers
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetClient()
         {
-            return await transactionHistoriqueService.GetAll();
+            return Ok(await transactionHistoriqueService.GetAll());
         }
 
         [HttpGet("/{debut}/{fin}")]
         public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetween(DateTime debut, DateTime fin)
         {
-            return await transactionHistoriqueService.GetByDateBetween(debut, fin);
+            return Ok(await transactionHistoriqueService.GetByDateBetween(debut, fin));
+        }
+        // GET: ClientssController
+
+        [HttpGet("/{debut}/{fin}/{id}")]
+        public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetweenByNumCB(DateTime debut, DateTime fin, string numCB)
+        {
+            return Ok(await transactionHistoriqueService.GetByDateBetweenByNumCB(debut, fin, numCB));
+        }
+
+        [HttpPost("/{transaction}")]
+        public async Task<ActionResult<int>> PostTransaction(TransactionHistoriqueDto transaction)
+        {
+            return await transactionHistoriqueService.Add(transaction);
         }
         // GET: ClientssController
 

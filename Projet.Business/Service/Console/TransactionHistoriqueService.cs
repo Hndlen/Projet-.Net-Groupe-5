@@ -37,6 +37,17 @@ namespace Projet.Business.Service.Console
             var addDto = addEntities.Select(cat => _mapper.Map<TransactionHistoriqueDto>(cat)).ToList();
             return addDto;
         }
-
+        public async Task<List<TransactionHistoriqueDto>> GetByDateBetweenByNumCB(DateTime debut, DateTime fin, string numCB)
+        {
+            var addEntities = await _repo.GetByDateBetweenByNumCB(debut, fin, numCB);
+            var addDto = addEntities.Select(cat => _mapper.Map<TransactionHistoriqueDto>(cat)).ToList();
+            return addDto;
+        }
+        public async Task<int> Add(TransactionHistoriqueDto addDto)
+        {
+            var addEntity = _mapper.Map<TransactionsHistorique>(addDto);
+            var addSaved = await _repo.Add(addEntity);
+            return addSaved;
+        }
     }
 }
