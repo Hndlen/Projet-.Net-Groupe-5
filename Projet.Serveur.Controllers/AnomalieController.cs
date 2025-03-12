@@ -32,5 +32,11 @@ namespace Projet.Serveur.Controllers
             Console.WriteLine("Anomalie ajouté avec succès !");
             return result;
         }
+
+        public async Task<List<AnomalieDto?>> GetAnomalies()
+        {
+            var anomalies = await AnomalieService.GetAnomalies();
+            return anomalies;
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace Projet.Business.Dto
         public EnumOperation TypeOperation { get; set; }
         public DateTime DateOperation { get; set; }
         public string Devise { get; set; }
+        public double? tauxConvertion { get; set; }
 
 
         /*public Adresse(string libelle, string complement,  int codePostal, string ville)

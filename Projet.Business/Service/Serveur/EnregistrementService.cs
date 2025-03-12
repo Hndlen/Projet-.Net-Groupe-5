@@ -38,6 +38,13 @@ namespace Projet.Business.Service.Serveur
             return addDto;
         }
 
+        public async Task<List<EnregistrementDto>> GetEnregistrementsByDate(DateTime date)
+        {
+            var addEntities = await _repo.GetbyDate(date);
+            var addDto = addEntities.Select(cat => _mapper.Map<EnregistrementDto>(cat)).ToList<EnregistrementDto>();
+            return addDto;
+        }
+
         public async Task<int> AddEnregistrement(EnregistrementDto addDto)
         {
             var addEntity = _mapper.Map<Enregistrement>(addDto);
