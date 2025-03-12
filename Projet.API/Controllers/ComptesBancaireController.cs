@@ -11,30 +11,37 @@ namespace Projet.API.Controllers
     public class ComptesBancaireController : Controller
     {
 
-        private readonly CompteBancaireService CompteBancaireService;
+        private readonly CompteBancaireService compteBancaireService;
 
         public ComptesBancaireController()
         {
-            this.CompteBancaireService = new CompteBancaireService();
+            this.compteBancaireService = new CompteBancaireService();
         }
 
         // GET: ProductsController
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<CompteBancaireDto>>> GetCompteBancaires()
         {
-            return await CompteBancaireService.GetCompteBancaires();
+            return Ok(await compteBancaireService.GetCompteBancaires());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<CompteBancaireDto>> GetCompteBancaireById(string id)
         {
-            return await CompteBancaireService.GetCompteBancairessById(id);
+            var res = await compteBancaireService.GetCompteBancairessById(id);
+            if (res == null)
+            {
+                return NotFound("No Products !");
+
+            }
+            return Ok(res);
+
         }
 
         [HttpPut("{numero},{montant}")]
         public async Task<ActionResult<int>> SetMontant(string numero, double montant)
         {
-            return await CompteBancaireService.MajSolde(numero, montant);
+            return await compteBancaireService.MajSolde(numero, montant);
         }
         // GET: ComptesBancaireController
 
