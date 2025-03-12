@@ -27,10 +27,11 @@ namespace Projet.Fenetre
         }
         static async void LectureJSON()
         {
-            string filePath = @"C:\Users\lhand\Source\Repos\Projet-.Net-Groupe-5\Projet.Console\jsontest.json";
-
+            //string filePath = @"C:\Users\lhand\Source\Repos\Projet-.Net-Groupe-5\Projet.Console\jsontest.json";
+            string filePath = @"..\..\..\..\Projet.Serveur.Extract\extract\extractEnregistrements.json";
             string jsonString = File.ReadAllText(filePath);
             bool Signe = true;
+            double montantConvert = 0;
             try
             {
                 using (JsonDocument doc = JsonDocument.Parse(jsonString))
@@ -46,33 +47,22 @@ namespace Projet.Fenetre
                         foreach (var enregistrement in enregistrements)
                         {
 
-                           /* Console.WriteLine(">>> LECTURE JSON");
-                            Console.WriteLine($"ID: {enregistrement.Id}");
-                            Console.WriteLine($"Numéro de Carte Bancaire: {enregistrement.NumeroCarteBancaire}");
-                            Console.WriteLine($"Montant de l'Opération: {enregistrement.MontantOperation}");
-                            Console.WriteLine($"Type d'Opération: {enregistrement.TypeOperation}");
-                            Console.WriteLine($"Date de l'Opération: {enregistrement.DateOperation}");
-                            Console.WriteLine($"Devise: {enregistrement.Devise}");
-                            Console.WriteLine();*/
+                           
 
-                            if (enregistrement.TypeOperation == "Depot")
+                            
+                            GetCartesByNumero(enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, Signe);
+
+                            if (enregistrement.tauxConvertion != 1)
                             {
-                             //   Console.WriteLine("DEPOT");
-                                Signe = true;
-                                GetCartesByNumero(enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, Signe);
-                            }
-                            else if (enregistrement.TypeOperation == "Retrait")
-                            {
-                             //   Console.WriteLine("RETRAIT");
-                                Signe = false;
-                                GetCartesByNumero(enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, Signe);
+                                montantConvert = enregistrement.MontantOperation * enregistrement.tauxConvertion;
+                                montantConvert = Math.Truncate(montantConvert * 100) / 100;
                             }
                             else
                             {
-                              //  Console.WriteLine("FACTURE");
+                                montantConvert = enregistrement.MontantOperation;
                             }
-                            Transactions(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
-                           // Console.WriteLine("__________________________________________________________");
+                            Transactions(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, montantConvert, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
+                            // Console.WriteLine("__________________________________________________________");
                         }
                     }
                     else
@@ -279,7 +269,7 @@ namespace Projet.Fenetre
 
         
 
-        static void Transactions(string NumeroCompte, string numeroCarteBancaire, double montantOperation, string typeOperation, string dateOperation, string devise)
+        static void Transactions(string NumeroCompte, string numeroCarteBancaire, double montantOperation, int typeOperation, string dateOperation, string devise)
         {
             using (var context = new MyDbContextConsole())
             {
@@ -289,16 +279,17 @@ namespace Projet.Fenetre
                 // Maintenant, initialise les données après la migration
                 //DateTime dateOuverture = new DateTime(2000, 11, 12);
                 //string numeroCompteTest = GenererNumeroCompte(dateOuverture);
-                DateTime date = DateTime.ParseExact(dateOperation, "yyyy/MM/dd", CultureInfo.InvariantCulture);
+                DateTime dateTime = DateTime.Parse(dateOperation);
+                DateTime date = DateTime.ParseExact(dateTime.ToString("yyyy/MM/dd"), "yyyy/MM/dd", CultureInfo.InvariantCulture);
                 // Ajouter ces données dans la base de données
                 context.TransactionsHistoriques.Add(new TransactionsHistorique
                 {
                     CompteCarteId = NumeroCompte,
                     NumeroCarteBancaire = numeroCarteBancaire,
                     MontantOperation = montantOperation,
-                    TypeOperation = typeOperation,
+                    TypeOperation = typeOperation.ToString(),
                     DateOperation = date,
-                    Devise = devise
+                    Devise = "EU"
 
                 });
 

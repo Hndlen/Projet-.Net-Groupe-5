@@ -12,7 +12,7 @@ using Projet.BDD;
 namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
 {
     [DbContext(typeof(MyDbContextServeur))]
-    [Migration("20250312092217_InitServeur")]
+    [Migration("20250312142129_InitServeur")]
     partial class InitServeur
     {
         /// <inheritdoc />
