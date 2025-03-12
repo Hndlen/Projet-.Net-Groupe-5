@@ -35,17 +35,24 @@ namespace Projet.BDD.Repositories.Console
                                     .SingleOrDefaultAsync<TransactionsHistorique>();
             return transactionsHistorique;
         }
-
-        public async Task<TransactionsHistorique?> GetbyNumCarte(string numero)
+        public async Task<TransactionsHistorique?> GetbyNumCompte(string numeroCompte)
         {
             using var context = new MyDbContextConsole();
             var transactionsHistorique = await context.TransactionsHistoriques
-                            .Where<TransactionsHistorique>(e => e.NumeroCarteBancaire == numero)
+                            .Where<TransactionsHistorique>(e => e.CompteCarteId == numeroCompte)
+                            .SingleOrDefaultAsync<TransactionsHistorique>();
+            return transactionsHistorique;
+        }
+        public async Task<TransactionsHistorique?> GetbyNumCarte(string numeroCarte)
+        {
+            using var context = new MyDbContextConsole();
+            var transactionsHistorique = await context.TransactionsHistoriques
+                            .Where<TransactionsHistorique>(e => e.NumeroCarteBancaire == numeroCarte)
                             .SingleOrDefaultAsync<TransactionsHistorique>();
             return transactionsHistorique;
         }
 
-        public async Task<List<TransactionsHistorique?>> GetbyTypeOp(EnumOperation typeOp)
+        public async Task<List<TransactionsHistorique?>> GetbyTypeOp(string typeOp)
         {
             using var context = new MyDbContextConsole();
             var transactionsHistorique = await context.TransactionsHistoriques

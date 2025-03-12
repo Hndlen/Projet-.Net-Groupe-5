@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Personnes>
+  <Personne>
+    <Nom>Doe</Nom>
+    <Prénom>John</Prénom>
+    <Âge>30</Âge>
+  </Personne>
+  <Personne>
+    <Nom>Smith</Nom>
+    <Prénom>Jane</Prénom>
+    <Âge>25</Âge>
+  </Personne>
+</Personnes>

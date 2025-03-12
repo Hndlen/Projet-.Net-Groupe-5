@@ -400,6 +400,10 @@ namespace Projet.BDD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CompteCarteId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DateOperation")
                         .HasColumnType("datetime2");
 
@@ -414,8 +418,9 @@ namespace Projet.BDD.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeOperation")
-                        .HasColumnType("int");
+                    b.Property<string>("TypeOperation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -12,7 +12,7 @@ using Projet.BDD;
 namespace Projet.BDD.Migrations
 {
     [DbContext(typeof(MyDbContextConsole))]
-    [Migration("20250312083313_InitConsole")]
+    [Migration("20250312091842_InitConsole")]
     partial class InitConsole
     {
         /// <inheritdoc />
@@ -403,6 +403,10 @@ namespace Projet.BDD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CompteCarteId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DateOperation")
                         .HasColumnType("datetime2");
 
@@ -417,8 +421,9 @@ namespace Projet.BDD.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeOperation")
-                        .HasColumnType("int");
+                    b.Property<string>("TypeOperation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
