@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Projet.BDD.Repositories.Console
 {
-    class TransactionsHistoriqueRepository : Irepository<TransactionsHistorique>
+    public class TransactionsHistoriqueRepository : Irepository<TransactionsHistorique>
     {
         public TransactionsHistoriqueRepository()
         {
@@ -60,6 +60,16 @@ namespace Projet.BDD.Repositories.Console
                             .ToListAsync<TransactionsHistorique>();
             return transactionsHistorique;
         }
+
+        public async Task<List<TransactionsHistorique?>> GetByDateBetween(DateTime debut, DateTime fin)
+        {
+            using var context = new MyDbContextConsole();
+            var transactionsHistoriques = await context.TransactionsHistoriques
+                                    .Where(e => e.DateOperation.Date >= debut.Date && e.DateOperation.Date <= fin.Date)
+                                    .ToListAsync();
+            return transactionsHistoriques;
+        }
+
 
         public async Task<int> Add(TransactionsHistorique catEntity)
         {
