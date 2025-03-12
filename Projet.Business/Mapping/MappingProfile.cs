@@ -22,6 +22,7 @@ namespace Projet.Business.Mapping
             CreateMap<ClientParticulier, ClientParticulierDto>().ReverseMap();
             CreateMap<ClientProfessionnel, ClientProfessionnelDto>().ReverseMap();
             CreateMap<CompteBancaire, CompteBancaireDto>().ReverseMap();
+            CreateMap<TransactionsHistorique, TransactionHistoriqueDto>().ReverseMap();
 
             //serveur
             CreateMap<Enregistrement, EnregistrementDto>().ReverseMap();

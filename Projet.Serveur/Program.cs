@@ -104,10 +104,13 @@ internal class Program
     private static void CreateFileFromDatabase(string filepath)
     {
         var enregistrements = controllerEnr.GetEnregistrementsBydate(DateTime.Now).Result;
-        var anomalies = controllerAno.GetAnomalies().Result;
-        Console.WriteLine(anomalies);
-
-        WriteToFile(enregistrements, filepath);
+        //Map data = Collections.singletoneMap("scuole", result);
+        //Console.WriteLine(anomalies);
+        var JsonEnregistrement = new
+        {
+            Enregistrements = enregistrements // Liste récupérée
+        };
+        WriteToFile(JsonEnregistrement, filepath);
 
     }
 

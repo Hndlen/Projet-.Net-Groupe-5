@@ -70,7 +70,7 @@ namespace Projet.BDD.Repositories.Console
             return transactionsHistoriques;
         }
 
-        public async Task<List<TransactionsHistorique?>> GetByDateBetweenById(DateTime debut, DateTime fin, string NumeroCarteBancaire)
+        public async Task<List<TransactionsHistorique?>> GetByDateBetweenByNumCB(DateTime debut, DateTime fin, string NumeroCarteBancaire)
         {
             using var context = new MyDbContextConsole();
             var transactionsHistoriques = await context.TransactionsHistoriques
