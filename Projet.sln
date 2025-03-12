@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projet.Serveur.Controllers"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projet.Serveur", "Projet.Serveur\Projet.Serveur.csproj", "{66DD3F6C-F90F-4DB5-92F2-B8E907FBD0E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projet.Fenetre", "Projet.Fenetre\Projet.Fenetre.csproj", "{B73EDE1B-C99E-4D88-BDA6-1E2B571943F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{66DD3F6C-F90F-4DB5-92F2-B8E907FBD0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66DD3F6C-F90F-4DB5-92F2-B8E907FBD0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66DD3F6C-F90F-4DB5-92F2-B8E907FBD0E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B73EDE1B-C99E-4D88-BDA6-1E2B571943F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B73EDE1B-C99E-4D88-BDA6-1E2B571943F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B73EDE1B-C99E-4D88-BDA6-1E2B571943F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B73EDE1B-C99E-4D88-BDA6-1E2B571943F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
