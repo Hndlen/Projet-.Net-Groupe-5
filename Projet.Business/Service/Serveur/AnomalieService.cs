@@ -43,6 +43,7 @@ namespace Projet.Business.Service.Serveur
         {
             var addEntity = _mapper.Map<Anomalie>(addDto);
             var addSaved = await _repo.Add(addEntity);
+            System.Console.WriteLine("AnomalieService");
             return addSaved;
         }
 

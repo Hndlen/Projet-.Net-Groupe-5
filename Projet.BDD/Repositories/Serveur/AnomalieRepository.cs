@@ -55,11 +55,27 @@ namespace Projet.BDD.Repositories.Serveur
 
         public async Task<int> Add(Anomalie anoEntity)
         {
-            using var context = new MyDbContextServeur();
-            context.Anomalies.Add(anoEntity);
-            var anoSaved = await context.SaveChangesAsync();
-            return anoSaved;
+            try
+            {
 
+
+                using var context = new MyDbContextServeur();
+
+                // Ajoute l'entité au contexte
+                context.Anomalies.Add(anoEntity);
+
+
+                var anoSaved =  context.SaveChanges();
+                System.Console.WriteLine("Après SaveChangesAsync()");
+                System.Console.WriteLine("AnomalieRepo2 : " + anoSaved);
+
+
+                return anoSaved;
+            }catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+                return 0;
+            }
         }
     }
 }

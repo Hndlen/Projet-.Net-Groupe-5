@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Projet.BDD.Entities.Console;
 using Projet.BDD.Entities.Serveur;
 using System;

@@ -60,7 +60,7 @@ namespace Projet.BDD.Repositories.Serveur
         {
             using var context = new MyDbContextServeur();
             context.Enregistrements.Add(catEntity);
-            var enrSaved = await context.SaveChangesAsync();
+            var enrSaved =  context.SaveChanges();
             return enrSaved;
 
         }
