@@ -1,0 +1,82 @@
+[
+  {
+    "numeroCarteBancaire": "4974 0185 0223 9143",
+    "Montant": -3069.65,
+    "Type": 2,
+    "Date": "2025-03-12T11:59:04.2549689+01:00",
+    "Devise": "JPY",
+    "TauxConversion": 161.21
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 2379",
+    "Montant": -2605.49,
+    "Type": 0,
+    "Date": "2025-03-12T11:59:05.173313+01:00",
+    "Devise": "CNY",
+    "TauxConversion": 7.88
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 0895",
+    "Montant": 529.97,
+    "Type": 1,
+    "Date": "2025-03-12T11:59:05.6411946+01:00",
+    "Devise": "EUR",
+    "TauxConversion": 1
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 4555",
+    "Montant": -5290.11,
+    "Type": 2,
+    "Date": "2025-03-12T11:59:06.1023904+01:00",
+    "Devise": "JPY",
+    "TauxConversion": 161.21
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 4555",
+    "Montant": 6972.97,
+    "Type": 1,
+    "Date": "2025-03-12T11:59:06.5588237+01:00",
+    "Devise": "CAD",
+    "TauxConversion": 1.58
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 0895",
+    "Montant": -3461.39,
+    "Type": 2,
+    "Date": "2025-03-12T11:59:07.0171935+01:00",
+    "Devise": "CNY",
+    "TauxConversion": 7.88
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 0894",
+    "Montant": 850.5,
+    "Type": 1,
+    "Date": "2025-03-12T11:59:07.4784529+01:00",
+    "Devise": "CAD",
+    "TauxConversion": 1.58
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 2379",
+    "Montant": -9931.5,
+    "Type": 0,
+    "Date": "2025-03-12T11:59:07.9377125+01:00",
+    "Devise": "EUR",
+    "TauxConversion": 1
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 6248",
+    "Montant": -9657.87,
+    "Type": 2,
+    "Date": "2025-03-12T11:59:08.3982673+01:00",
+    "Devise": "EUR",
+    "TauxConversion": 1
+  },
+  {
+    "numeroCarteBancaire": "4974 0185 0223 2379",
+    "Montant": -2912.69,
+    "Type": 2,
+    "Date": "2025-03-12T11:59:08.8612986+01:00",
+    "Devise": "CNY",
+    "TauxConversion": 7.88
+  }
+]

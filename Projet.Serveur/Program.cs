@@ -14,8 +14,9 @@ internal class Program
     private static void Main(string[] args)
     {
 
-        string filename = @"C:\Users\bosso\Documents\Thierry\Ajc_formation\c#\Projet .Net\projet\Projet-.Net-Groupe-5\Projet.Serveur\json\test.json";
-        string filename2 = @"C:\Users\bosso\Documents\Thierry\Ajc_formation\c#\Projet .Net\projet\Projet-.Net-Groupe-5\Projet.Serveur\json\test2.json";
+        string filename = @"..\..\..\json\Operations.json";
+        string filename2 = @"..\..\..\..\Projet.Serveur.Extract\extract\extractEnregistrements.json";
+
         List<Operation> operations = CreateOperations(10);
         WriteToFile(operations, filename);
         AddOperationFromFileAsync(filename);
@@ -32,7 +33,6 @@ internal class Program
         for (int i = 0; i < nb; i++)
         {
             operations.Add(new Operation());
-            Console.WriteLine("OPEratino taux = " + operations[i].TauxConversion);
         }
 
         return operations;

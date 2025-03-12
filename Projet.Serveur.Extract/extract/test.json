@@ -259,5 +259,23 @@
     "DateOperation": "2025-03-12T11:05:48.7564576",
     "Devise": "EUR",
     "tauxConvertion": 1
+  },
+  {
+    "Id": 31,
+    "NumeroCarteBancaire": "4974 0185 0223 0895",
+    "MontantOperation": 529.97,
+    "TypeOperation": 1,
+    "DateOperation": "2025-03-12T11:59:05.6411946",
+    "Devise": "EUR",
+    "tauxConvertion": 1
+  },
+  {
+    "Id": 32,
+    "NumeroCarteBancaire": "4974 0185 0223 0895",
+    "MontantOperation": -3461.39,
+    "TypeOperation": 2,
+    "DateOperation": "2025-03-12T11:59:07.0171935",
+    "Devise": "CNY",
+    "tauxConvertion": 7.88
   }
 ]
