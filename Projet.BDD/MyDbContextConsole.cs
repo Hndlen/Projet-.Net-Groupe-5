@@ -20,7 +20,8 @@ namespace Projet.BDD
         public DbSet<ClientProfessionnel> ClientsProfessionnel { get; set; }
         public DbSet<CompteBancaire> ComptesBancaire { get; set; }
         public DbSet<CarteBancaire> CartesBancaire { get; set; }
-        //public DbSet<Enregistrement> Enregistrements { get; set; }
+
+        public DbSet<TransactionsHistorique> TransactionsHistoriques { get; set; }
         //public DbSet<Anomalie> Anomalies { get; set; }
 
         public DbSet<Adresse> Adresses { get; set; }
@@ -79,11 +80,11 @@ namespace Projet.BDD
             }
         }*/
 
-        protected void OuvertureCompteClient(ModelBuilder modelBuilder,int idClient, int CP, DateTime dateNaissance, DateTime dateOuverture, int nbCarte)
+        protected void OuvertureCompteClient(ModelBuilder modelBuilder,int idClient, int CP , DateTime dateOuverture, int nbCarte)
         {
             string dateO = dateOuverture.ToString("yyyy MMdd");
-            string dateN = dateNaissance.ToString("yyyy MMdd");
-            string newNumero = $"HNTB {dateO} {dateN} {CP.ToString().Substring(0,4)}";
+            string ID = idClient.ToString("D4").Substring(0, 4);
+            string newNumero = $"HNTB {ID} {dateO} {CP.ToString().Substring(0,4)}";
             int numCarte = 0;
             modelBuilder.Entity<CompteBancaire>()
                   .HasData(new CompteBancaire
@@ -424,7 +425,7 @@ namespace Projet.BDD
                       Sexe = EnumSexe.Masculin,
                       DateNaissance = new DateTime(1985, 11, 12)
                   });
-            OuvertureCompteClient(modelBuilder, 1, 94000, new DateTime(1985, 11, 12), new DateTime(2000, 11, 12), 1);
+            OuvertureCompteClient(modelBuilder, 1, 94000,  new DateTime(2000, 11, 12), 1);
 
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
@@ -437,7 +438,7 @@ namespace Projet.BDD
                       Sexe = EnumSexe.Masculin,
                       DateNaissance = new DateTime(1965, 5, 5)
                   });
-            OuvertureCompteClient(modelBuilder, 3, 94300, new DateTime(1965, 5, 5), new DateTime(2005, 11, 12), 2);
+            OuvertureCompteClient(modelBuilder, 3, 94300,  new DateTime(2005, 11, 12), 2);
 
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
@@ -450,7 +451,7 @@ namespace Projet.BDD
                       Sexe = EnumSexe.Feminin,
                       DateNaissance = new DateTime(1977, 6, 6)
                   });
-            OuvertureCompteClient(modelBuilder, 5, 94120, new DateTime(1977, 6, 6), new DateTime(2014, 12, 12), 2);
+            OuvertureCompteClient(modelBuilder, 5, 94120,  new DateTime(2014, 12, 12), 2);
 
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
@@ -463,7 +464,7 @@ namespace Projet.BDD
                       Sexe = EnumSexe.Feminin,
                       DateNaissance = new DateTime(1977, 4, 12)
                   });
-            OuvertureCompteClient(modelBuilder, 7, 92100, new DateTime(1977, 4, 12), new DateTime(2022, 12, 12), 1);
+            OuvertureCompteClient(modelBuilder, 7, 92100, new DateTime(2022, 12, 12), 1);
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
                   {
@@ -475,7 +476,7 @@ namespace Projet.BDD
                       Sexe = EnumSexe.Feminin,
                       DateNaissance = new DateTime(1976, 4, 16)
                   });
-            OuvertureCompteClient(modelBuilder, 9, 93500, new DateTime(1976, 4, 16), new DateTime(1999, 4, 16), 1);
+            OuvertureCompteClient(modelBuilder, 9, 93500,  new DateTime(1999, 4, 16), 1);
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
                   {
@@ -503,6 +504,7 @@ namespace Projet.BDD
                       StatutJuridique = EnumStatutJuridique.SARL,
                       AdresseSiegeId = 2
                   });
+            OuvertureCompteClient(modelBuilder, 2, 94120, new DateTime(1999, 4, 16), 1);
 
             modelBuilder.Entity<ClientProfessionnel>()
                   .HasData(new ClientProfessionnel
@@ -515,6 +517,7 @@ namespace Projet.BDD
                       StatutJuridique = EnumStatutJuridique.EURL,
                       AdresseSiegeId = 12
                   });
+            OuvertureCompteClient(modelBuilder, 4, 93500, new DateTime(2020, 2, 15), 2);
 
             modelBuilder.Entity<ClientProfessionnel>()
                   .HasData(new ClientProfessionnel
@@ -527,6 +530,7 @@ namespace Projet.BDD
                       StatutJuridique = EnumStatutJuridique.SARL,
                       AdresseSiegeId = 6
                   });
+            OuvertureCompteClient(modelBuilder, 6, 75002, new DateTime(2021, 3, 15), 2);
 
             modelBuilder.Entity<ClientProfessionnel>()
                   .HasData(new ClientProfessionnel
@@ -539,7 +543,7 @@ namespace Projet.BDD
                       StatutJuridique = EnumStatutJuridique.SA,
                       AdresseSiegeId = 13
                   });
-
+            OuvertureCompteClient(modelBuilder, 8, 92100, new DateTime(2019, 3, 23), 2);
             modelBuilder.Entity<ClientProfessionnel>()
                   .HasData(new ClientProfessionnel
                   {
@@ -551,6 +555,7 @@ namespace Projet.BDD
                       StatutJuridique = EnumStatutJuridique.SAS,
                       AdresseSiegeId = 14
                   });
+            OuvertureCompteClient(modelBuilder, 10, 75003, new DateTime(2015, 7, 19), 2);
 
         }
     }

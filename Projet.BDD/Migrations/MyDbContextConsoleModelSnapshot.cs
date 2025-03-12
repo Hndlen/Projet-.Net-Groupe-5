@@ -182,37 +182,82 @@ namespace Projet.BDD.Migrations
                         new
                         {
                             Numero = "4974 0185 0223 0001",
-                            CompteCarteId = "HNTB 2000 1112 1985 1112 9400"
+                            CompteCarteId = "HNTB 0001 2000 1112 9400"
                         },
                         new
                         {
                             Numero = "4974 0185 0223 0002",
-                            CompteCarteId = "HNTB 2005 1112 1965 0505 9430"
+                            CompteCarteId = "HNTB 0003 2005 1112 9430"
                         },
                         new
                         {
                             Numero = "4974 0185 0223 0003",
-                            CompteCarteId = "HNTB 2005 1112 1965 0505 9430"
+                            CompteCarteId = "HNTB 0003 2005 1112 9430"
                         },
                         new
                         {
                             Numero = "4974 0185 0223 0004",
-                            CompteCarteId = "HNTB 2014 1212 1977 0606 9412"
+                            CompteCarteId = "HNTB 0005 2014 1212 9412"
                         },
                         new
                         {
                             Numero = "4974 0185 0223 0005",
-                            CompteCarteId = "HNTB 2014 1212 1977 0606 9412"
+                            CompteCarteId = "HNTB 0005 2014 1212 9412"
                         },
                         new
                         {
                             Numero = "4974 0185 0223 0006",
-                            CompteCarteId = "HNTB 2022 1212 1977 0412 9210"
+                            CompteCarteId = "HNTB 0007 2022 1212 9210"
                         },
                         new
                         {
                             Numero = "4974 0185 0223 0007",
-                            CompteCarteId = "HNTB 1999 0416 1976 0416 9350"
+                            CompteCarteId = "HNTB 0009 1999 0416 9350"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0008",
+                            CompteCarteId = "HNTB 0002 1999 0416 9412"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0009",
+                            CompteCarteId = "HNTB 0004 2020 0215 9350"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0010",
+                            CompteCarteId = "HNTB 0004 2020 0215 9350"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0011",
+                            CompteCarteId = "HNTB 0006 2021 0315 7500"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0012",
+                            CompteCarteId = "HNTB 0006 2021 0315 7500"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0013",
+                            CompteCarteId = "HNTB 0008 2019 0323 9210"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0014",
+                            CompteCarteId = "HNTB 0008 2019 0323 9210"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0015",
+                            CompteCarteId = "HNTB 0010 2015 0719 7500"
+                        },
+                        new
+                        {
+                            Numero = "4974 0185 0223 0016",
+                            CompteCarteId = "HNTB 0010 2015 0719 7500"
                         });
                 });
 
@@ -277,39 +322,104 @@ namespace Projet.BDD.Migrations
                     b.HasData(
                         new
                         {
-                            Numero = "HNTB 2000 1112 1985 1112 9400",
+                            Numero = "HNTB 0001 2000 1112 9400",
                             ClientId = 1,
                             DateOuverture = new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Solde = 1000.0
                         },
                         new
                         {
-                            Numero = "HNTB 2005 1112 1965 0505 9430",
+                            Numero = "HNTB 0003 2005 1112 9430",
                             ClientId = 3,
                             DateOuverture = new DateTime(2005, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Solde = 1000.0
                         },
                         new
                         {
-                            Numero = "HNTB 2014 1212 1977 0606 9412",
+                            Numero = "HNTB 0005 2014 1212 9412",
                             ClientId = 5,
                             DateOuverture = new DateTime(2014, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Solde = 1000.0
                         },
                         new
                         {
-                            Numero = "HNTB 2022 1212 1977 0412 9210",
+                            Numero = "HNTB 0007 2022 1212 9210",
                             ClientId = 7,
                             DateOuverture = new DateTime(2022, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Solde = 1000.0
                         },
                         new
                         {
-                            Numero = "HNTB 1999 0416 1976 0416 9350",
+                            Numero = "HNTB 0009 1999 0416 9350",
                             ClientId = 9,
                             DateOuverture = new DateTime(1999, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Solde = 1000.0
+                        },
+                        new
+                        {
+                            Numero = "HNTB 0002 1999 0416 9412",
+                            ClientId = 2,
+                            DateOuverture = new DateTime(1999, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Solde = 1000.0
+                        },
+                        new
+                        {
+                            Numero = "HNTB 0004 2020 0215 9350",
+                            ClientId = 4,
+                            DateOuverture = new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Solde = 1000.0
+                        },
+                        new
+                        {
+                            Numero = "HNTB 0006 2021 0315 7500",
+                            ClientId = 6,
+                            DateOuverture = new DateTime(2021, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Solde = 1000.0
+                        },
+                        new
+                        {
+                            Numero = "HNTB 0008 2019 0323 9210",
+                            ClientId = 8,
+                            DateOuverture = new DateTime(2019, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Solde = 1000.0
+                        },
+                        new
+                        {
+                            Numero = "HNTB 0010 2015 0719 7500",
+                            ClientId = 10,
+                            DateOuverture = new DateTime(2015, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Solde = 1000.0
                         });
+                });
+
+            modelBuilder.Entity("Projet.BDD.Entities.Console.TransactionsHistorique", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DateOperation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Devise")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("MontantOperation")
+                        .HasColumnType("float");
+
+                    b.Property<string>("NumeroCarteBancaire")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TypeOperation")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransactionsHistoriques");
                 });
 
             modelBuilder.Entity("Projet.BDD.Entities.Console.ClientParticulier", b =>

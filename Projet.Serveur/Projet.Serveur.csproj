@@ -11,4 +11,8 @@
     <Folder Include="json\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Projet.Business\Projet.Business.csproj" />
+  </ItemGroup>
+
 </Project>

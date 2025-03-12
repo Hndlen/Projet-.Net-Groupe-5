@@ -2,6 +2,7 @@
 using Projet.BDD;
 using Projet.BDD.Entities.Console;
 using Projet.BDD.Entities.Serveur;
+using Projet.Console.Authentification;
 using Projet.Console.InfoJSON;
 using System.Reflection.Emit;
 using System.Text;
@@ -298,9 +299,47 @@ internal class Program
 
     }
 
+    static string LireMotDePasse()
+    {
+        string motDePasse = "";
+        ConsoleKeyInfo key;
 
+        do
+        {
+            key = Console.ReadKey(intercept: true); // Ne pas afficher la touche tapée
+
+            if (key.Key != ConsoleKey.Enter)
+            {
+                motDePasse += key.KeyChar;
+                Console.Write("*"); // Affiche un astérisque à la place
+            }
+        } while (key.Key != ConsoleKey.Enter);
+
+        Console.WriteLine();
+        return motDePasse;
+    }
     private static void Main(string[] args)
     {
+        Connexion co = new Connexion();
+        bool estAuthentifie = false;
+        while (estAuthentifie == false)
+        {
+            Console.Write("Nom d'utilisateur : ");
+            string username = Console.ReadLine();
+            Console.Write("Mot de passe : ");
+            string password = LireMotDePasse();
+            estAuthentifie = co.Login(username, password);
+            if (estAuthentifie)
+            {
+                Console.WriteLine("\nConnexion réussie !");
+            }
+            else
+            {
+                Console.WriteLine("\nIdentifiants incorrects !");
+            }
+        }
+        
+
         LectureJSON();
         //GetAllClient();
         Console.WriteLine("__");

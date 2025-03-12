@@ -30,6 +30,23 @@ namespace Projet.BDD.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TransactionsHistoriques",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NumeroCarteBancaire = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MontantOperation = table.Column<double>(type: "float", nullable: false),
+                    TypeOperation = table.Column<int>(type: "int", nullable: false),
+                    DateOperation = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Devise = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransactionsHistoriques", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Clients",
                 columns: table => new
                 {
@@ -179,11 +196,16 @@ namespace Projet.BDD.Migrations
                 columns: new[] { "Numero", "ClientId", "DateOuverture", "Solde" },
                 values: new object[,]
                 {
-                    { "HNTB 1999 0416 1976 0416 9350", 9, new DateTime(1999, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
-                    { "HNTB 2000 1112 1985 1112 9400", 1, new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
-                    { "HNTB 2005 1112 1965 0505 9430", 3, new DateTime(2005, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
-                    { "HNTB 2014 1212 1977 0606 9412", 5, new DateTime(2014, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
-                    { "HNTB 2022 1212 1977 0412 9210", 7, new DateTime(2022, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 }
+                    { "HNTB 0001 2000 1112 9400", 1, new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0002 1999 0416 9412", 2, new DateTime(1999, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0003 2005 1112 9430", 3, new DateTime(2005, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0004 2020 0215 9350", 4, new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0005 2014 1212 9412", 5, new DateTime(2014, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0006 2021 0315 7500", 6, new DateTime(2021, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0007 2022 1212 9210", 7, new DateTime(2022, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0008 2019 0323 9210", 8, new DateTime(2019, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0009 1999 0416 9350", 9, new DateTime(1999, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 },
+                    { "HNTB 0010 2015 0719 7500", 10, new DateTime(2015, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -191,13 +213,22 @@ namespace Projet.BDD.Migrations
                 columns: new[] { "Numero", "CompteCarteId" },
                 values: new object[,]
                 {
-                    { "4974 0185 0223 0001", "HNTB 2000 1112 1985 1112 9400" },
-                    { "4974 0185 0223 0002", "HNTB 2005 1112 1965 0505 9430" },
-                    { "4974 0185 0223 0003", "HNTB 2005 1112 1965 0505 9430" },
-                    { "4974 0185 0223 0004", "HNTB 2014 1212 1977 0606 9412" },
-                    { "4974 0185 0223 0005", "HNTB 2014 1212 1977 0606 9412" },
-                    { "4974 0185 0223 0006", "HNTB 2022 1212 1977 0412 9210" },
-                    { "4974 0185 0223 0007", "HNTB 1999 0416 1976 0416 9350" }
+                    { "4974 0185 0223 0001", "HNTB 0001 2000 1112 9400" },
+                    { "4974 0185 0223 0002", "HNTB 0003 2005 1112 9430" },
+                    { "4974 0185 0223 0003", "HNTB 0003 2005 1112 9430" },
+                    { "4974 0185 0223 0004", "HNTB 0005 2014 1212 9412" },
+                    { "4974 0185 0223 0005", "HNTB 0005 2014 1212 9412" },
+                    { "4974 0185 0223 0006", "HNTB 0007 2022 1212 9210" },
+                    { "4974 0185 0223 0007", "HNTB 0009 1999 0416 9350" },
+                    { "4974 0185 0223 0008", "HNTB 0002 1999 0416 9412" },
+                    { "4974 0185 0223 0009", "HNTB 0004 2020 0215 9350" },
+                    { "4974 0185 0223 0010", "HNTB 0004 2020 0215 9350" },
+                    { "4974 0185 0223 0011", "HNTB 0006 2021 0315 7500" },
+                    { "4974 0185 0223 0012", "HNTB 0006 2021 0315 7500" },
+                    { "4974 0185 0223 0013", "HNTB 0008 2019 0323 9210" },
+                    { "4974 0185 0223 0014", "HNTB 0008 2019 0323 9210" },
+                    { "4974 0185 0223 0015", "HNTB 0010 2015 0719 7500" },
+                    { "4974 0185 0223 0016", "HNTB 0010 2015 0719 7500" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -227,6 +258,9 @@ namespace Projet.BDD.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CartesBancaire");
+
+            migrationBuilder.DropTable(
+                name: "TransactionsHistoriques");
 
             migrationBuilder.DropTable(
                 name: "ComptesBancaire");
