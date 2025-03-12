@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projet.Business.Dto.Console
 {
-    class TransactionHistoriqueDto
+    public class TransactionHistoriqueDto
     {
         public int Id { get; set; }
         public string CompteCarteId { get; set; }

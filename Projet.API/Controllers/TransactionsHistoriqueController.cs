@@ -15,20 +15,20 @@ namespace Projet.API.Controllers
 
         public TransactionsHistoriqueController()
         {
-            this.TransactionHistoriqueService = new transactionHistoriqueService();
+            this.transactionHistoriqueService = new TransactionHistoriqueService();
         }
 
         // GET: ProductsController
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetClient()
         {
-            return await TransactionHistoriqueService.getAll();
+            return await transactionHistoriqueService.GetAll();
         }
 
         [HttpGet("/{debut}/{fin}")]
-        public async Task<ActionResult<ClientDto>> GetTransactionHistoriqueBetween(DateTime debut, DateTime fin)
+        public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetween(DateTime debut, DateTime fin)
         {
-            return await TransactionHistoriqueService.GetByDateBetween(debut, fin);
+            return await transactionHistoriqueService.GetByDateBetween(debut, fin);
         }
         // GET: ClientssController
 

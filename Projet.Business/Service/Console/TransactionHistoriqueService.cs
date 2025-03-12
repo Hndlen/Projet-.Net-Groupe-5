@@ -13,12 +13,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Projet.Business.Service.Console
 {
-    class TransationHistoriqueService
+    public class TransactionHistoriqueService
     {
         private readonly TransactionsHistoriqueRepository _repo;
         private readonly IMapper _mapper;
 
-        public TransationHistoriqueService()
+        public TransactionHistoriqueService()
         {
             _repo = new TransactionsHistoriqueRepository();
             _mapper = MappingConfig.Mapper;
@@ -31,7 +31,7 @@ namespace Projet.Business.Service.Console
             var addDto = addEntities.Select(cat => _mapper.Map<TransactionHistoriqueDto>(cat)).ToList();
             return addDto;
         }
-        public async Task<List<TransactionHistoriqueDto?>> GetByDateBetween(DateTime debut, DateTime fin)
+        public async Task<List<TransactionHistoriqueDto>> GetByDateBetween(DateTime debut, DateTime fin)
         {
             var addEntities = await _repo.GetByDateBetween(debut, fin);
             var addDto = addEntities.Select(cat => _mapper.Map<TransactionHistoriqueDto>(cat)).ToList();
