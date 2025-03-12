@@ -62,11 +62,15 @@ namespace Projet.Serveur.Traitement
 
                 if (paire)
                 {
-                    chiffre *= 2;
+                    chiffre = chiffre * 2;
 
                     if (chiffre >= 10)
                     {
-                        somme += (chiffre - 9);
+                        string chiffreString = chiffre.ToString();
+
+                        int chiffreUnite = int.Parse(chiffreString[1].ToString());
+                        int chiffreDizaine = int.Parse(chiffreString[0].ToString()); 
+                        somme += chiffreUnite + chiffreDizaine;
                     }
                     else
                     {

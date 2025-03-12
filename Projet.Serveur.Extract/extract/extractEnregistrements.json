@@ -1,0 +1,472 @@
+{
+  "Enregistrements": [
+    {
+      "Id": 2,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -6000,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T10:23:54.8042226",
+      "Devise": "YEN",
+      "tauxConvertion": 0
+    },
+    {
+      "Id": 3,
+      "NumeroCarteBancaire": "4974 0185 0223 2370",
+      "MontantOperation": -8867.22,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T10:23:54.815949",
+      "Devise": "YEN",
+      "tauxConvertion": 0
+    },
+    {
+      "Id": 4,
+      "NumeroCarteBancaire": "4974 0185 0223 6249",
+      "MontantOperation": -5492.84,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T10:23:54.8159573",
+      "Devise": "YUAN",
+      "tauxConvertion": 0
+    },
+    {
+      "Id": 5,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -9182.12,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T10:23:54.8159582",
+      "Devise": "EUR",
+      "tauxConvertion": 0
+    },
+    {
+      "Id": 6,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": -21.79,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T10:23:54.8159597",
+      "Devise": "USD",
+      "tauxConvertion": 0
+    },
+    {
+      "Id": 7,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": -2965.07,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T10:23:54.8159607",
+      "Devise": "USD",
+      "tauxConvertion": 0
+    },
+    {
+      "Id": 8,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": -7535.02,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T10:23:54.8159751",
+      "Devise": "USD",
+      "tauxConvertion": 0
+    },
+    {
+      "Id": 9,
+      "NumeroCarteBancaire": "4974 0185 0223 6249",
+      "MontantOperation": -5110.63,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T10:23:54.8159776",
+      "Devise": "EUR",
+      "tauxConvertion": 0
+    },
+    {
+      "Id": 10,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": -3824.02,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T10:48:29.6236774",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 11,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -8174.07,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T10:48:39.6218901",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 12,
+      "NumeroCarteBancaire": "4974 0185 0223 2370",
+      "MontantOperation": -740.96,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T10:48:40.0781604",
+      "Devise": "CNY",
+      "tauxConvertion": 7.88
+    },
+    {
+      "Id": 13,
+      "NumeroCarteBancaire": "4974 0185 0223 2370",
+      "MontantOperation": 7129.58,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T10:48:41.9618011",
+      "Devise": "JPY",
+      "tauxConvertion": 161.21
+    },
+    {
+      "Id": 14,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -2317.76,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T10:57:08.2750019",
+      "Devise": "USD",
+      "tauxConvertion": 1.09
+    },
+    {
+      "Id": 15,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -8379.16,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T10:58:43.3067801",
+      "Devise": "EUR",
+      "tauxConvertion": 1
+    },
+    {
+      "Id": 16,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": 8729.94,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T10:58:44.2451413",
+      "Devise": "JPY",
+      "tauxConvertion": 161.21
+    },
+    {
+      "Id": 17,
+      "NumeroCarteBancaire": "4974 0185 0223 2370",
+      "MontantOperation": -8059.7,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T10:58:44.7041781",
+      "Devise": "JPY",
+      "tauxConvertion": 161.21
+    },
+    {
+      "Id": 18,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -624.14,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T10:58:45.1806522",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 19,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": 1732.88,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T10:58:45.6424629",
+      "Devise": "USD",
+      "tauxConvertion": 1.09
+    },
+    {
+      "Id": 20,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -7333.15,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T10:58:46.5642195",
+      "Devise": "JPY",
+      "tauxConvertion": 161.21
+    },
+    {
+      "Id": 21,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -2314.24,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T11:01:26.7395086",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 22,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": -6610.38,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T11:01:28.5175318",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 23,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": 3495.54,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T11:01:28.9830625",
+      "Devise": "CNY",
+      "tauxConvertion": 7.88
+    },
+    {
+      "Id": 24,
+      "NumeroCarteBancaire": "4974 0185 0223 6249",
+      "MontantOperation": -8045.91,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T11:01:29.4475191",
+      "Devise": "JPY",
+      "tauxConvertion": 161.21
+    },
+    {
+      "Id": 25,
+      "NumeroCarteBancaire": "4974 0185 0223 6249",
+      "MontantOperation": -3319.28,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T11:01:30.8419483",
+      "Devise": "USD",
+      "tauxConvertion": 1.09
+    },
+    {
+      "Id": 26,
+      "NumeroCarteBancaire": "4974 0185 0223 2370",
+      "MontantOperation": -398.91,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T11:01:31.3108994",
+      "Devise": "JPY",
+      "tauxConvertion": 161.21
+    },
+    {
+      "Id": 27,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": -9498.64,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T11:05:45.6259046",
+      "Devise": "JPY",
+      "tauxConvertion": 161.21
+    },
+    {
+      "Id": 28,
+      "NumeroCarteBancaire": "4974 0185 0223 6249",
+      "MontantOperation": 5339.79,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T11:05:47.3446228",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 29,
+      "NumeroCarteBancaire": "4974 0185 0223 2370",
+      "MontantOperation": -8490.58,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T11:05:47.8176604",
+      "Devise": "USD",
+      "tauxConvertion": 1.09
+    },
+    {
+      "Id": 30,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -3535.29,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T11:05:48.7564576",
+      "Devise": "EUR",
+      "tauxConvertion": 1
+    },
+    {
+      "Id": 31,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": 529.97,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T11:59:05.6411946",
+      "Devise": "EUR",
+      "tauxConvertion": 1
+    },
+    {
+      "Id": 32,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": -3461.39,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T11:59:07.0171935",
+      "Devise": "CNY",
+      "tauxConvertion": 7.88
+    },
+    {
+      "Id": 33,
+      "NumeroCarteBancaire": "4974 0185 0223 6249",
+      "MontantOperation": -1772.67,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T15:32:51.6949515",
+      "Devise": "JPY",
+      "tauxConvertion": 161.21
+    },
+    {
+      "Id": 34,
+      "NumeroCarteBancaire": "4974 0185 0223 6249",
+      "MontantOperation": -1379.89,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T15:32:52.1537223",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 35,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": -3387.12,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T15:32:53.0793905",
+      "Devise": "EUR",
+      "tauxConvertion": 1
+    },
+    {
+      "Id": 36,
+      "NumeroCarteBancaire": "4974 0185 0223 4061",
+      "MontantOperation": 5595.54,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T15:32:53.5433228",
+      "Devise": "EUR",
+      "tauxConvertion": 1
+    },
+    {
+      "Id": 37,
+      "NumeroCarteBancaire": "4974 0185 0223 4061",
+      "MontantOperation": -1472.68,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T15:32:54.4638508",
+      "Devise": "CNY",
+      "tauxConvertion": 7.88
+    },
+    {
+      "Id": 38,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": 3807.74,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T15:33:53.6854897",
+      "Devise": "EUR",
+      "tauxConvertion": 1
+    },
+    {
+      "Id": 39,
+      "NumeroCarteBancaire": "4974 0185 0223 4053",
+      "MontantOperation": -5807.07,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T15:33:55.0888483",
+      "Devise": "USD",
+      "tauxConvertion": 1.09
+    },
+    {
+      "Id": 40,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": 7836.1,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T15:33:56.4848549",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 41,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -322.61,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T15:33:56.9408936",
+      "Devise": "USD",
+      "tauxConvertion": 1.09
+    },
+    {
+      "Id": 42,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": -2981.94,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T15:33:57.880096",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 43,
+      "NumeroCarteBancaire": "4974 0185 0223 2370",
+      "MontantOperation": -5429.04,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T15:34:29.8897978",
+      "Devise": "JPY",
+      "tauxConvertion": 161.21
+    },
+    {
+      "Id": 44,
+      "NumeroCarteBancaire": "4974 0185 0223 4053",
+      "MontantOperation": -303.91,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T15:34:31.7913877",
+      "Devise": "USD",
+      "tauxConvertion": 1.09
+    },
+    {
+      "Id": 45,
+      "NumeroCarteBancaire": "4974 0185 0223 6249",
+      "MontantOperation": -814.66,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T15:34:32.271978",
+      "Devise": "CNY",
+      "tauxConvertion": 7.88
+    },
+    {
+      "Id": 46,
+      "NumeroCarteBancaire": "4974 0185 0223 9144",
+      "MontantOperation": 9239.43,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T15:34:32.7338363",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 47,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": -8637.17,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T15:38:40.44599",
+      "Devise": "CAD",
+      "tauxConvertion": 1.58
+    },
+    {
+      "Id": 48,
+      "NumeroCarteBancaire": "4974 0185 0223 4061",
+      "MontantOperation": 1086.66,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T17:00:56.3452628",
+      "Devise": "USD",
+      "tauxConvertion": 1.09
+    },
+    {
+      "Id": 49,
+      "NumeroCarteBancaire": "4974 0185 0223 4061",
+      "MontantOperation": 536.61,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T17:00:56.8086801",
+      "Devise": "CNY",
+      "tauxConvertion": 7.88
+    },
+    {
+      "Id": 50,
+      "NumeroCarteBancaire": "4974 0185 0223 6249",
+      "MontantOperation": -7932.4,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T17:00:57.7424274",
+      "Devise": "CNY",
+      "tauxConvertion": 7.88
+    },
+    {
+      "Id": 51,
+      "NumeroCarteBancaire": "4974 0185 0223 4053",
+      "MontantOperation": -4156.57,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T17:03:24.5852506",
+      "Devise": "CNY",
+      "tauxConvertion": 7.88
+    },
+    {
+      "Id": 52,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": -6120.98,
+      "TypeOperation": 2,
+      "DateOperation": "2025-03-12T17:03:25.9541381",
+      "Devise": "EUR",
+      "tauxConvertion": 1
+    },
+    {
+      "Id": 53,
+      "NumeroCarteBancaire": "4974 0185 0223 4053",
+      "MontantOperation": -5593.22,
+      "TypeOperation": 0,
+      "DateOperation": "2025-03-12T17:03:27.7971277",
+      "Devise": "JPY",
+      "tauxConvertion": 161.21
+    }
+  ]
+}
