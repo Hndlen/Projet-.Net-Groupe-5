@@ -9,15 +9,18 @@ using Projet.Serveur.Controllers;
 
 internal class Program
 {
+    static EnregistrementController controllerEnr = new EnregistrementController();
+    static AnomalieController controllerAno = new AnomalieController();
     private static void Main(string[] args)
     {
-        var controllerAno = new EnregistrementController();
-        var controllerEnr = new AnomalieController();
 
-        string filename = @"C:\Users\bosso\Documents\Thierry\Ajc_formation\c#\Projet .Net\projet\Projet-.Net-Groupe-5\Projet.Serveur\json\test.json";
+        string filename = @"..\..\..\json\Operations.json";
+        string filename2 = @"..\..\..\..\Projet.Serveur.Extract\extract\extractEnregistrements.json";
+
         List<Operation> operations = CreateOperations(10);
-        WriteOperationsToFile(operations, filename);
+        WriteToFile(operations, filename);
         AddOperationFromFileAsync(filename);
+        CreateFileFromDatabase(filename2);
 
 
 
@@ -25,6 +28,7 @@ internal class Program
     private static List<Operation> CreateOperations(int nb)
     {
         List<Operation> operations = new List<Operation>();
+       
 
         for (int i = 0; i < nb; i++)
         {
@@ -34,24 +38,25 @@ internal class Program
         return operations;
     }
 
-    private static void WriteOperationsToFile(List<Operation> operations, string filename)
+    private static void WriteToFile<T>(T data, string filename)
     {
-        string jsonString = JsonSerializer.Serialize(operations, new JsonSerializerOptions { WriteIndented = true });
+        // Sérialisation de l'objet en JSON
+        string jsonString = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
 
+        // Écriture dans le fichier
         using (FileStream jsonfs = new FileStream(filename, FileMode.Create, FileAccess.Write))
         {
-            JsonSerializer.Serialize(jsonfs, operations, new JsonSerializerOptions { WriteIndented = true });
+            JsonSerializer.Serialize(jsonfs, data, new JsonSerializerOptions { WriteIndented = true });
         }
 
         Console.WriteLine($"Fichier JSON '{filename}' créé avec succès.");
     }
 
+
     private static async Task AddOperationFromFileAsync(string filepath)
     {
-        var controllerEnr = new EnregistrementController();
-        var controllerAno = new AnomalieController();
         string jsonString = File.ReadAllText(filepath);
-        
+
         List<Operation> operations = JsonSerializer.Deserialize<List<Operation>>(jsonString);
         Random rand = new Random();
 
@@ -67,12 +72,13 @@ internal class Program
                     MontantOperation = op.Montant,
                     TypeOperation = (Projet.Business.Dto.Serveur.EnumOperation)op.Type,  // Casting Enum
                     DateOperation = op.Date,
+                    tauxConvertion = op.TauxConversion,
                     Devise = op.Devise
                 };
-                
+
                 Console.WriteLine("insertion enregistrement");
                 await controllerEnr.AddEnregistrement(enregistrement);
-                
+
             }
             else
             {
@@ -83,16 +89,26 @@ internal class Program
                     TypeOperation = (Projet.Business.Dto.Serveur.EnumOperation)op.Type,
                     DateOperation = op.Date,
                     Devise = op.Devise,
-                    Erreur = "Opération non valide selon les règles de vérification." // Message d'erreur par défaut
+                    tauxConvertion = op.TauxConversion,
+                    Erreur = VerifOperation.LastError // Message d'erreur par défaut
                 };
                 Console.WriteLine("insertion anomalie");
                 await controllerAno.AddAnomalie(anomalie);
-               
+
 
             }
-           
-           
+
+
         }
+    }
+    private static void CreateFileFromDatabase(string filepath)
+    {
+        var enregistrements = controllerEnr.GetEnregistrementsBydate(DateTime.Now).Result;
+        var anomalies = controllerAno.GetAnomalies().Result;
+        Console.WriteLine(anomalies);
+
+        WriteToFile(enregistrements, filepath);
+
     }
 
 }

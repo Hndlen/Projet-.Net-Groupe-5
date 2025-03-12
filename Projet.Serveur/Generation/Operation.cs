@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
@@ -42,6 +43,7 @@ namespace Projet.Serveur.Generation
             SetMontant();
             Date = DateTime.Now;  // Date d'aujourd'hui
             SetDevise();
+            SetTauxConvertion();
         }
 
         // Méthode pour générer un numéro de carte bancaire aléatoire
@@ -88,7 +90,7 @@ namespace Projet.Serveur.Generation
         // Méthode pour générer une devise aléatoire
         private void SetDevise()
         {
-            string[] devises = { "EUR", "USD", "YUAN", "YEN" };
+            string[] devises = { "EUR", "USD", "CAD", "JPY", "CNY" };
             int index = random.Next(devises.Length);
             this.Devise = devises[index];
         }
@@ -99,6 +101,45 @@ namespace Projet.Serveur.Generation
             Array types = Enum.GetValues(typeof(EnumOperation));
             this.Type = (EnumOperation)types.GetValue(random.Next(types.Length));
         }
+
+        public  void SetTauxConvertion()
+        {
+            string url = "https://api.exchangerate-api.com/v4/latest/EUR";
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.GetAsync(url).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonInfo = response.Content.ReadAsStringAsync().Result;
+
+                    var jsonDoc = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jsonInfo);
+
+                    if (jsonDoc != null && jsonDoc.ContainsKey("rates"))
+                    {
+                        var rates = JsonSerializer.Deserialize<Dictionary<string, double>>(jsonDoc["rates"].GetRawText());
+
+                        if (rates != null && rates.ContainsKey(Devise))
+                        {
+                            double taux = rates[Devise];
+                            TauxConversion = taux;
+                        }
+                        else
+                        {
+                            TauxConversion = -1;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Erreur lors de la récupération des données.");
+                    TauxConversion = -1;
+                }
+            }
+        }
+
 
         // Méthode pour afficher les informations de la transaction
         public void AfficherTransaction()
