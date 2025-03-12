@@ -2,14 +2,26 @@
 using Projet.BDD;
 using Projet.BDD.Entities.Console;
 using Projet.BDD.Entities.Serveur;
+using Projet.Console.Authentification;
+using Projet.Console.ExtractionsXML;
 using Projet.Console.InfoJSON;
+using System.Globalization;
 using System.Reflection.Emit;
 using System.Text;
 using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
 
-internal class Program
+public class Program
 {
+    //
+    
+    static class NumeroCompteGlobal
+    {
+        public static string numeroCompte = "";
+    }
+
+
+    /*
     public static string GenererNumeroCompte(DateTime dateOuverture)
     {
         // Générer un numéro de compte basé sur la date
@@ -44,8 +56,8 @@ internal class Program
             // Sauvegarder les modifications dans la base de données
             context.SaveChanges();
         }
-    }
-    
+    }*/
+
     static async void LectureJSON()
     {
         //string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "ExportJSON", "export.json");
@@ -68,6 +80,7 @@ internal class Program
                     // Affichage des données
                     foreach (var enregistrement in enregistrements)
                     {
+                        
                         Console.WriteLine(">>> LECTURE JSON");
                         Console.WriteLine($"ID: {enregistrement.Id}");
                         Console.WriteLine($"Numéro de Carte Bancaire: {enregistrement.NumeroCarteBancaire}");
@@ -76,8 +89,8 @@ internal class Program
                         Console.WriteLine($"Date de l'Opération: {enregistrement.DateOperation}");
                         Console.WriteLine($"Devise: {enregistrement.Devise}");
                         Console.WriteLine();
-
-                        if(enregistrement.TypeOperation == "Depot")
+                        
+                        if (enregistrement.TypeOperation == "Depot")
                         {
                             Console.WriteLine("DEPOT");
                             Signe = true;
@@ -93,8 +106,8 @@ internal class Program
                         {
                             Console.WriteLine("FACTURE");
                         }
-                            
-                            Console.WriteLine("__________________________________________________________");
+                        Transactions(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
+                        Console.WriteLine("__________________________________________________________");
                     }
                 }
                 else
@@ -205,6 +218,7 @@ internal class Program
                     Console.WriteLine();
                     double NouveauSolde = montant * (Signe ? 1 : -1);
                     //Console.WriteLine("test1");
+                    NumeroCompteGlobal.numeroCompte = carteInfo.CompteCarteId;
                     GetCompteByNumero(carteInfo.CompteCarteId);
                     //Console.WriteLine("test2");
                     PutCompteByNumeroAndMontant(carteInfo.CompteCarteId, NouveauSolde);
@@ -298,10 +312,91 @@ internal class Program
 
     }
 
+    static string LireMotDePasse()
+    {
+        string motDePasse = "";
+        ConsoleKeyInfo key;
 
+        do
+        {
+            key = Console.ReadKey(intercept: true); // Ne pas afficher la touche tapée
+
+            if (key.Key != ConsoleKey.Enter)
+            {
+                motDePasse += key.KeyChar;
+                Console.Write("*"); // Affiche un astérisque à la place
+            }
+        } while (key.Key != ConsoleKey.Enter);
+
+        Console.WriteLine();
+        return motDePasse;
+    }
+
+    static void Authentification()
+    {
+        Connexion co = new Connexion();
+        bool estAuthentifie = false;
+        while (estAuthentifie == false)
+        {
+            Console.Write("Nom d'utilisateur : ");
+            string username = Console.ReadLine();
+            Console.Write("Mot de passe : ");
+            string password = LireMotDePasse();
+            estAuthentifie = co.Login(username, password);
+            if (estAuthentifie)
+            {
+                Console.WriteLine("\nConnexion réussie !");
+            }
+            else
+            {
+                Console.WriteLine("\nIdentifiants incorrects !");
+            }
+        }
+    }
+
+    static void Transactions(string NumeroCompte,string numeroCarteBancaire,double montantOperation,string typeOperation,string dateOperation,string devise)
+    {
+        using (var context = new MyDbContextConsole())
+        {
+            // Appliquer les migrations à la base de données
+            context.Database.Migrate();  // Cela applique toutes les migrations en attente
+
+            // Maintenant, initialise les données après la migration
+            //DateTime dateOuverture = new DateTime(2000, 11, 12);
+            //string numeroCompteTest = GenererNumeroCompte(dateOuverture);
+            DateTime date = DateTime.ParseExact(dateOperation, "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            // Ajouter ces données dans la base de données
+            context.TransactionsHistoriques.Add(new TransactionsHistorique
+            {
+                CompteCarteId = NumeroCompte,
+                NumeroCarteBancaire = numeroCarteBancaire,
+                MontantOperation = montantOperation,
+                TypeOperation = typeOperation,
+                DateOperation = date,
+                Devise = devise
+
+            });
+
+
+
+            // Sauvegarder les modifications dans la base de données
+            context.SaveChanges();
+        }
+    }
     private static void Main(string[] args)
     {
-        LectureJSON();
+
+        //Authentification();
+
+        //LectureJSON();
+
+        string filePath = "C:\\Users\\lhand\\Source\\Repos\\Projet-.Net-Groupe-5\\Projet.Console\\ExtractionsXML\\personnes.xml"; // Chemin du fichier XML
+        ExtractionXML.CreerXml(filePath);
+
+        string filePath2 = "C:\\Users\\lhand\\Source\\Repos\\Projet-.Net-Groupe-5\\Projet.Console\\ExtractsPDF\\mon_document.pdf"; // Nom du fichier PDF
+        string texte = "Bonjour, ceci est un fichier PDF généré en C#!";
+
+        PdfCreator.CreerPdf(filePath2, texte);
         //GetAllClient();
         Console.WriteLine("__");
         //GetCartesByNumero("4974 0185 0223 0007");

@@ -14,6 +14,7 @@ namespace Projet.BDD.Repositories.Console
         {
             InitializeDatabase();
         }
+        
 
         private void InitializeDatabase()
         {
