@@ -26,7 +26,7 @@ namespace Projet.API.Controllers
         }
 
         [HttpGet("/{debut}/{fin}")]
-        public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetween(DateTime debut, DateTime fin)
+        public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetween(string debut, string fin)
         {
             return Ok(await transactionHistoriqueService.GetByDateBetween(debut, fin));
         }
