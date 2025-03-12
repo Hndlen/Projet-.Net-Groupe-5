@@ -32,5 +32,12 @@ namespace Projet.API.Controllers
         }
         // GET: ClientssController
 
+        [HttpPost("/{transaction}")]
+        public async Task<ActionResult<int>> PostTransaction(TransactionHistoriqueDto transaction)
+        {
+            return await transactionHistoriqueService.Add(transaction);
+        }
+        // GET: ClientssController
+
     }
 }
