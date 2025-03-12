@@ -12,7 +12,7 @@ using Projet.BDD;
 namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
 {
     [DbContext(typeof(MyDbContextServeur))]
-    [Migration("20250311163116_InitServeur")]
+    [Migration("20250312092217_InitServeur")]
     partial class InitServeur
     {
         /// <inheritdoc />
@@ -53,6 +53,9 @@ namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
                     b.Property<int?>("TypeOperation")
                         .HasColumnType("int");
 
+                    b.Property<double?>("tauxConvertion")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.ToTable("Anomalies");
@@ -82,6 +85,9 @@ namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
 
                     b.Property<int>("TypeOperation")
                         .HasColumnType("int");
+
+                    b.Property<double?>("tauxConvertion")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

@@ -9,29 +9,37 @@ namespace Projet.Serveur.Traitement
 {
     public static class VerifOperation
     {
+
+        public static string LastError { get; set; }
         public static bool CheckOperation(Operation op)
         {
             if (!Enum.IsDefined(typeof(EnumOperation), op.Type))
             {
-                Console.WriteLine("Opération de type invalide.");
+                LastError = "Opération de type invalide.";
                 return false;
             }
 
 
             if (op.Montant == 0)
             {
-                Console.WriteLine("Le montant ne peut pas être nul.");
+                LastError = "Le montant ne peut pas être nul.";
                 return false;
             }
             if (op.Montant > 0 && op.Type == EnumOperation.Retrait || op.Montant > 0 && op.Type == EnumOperation.Facture)
             {
-                Console.WriteLine("Un retrait ou une facture ne peut pas avoir un montant positif.");
+                LastError = "Un retrait ou une facture ne peut pas avoir un montant positif.";
                 return false;
             }
 
             if (op.Montant < 0 && op.Type == EnumOperation.Depot)
             {
-                Console.WriteLine("Un dépôt ne peut pas avoir un montant négatif.");
+                LastError = "Un dépôt ne peut pas avoir un montant négatif.";
+                return false;
+            }
+
+            if (op.TauxConversion < 0)
+            {
+                LastError = "La devise est incorrecte.";
                 return false;
             }
 
@@ -76,7 +84,16 @@ namespace Projet.Serveur.Traitement
             }
 
             // Si la somme est divisible par 10, le numéro de carte est valide
-            return (somme % 10 == 0);
+            bool nbValide = (somme % 10 == 0);
+            if (nbValide)
+            {
+                return true;
+            }
+            else
+            {
+                LastError = "Numéro de carte Bancaire non valide";
+                return false;
+            }
         }
 
 

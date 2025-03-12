@@ -22,6 +22,7 @@ namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
                     TypeOperation = table.Column<int>(type: "int", nullable: true),
                     DateOperation = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Devise = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    tauxConvertion = table.Column<double>(type: "float", nullable: true),
                     Erreur = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -39,7 +40,8 @@ namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
                     MontantOperation = table.Column<double>(type: "float", nullable: false),
                     TypeOperation = table.Column<int>(type: "int", nullable: false),
                     DateOperation = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Devise = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Devise = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    tauxConvertion = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,8 +50,8 @@ namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
 
             migrationBuilder.InsertData(
                 table: "Enregistrements",
-                columns: new[] { "Id", "DateOperation", "Devise", "MontantOperation", "NumeroCarteBancaire", "TypeOperation" },
-                values: new object[] { 1, new DateTime(2024, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "€", 500.0, "4974 0185 0223 0000", 1 });
+                columns: new[] { "Id", "DateOperation", "Devise", "MontantOperation", "NumeroCarteBancaire", "TypeOperation", "tauxConvertion" },
+                values: new object[] { 1, new DateTime(2024, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "€", 500.0, "4974 0185 0223 0000", 1, null });
         }
 
         /// <inheritdoc />

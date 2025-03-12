@@ -1,4 +1,5 @@
-﻿using Projet.Business.Dto;
+﻿using Projet.BDD.Entities.Serveur;
+using Projet.Business.Dto;
 using Projet.Business.Service.Serveur;
 
 namespace Projet.Serveur.Controllers
@@ -26,6 +27,12 @@ namespace Projet.Serveur.Controllers
 
             Console.WriteLine("enregistrement ajouté avec succès !");
             return result;
+        }
+
+        public async Task<List<EnregistrementDto?>> GetEnregistrementsBydate(DateTime date)
+        {
+            var enregistrements = await enregistrementService.GetEnregistrementsByDate(date);
+            return enregistrements;
         }
     }
 }

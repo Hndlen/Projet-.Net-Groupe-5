@@ -56,6 +56,15 @@ namespace Projet.BDD.Repositories.Serveur
             return enregistrement;
         }
 
+        public async Task<List<Enregistrement?>> GetbyDate(DateTime time)
+        {
+            using var context = new MyDbContextServeur();
+            var enregistrements = await context.Enregistrements
+                            .Where<Enregistrement>(e => e.DateOperation.Date == time.Date)
+                            .ToListAsync<Enregistrement>();
+            return enregistrements;
+        }
+
         public async Task<int> Add(Enregistrement catEntity)
         {
             using var context = new MyDbContextServeur();

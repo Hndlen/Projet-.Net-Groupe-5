@@ -50,6 +50,9 @@ namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
                     b.Property<int?>("TypeOperation")
                         .HasColumnType("int");
 
+                    b.Property<double?>("tauxConvertion")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.ToTable("Anomalies");
@@ -79,6 +82,9 @@ namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
 
                     b.Property<int>("TypeOperation")
                         .HasColumnType("int");
+
+                    b.Property<double?>("tauxConvertion")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

@@ -18,6 +18,7 @@ namespace Projet.BDD.Entities.Serveur
         public EnumOperation? TypeOperation { get; set; }
         public DateTime? DateOperation { get; set; }
         public string? Devise { get; set; }
+        public double? tauxConvertion { get; set; }
         public string Erreur { get; set; }
     }
 }
