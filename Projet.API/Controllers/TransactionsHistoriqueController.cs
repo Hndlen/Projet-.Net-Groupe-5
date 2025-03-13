@@ -47,7 +47,7 @@ namespace Projet.API.Controllers
                
         }
 
-        [HttpGet("{numCB}/{debut}/{fin}/")]
+        [HttpGet("{numCompte}/{debut}/{fin}/")]
         public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetweenByNumCompteBancaire(string numCB, DateTime debut, DateTime fin)
         {
             if (debut < fin)
