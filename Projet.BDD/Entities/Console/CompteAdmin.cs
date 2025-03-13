@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Projet.BDD.Entities.Console
 {
     public class CompteAdmin
-    {
+    { 
         [Key]
         [StringLength(50, MinimumLength = 5)]
         public string Identifiant { get; set; }
