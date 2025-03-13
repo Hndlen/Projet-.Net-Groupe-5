@@ -52,7 +52,7 @@ namespace Projet.API.Controllers
         {
             if (debut < fin)
             {
-                return Ok(await transactionHistoriqueService.GetbyNumCompteBetween(debut, fin, numCB));
+                return Ok(await transactionHistoriqueService.GetbyNumCompteBetween(debut, fin, numCompte));
             }
             else
             {
