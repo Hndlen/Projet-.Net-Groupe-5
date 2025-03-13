@@ -340,26 +340,15 @@ public class Program
 
                 if (response.IsSuccessStatusCode)
                 {
-                    //Console.WriteLine(">>> LECTURE Carte Bancaire par ID");
+
                     string jsonInfo = response.Content.ReadAsStringAsync().Result;
-                    //Console.WriteLine(jsonInfo);
-                    //var clientInfo = JsonSerializer.Deserialize<Client>(jsonInfo, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                    //var carteInfo = JsonSerializer.Deserialize<List<TransactionJSON>>(enregistrementsElement.GetRawText());
                     var objInfo = JsonSerializer.Deserialize<List<TransactionJSON>>(jsonInfo);
-                    //var carteInfo = JsonSerializer.Deserialize<TransactionJSON>(jsonInfo);
                     foreach (var o in objInfo)
                     {
                         Console.WriteLine($"{o.Id} {o.NumeroCarteBancaire} {o.MontantOperation}");
                         Console.WriteLine();
                     }
-                    
-                    
-                    //double NouveauSolde = montant * (Signe ? 1 : -1);
-                    //Console.WriteLine("test1");
-                    //NumeroCompteGlobal.numeroCompte = carteInfo.CompteCarteId;
-                    //GetCompteByNumero(carteInfo.CompteCarteId);
-                    //Console.WriteLine("test2");
-                    //PutCompteByNumeroAndMontant(carteInfo.CompteCarteId, NouveauSolde);
+
 
                 }
                 else
@@ -464,9 +453,9 @@ public class Program
 
         PdfCreator.CreerPdf(filePath2, texte);*/
         //GetAllClient();
-        /*DateTime Debut =  new DateTime(2000, 11, 12);
-        DateTime Fin = new DateTime(2026, 11, 12);
-        string dateString = "2025-03-12";
+        //DateTime Debut =  new DateTime(2000, 11, 12);
+        //DateTime Fin = new DateTime(2026, 11, 12);
+        /*string dateString = "2025-03-12";
         DateTime date = DateTime.ParseExact(dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         Console.WriteLine(date);
         Console.WriteLine(Debut);

@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Projet.Fenetre
@@ -24,6 +25,10 @@ namespace Projet.Fenetre
         static class RecapJSON
         {
             public static string recapJSON = "";
+        }
+        static class RecapPDF
+        {
+            public static string recapPDF = "";
         }
         static async void LectureJSON()
         {
@@ -47,9 +52,9 @@ namespace Projet.Fenetre
                         foreach (var enregistrement in enregistrements)
                         {
 
-                           
 
-                            
+
+
                             GetCartesByNumero(enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, Signe);
 
                             if (enregistrement.tauxConvertion != 1)
@@ -73,7 +78,7 @@ namespace Projet.Fenetre
             }
             catch (JsonException ex)
             {
-               // Console.WriteLine($"Erreur de désérialisation JSON: {ex.Message}");
+                // Console.WriteLine($"Erreur de désérialisation JSON: {ex.Message}");
             }
         }
 
@@ -92,7 +97,7 @@ namespace Projet.Fenetre
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonInfo = response.Content.ReadAsStringAsync().Result;
-                   // Console.WriteLine(jsonInfo);
+                    // Console.WriteLine(jsonInfo);
                     var objInfo = JsonSerializer.Deserialize<List<ClientJSON>>(jsonInfo);
                     foreach (var o in objInfo)
                     {
@@ -102,7 +107,7 @@ namespace Projet.Fenetre
                 }
                 else
                 {
-                   // Console.WriteLine($"Err not found");
+                    // Console.WriteLine($"Err not found");
                 }
             }
         }
@@ -110,7 +115,7 @@ namespace Projet.Fenetre
         static async Task GetClientById(int id)
         {
             string url = $"http://localhost:5187/{id}";
-           // Console.WriteLine("test1");
+            // Console.WriteLine("test1");
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
@@ -122,7 +127,7 @@ namespace Projet.Fenetre
 
                     if (response.IsSuccessStatusCode)
                     {
-                       // Console.WriteLine("test3");
+                        // Console.WriteLine("test3");
                         string jsonInfo = response.Content.ReadAsStringAsync().Result;
                         //Console.WriteLine(jsonInfo);
                         //var clientInfo = JsonSerializer.Deserialize<Client>(jsonInfo, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -135,7 +140,7 @@ namespace Projet.Fenetre
                     }
                     else
                     {
-                       // Console.WriteLine($"❌ Erreur : Client avec ID {id} non trouvé.");
+                        // Console.WriteLine($"❌ Erreur : Client avec ID {id} non trouvé.");
                     }
                 }
                 catch (Exception ex)
@@ -169,7 +174,7 @@ namespace Projet.Fenetre
                         var carteInfo = JsonSerializer.Deserialize<CarteBancaireJSON>(jsonInfo);
 
                         //Console.WriteLine($"ID: {carteInfo.Numero}");
-                       // Console.WriteLine($"Nom: {carteInfo.CompteCarteId}");
+                        // Console.WriteLine($"Nom: {carteInfo.CompteCarteId}");
                         //Console.WriteLine();
                         double NouveauSolde = montant * (Signe ? 1 : -1);
                         //Console.WriteLine("test1");
@@ -267,7 +272,51 @@ namespace Projet.Fenetre
 
         }
 
-        
+        static async Task GetTransactionByPeriode(string numero, string dateDebut, string dateFin)
+        {
+            string url = $"http://localhost:5187/{dateDebut}/{dateFin}/{numero}";
+            //string url = $"http://localhost:5187/{dateDebut}/{dateFin}";
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string recap = "";
+                string test = "";
+                try
+                {
+
+                    HttpResponseMessage response = client.GetAsync($"{url}").Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        string jsonInfo = response.Content.ReadAsStringAsync().Result;
+                        var objInfo = JsonSerializer.Deserialize<List<TransactionJSON>>(jsonInfo);
+                        int count = 0;
+                        foreach (var o in objInfo)
+                        {
+                            count++;
+                            recap += $"Transaction {count}:{Environment.NewLine}      - Id:{o.Id} {Environment.NewLine}      - Numero de CB:{o.NumeroCarteBancaire} {Environment.NewLine}      - Montant:{o.MontantOperation} {Environment.NewLine}      - Type:{(o.TypeOperation == "0" ? "Depot" : o.TypeOperation == "1" ? "Retrait" : "Facture")} {Environment.NewLine}      - Date:{o.DateOperation.ToString("yyyy-MM-dd")} {Environment.NewLine}      - Devise:{o.Devise}{Environment.NewLine}{Environment.NewLine}----------------------------------------------{Environment.NewLine}{Environment.NewLine}";
+                            //Console.WriteLine($"{o.Id} {o.NumeroCarteBancaire} {o.MontantOperation}");
+                            //Console.WriteLine();
+                        }
+                        RecapPDF.recapPDF += recap;
+                        MessageBox.Show(RecapPDF.recapPDF);
+                    }
+                    else
+                    {
+                        //Console.WriteLine(response);
+                        //Console.WriteLine($"Erreur : Client avec ID {numero} non trouvé.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Console.WriteLine($"Erreur lors de la récupération : {ex.Message}");
+                }
+
+            }
+
+        }
 
         static void Transactions(string NumeroCompte, string numeroCarteBancaire, double montantOperation, int typeOperation, string dateOperation, string devise)
         {
@@ -303,14 +352,17 @@ namespace Projet.Fenetre
             RecapJSON.recapJSON += recap;
         }
 
-       /* public void majRecapJSON(string recap)
-        {
-            textBoxRecapMajJSON.Text += recap;
-        }*/
+        /* public void majRecapJSON(string recap)
+         {
+             textBoxRecapMajJSON.Text += recap;
+         }*/
         //*-*********************************************************************
         private void listeDesMouvementsPDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            panelMajJSON.Visible = true;
+            labelAuthentification.Visible = false;
+            panelPDF.Visible = true;
+            //panel1.Visible = false;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -321,6 +373,7 @@ namespace Projet.Fenetre
         private void logginToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panel1.Visible = true;
+            //panelMajJSON.Visible = false;
             //textBox1.Text = "LOGIN";
         }
 
@@ -354,6 +407,7 @@ namespace Projet.Fenetre
                     labelAuthentification.Text = "Connexion réussie !";
                     mAJJsonToolStripMenuItem.Enabled = true;
                     listeDesMouvementsPDFToolStripMenuItem.Enabled = true;
+                    listeToolStripMenuItemListeCartes.Enabled = true;
                     recapitulationDesOpérationsXMLToolStripMenuItem.Enabled = true;
                     textBoxIdentifiant.Enabled = false;
                     textBoxMotDePasse.Enabled = false;
@@ -378,6 +432,7 @@ namespace Projet.Fenetre
             //panel1.Visible = false;
             labelAuthentification.Visible = false;
             panelMajJSON.Visible = true;
+            panelPDF.Visible = false;
         }
 
         private void buttonMajJSON_Click(object sender, EventArgs e)
@@ -387,6 +442,58 @@ namespace Projet.Fenetre
             textBoxRecapMajJSON.Text = RecapJSON.recapJSON;
             labelMajJSON.Text = " Lecture fini, mise à jour de la balance";
             mAJJsonToolStripMenuItem.Enabled = false;
+            buttonMajJSON.Enabled = false;
+        }
+
+        private void label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxPDFNum_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonPDF_Click(object sender, EventArgs e)
+        {
+            textBoxPDFConsole.Text = "Génération en cours";
+            string num = textBoxPDFNum.Text;
+            string DateDebut = monthCalendarDebut.SelectionStart.ToString("yyyy-MM-dd");
+            string DateFin = monthCalendarFin.SelectionStart.ToString("yyyy-MM-dd");
+
+            /*string DateDebut = "2000-10-10";
+            string DateFin = "2030-10-10";*/
+            //GetTransactionByPeriode("4974 0185 0223 4053", DateDebut, DateFin);
+
+            GetTransactionByPeriode(num, DateDebut, DateFin);
+            //MessageBox.Show(DateDebut + " " + DateFin + " " + num);
+            textBoxPDFConsole.Text = RecapPDF.recapPDF;
+            if (num != "" && RecapPDF.recapPDF != "")
+            {
+                string filePath = $@"..\..\..\..\Projet.Console\ExtractsPDF\extract{num}{DateDebut}{DateFin}.pdf";
+                string texte = $"|Numero de compte: {num}{Environment.NewLine}|Date de début: {DateDebut}{Environment.NewLine}|Date de fin: {DateFin}{Environment.NewLine}{Environment.NewLine}> Liste des transactions:{Environment.NewLine}{Environment.NewLine}";
+                texte += RecapPDF.recapPDF;
+
+                PdfCreator.CreerPdf(filePath, texte);
+            }
+            //textBoxPDFConsole.
+            //string filePath2 = "C:\\Users\\lhand\\Source\\Repos\\Projet-.Net-Groupe-5\\Projet.Console\\ExtractsPDF\\mon_document.pdf"; // Nom du fichier PDF
+            RecapPDF.recapPDF = "";
+        }
+
+        private void listeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            labelAuthentification.Visible = false;
+            panelMajJSON.Visible = true;
+            panelPDF.Visible = true;
+            panelCarteListe.Visible = true;
+
+        }
+
+        private void buttonListeCartes_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
