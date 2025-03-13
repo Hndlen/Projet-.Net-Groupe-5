@@ -56,13 +56,11 @@ namespace Projet.BDD.Repositories.Console
             return transactionsHistorique;
         }
 
-        public async Task<List<TransactionsHistorique?>> GetByDateBetween(string debut, string fin)
+        public async Task<List<TransactionsHistorique?>> GetByDateBetween(DateTime debut, DateTime fin)
         {
-            DateTime debutDate = DateTime.Parse(debut, CultureInfo.InvariantCulture);
-            DateTime finDate = DateTime.Parse(fin, CultureInfo.InvariantCulture);
             using var context = new MyDbContextConsole();
             var transactionsHistoriques = await context.TransactionsHistoriques
-                                    .Where(e => e.DateOperation.Date >= debutDate.Date && e.DateOperation.Date <= finDate.Date)
+                                    .Where(e => e.DateOperation.Date >= debut.Date && e.DateOperation.Date <= fin.Date)
                                     .ToListAsync();
             return transactionsHistoriques;
         }

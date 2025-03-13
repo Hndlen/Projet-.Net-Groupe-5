@@ -31,7 +31,7 @@ namespace Projet.Business.Service.Console
             var dto = entities.Select(cat => _mapper.Map<TransactionHistoriqueDto>(cat)).ToList();
             return dto;
         }
-        public async Task<List<TransactionHistoriqueDto>> GetByDateBetween(string debut, string fin)
+        public async Task<List<TransactionHistoriqueDto>> GetByDateBetween(DateTime debut, DateTime fin)
         {
             var entities = await _repo.GetByDateBetween(debut, fin);
             var dto = entities.Select(cat => _mapper.Map<TransactionHistoriqueDto>(cat)).ToList();
