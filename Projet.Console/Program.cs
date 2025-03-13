@@ -288,17 +288,18 @@ public class Program
         }
 
     }
-    static async Task PutCompteByNumeroAndMontant(string numero, double montant)
+    static async Task PutCompteByNumeroAndMontant(string numero_, double montant_)
     {
-        string url = $"http://localhost:5187/api/ComptesBancaire/{numero},{montant}";
+        string url = $"http://localhost:5187/api/ComptesBancaire/{numero_},{montant_}";
+        //string url = $"http://localhost:5187/api/ComptesBancaire/";
 
         using (HttpClient client = new HttpClient())
         {
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             var testDT = new
             {
-                CompteCarteId = numero,
-                Montant = montant
+                numero = numero_,
+                montant = montant_
             };
             string jsonData = JsonSerializer.Serialize(testDT);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -308,14 +309,14 @@ public class Program
                 Console.WriteLine(">>> Put Compte Bancaire par Carte");
                 //HttpResponseMessage response = client.GetAsync($"{url}").Result;
                 HttpResponseMessage response =  client.PutAsync(url, content).Result;
-                //Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}{response.ToString()}{Environment.NewLine}{Environment.NewLine}");
+                //Console.WriteLine($"+++ {Environment.NewLine}{Environment.NewLine}{response.ToString()}{Environment.NewLine}{Environment.NewLine}");
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine($"Mise à jour réussie pour la carte {numero} avec un montant de {montant}");
+                    Console.WriteLine($"Mise à jour réussie pour la carte {numero_} avec un montant de {montant_}");
                 }
                 else
                 {
-                    Console.WriteLine($"Erreur : Impossible de mettre à jour la carte {numero}. Code : {response.StatusCode}");
+                    Console.WriteLine($"Erreur : Impossible de mettre à jour la carte {numero_}. Code : {response.StatusCode}");
                 }
             }
             catch (Exception ex)
