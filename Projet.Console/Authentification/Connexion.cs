@@ -10,6 +10,7 @@ namespace Projet.Console.Authentification
     {
         private static Dictionary<string, string> utilisateurs = new Dictionary<string, string>
         {
+            { "a", "a" },
             { "admin", "password" },
             { "steeve", "assous" },
             { "thierry", "bossou" },

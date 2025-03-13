@@ -60,12 +60,11 @@ public class Program
 
     static async void LectureJSON()
     {
-        //string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "ExportJSON", "export.json");
-        //string filePath = @"C:\Users\lhand\source\repos\Projet-.Net-Groupe-5\Projet.Console\ExportJSON";
         string filePath = @"C:\Users\lhand\Source\Repos\Projet-.Net-Groupe-5\Projet.Console\jsontest.json";
 
         string jsonString = File.ReadAllText(filePath);
         bool Signe = true;
+        double montantConvert = 0;
         try
         {
             using (JsonDocument doc = JsonDocument.Parse(jsonString))
@@ -74,6 +73,7 @@ public class Program
                 JsonElement root = doc.RootElement;
                 if (root.TryGetProperty("Enregistrements", out JsonElement enregistrementsElement))
                 {
+                    
                     // Désérialisation directement en List<Enregistrement>
                     var enregistrements = JsonSerializer.Deserialize<List<EnregistrementJSON>>(enregistrementsElement.GetRawText());
 
@@ -90,23 +90,36 @@ public class Program
                         Console.WriteLine($"Devise: {enregistrement.Devise}");
                         Console.WriteLine();
                         
-                        if (enregistrement.TypeOperation == "Depot")
+                        if (enregistrement.TypeOperation == 0)
                         {
                             Console.WriteLine("DEPOT");
-                            Signe = true;
-                            GetCartesByNumero(enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation,Signe);
+                            
+                            
                         }
-                        else if(enregistrement.TypeOperation == "Retrait")
+                        else if(enregistrement.TypeOperation == 1)
                         {
                             Console.WriteLine("RETRAIT");
-                            Signe = false;
-                            GetCartesByNumero(enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, Signe);
+                            
+                            
                         }
                         else
                         {
                             Console.WriteLine("FACTURE");
                         }
-                        Transactions(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
+                        GetCartesByNumero(enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, Signe);
+
+                        if (enregistrement.tauxConvertion != 1)
+                        {
+                            montantConvert = enregistrement.MontantOperation * enregistrement.tauxConvertion;
+                            montantConvert = Math.Truncate(montantConvert * 100) / 100;
+
+                        }
+                        else
+                        {
+                            montantConvert = enregistrement.MontantOperation;
+                        }
+
+                            Transactions(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, montantConvert, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
                         Console.WriteLine("__________________________________________________________");
                     }
                 }
@@ -311,7 +324,47 @@ public class Program
         }
 
     }
+    static async Task GetTransactionByPeriode(string numero, string dateDebut, string dateFin)
+    {
+        string url = $"http://localhost:5187/{dateDebut}/{dateFin}/{numero}";
+        //string url = $"http://localhost:5187/{dateDebut}/{dateFin}";
 
+        using (HttpClient client = new HttpClient())
+        {
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            try
+            {
+
+                HttpResponseMessage response = client.GetAsync($"{url}").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string jsonInfo = response.Content.ReadAsStringAsync().Result;
+                    var objInfo = JsonSerializer.Deserialize<List<TransactionJSON>>(jsonInfo);
+                    foreach (var o in objInfo)
+                    {
+                        Console.WriteLine($"{o.Id} {o.NumeroCarteBancaire} {o.MontantOperation}");
+                        Console.WriteLine();
+                    }
+
+
+                }
+                else
+                {
+                    Console.WriteLine(response);
+                    Console.WriteLine($"Erreur : Client avec ID {numero} non trouvé.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la récupération : {ex.Message}");
+            }
+
+        }
+
+    }
     static string LireMotDePasse()
     {
         string motDePasse = "";
@@ -354,7 +407,7 @@ public class Program
         }
     }
 
-    static void Transactions(string NumeroCompte,string numeroCarteBancaire,double montantOperation,string typeOperation,string dateOperation,string devise)
+    static void Transactions(string NumeroCompte,string numeroCarteBancaire,double montantOperation,int typeOperation,string dateOperation,string devise)
     {
         using (var context = new MyDbContextConsole())
         {
@@ -364,16 +417,18 @@ public class Program
             // Maintenant, initialise les données après la migration
             //DateTime dateOuverture = new DateTime(2000, 11, 12);
             //string numeroCompteTest = GenererNumeroCompte(dateOuverture);
-            DateTime date = DateTime.ParseExact(dateOperation, "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            //DateTime date = DateTime.ParseExact(dateOperation, "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            DateTime dateTime = DateTime.Parse(dateOperation);
+            DateTime date = DateTime.ParseExact(dateTime.ToString("yyyy/MM/dd"), "yyyy/MM/dd", CultureInfo.InvariantCulture);
             // Ajouter ces données dans la base de données
             context.TransactionsHistoriques.Add(new TransactionsHistorique
             {
                 CompteCarteId = NumeroCompte,
                 NumeroCarteBancaire = numeroCarteBancaire,
                 MontantOperation = montantOperation,
-                TypeOperation = typeOperation,
+                TypeOperation = typeOperation.ToString(),
                 DateOperation = date,
-                Devise = devise
+                Devise = "EU"
 
             });
 
@@ -389,15 +444,26 @@ public class Program
         //Authentification();
 
         //LectureJSON();
-
+        /*
         string filePath = "C:\\Users\\lhand\\Source\\Repos\\Projet-.Net-Groupe-5\\Projet.Console\\ExtractionsXML\\personnes.xml"; // Chemin du fichier XML
         ExtractionXML.CreerXml(filePath);
 
         string filePath2 = "C:\\Users\\lhand\\Source\\Repos\\Projet-.Net-Groupe-5\\Projet.Console\\ExtractsPDF\\mon_document.pdf"; // Nom du fichier PDF
         string texte = "Bonjour, ceci est un fichier PDF généré en C#!";
 
-        PdfCreator.CreerPdf(filePath2, texte);
+        PdfCreator.CreerPdf(filePath2, texte);*/
         //GetAllClient();
+        //DateTime Debut =  new DateTime(2000, 11, 12);
+        //DateTime Fin = new DateTime(2026, 11, 12);
+        /*string dateString = "2025-03-12";
+        DateTime date = DateTime.ParseExact(dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        Console.WriteLine(date);
+        Console.WriteLine(Debut);
+        Console.WriteLine(Fin);*/
+        string Debut = "2000-10-10";
+        string Fin = "2030-10-10";
+        GetTransactionByPeriode("4974 0185 0223 4053",Debut,Fin );
+
         Console.WriteLine("__");
         //GetCartesByNumero("4974 0185 0223 0007");
         //GetClientById(1);

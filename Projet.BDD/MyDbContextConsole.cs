@@ -28,7 +28,39 @@ namespace Projet.BDD
 
         public DbSet<Adresse> Adresses { get; set; }
         public int countCarte=0;
-        public List<int> listCarte = new List<int> {};
+        public List<string> listCarte = new List<string> {
+            "4974 0185 0223 9888",
+            "4974 0185 0223 0457",
+            "4974 0185 0223 0952",
+            "4974 0185 0223 8476",
+            "4974 0185 0223 8666",
+            "4974 0185 0223 7411",
+            "4974 0185 0223 4814",
+            "4974 0185 0223 7320",
+            "4974 0185 0223 5142",
+            "4974 0185 0223 7874",
+            "4974 0185 0223 6090",
+            "4974 0185 0223 3469",
+            "4974 0185 0223 5720",
+            "4974 0185 0223 2842",
+            "4974 0185 0223 9763",
+            "4974 0185 0223 4871",
+            "4974 0185 0223 6215",
+            "4974 0185 0223 0150",
+            "4974 0185 0223 2198",
+            "4974 0185 0223 8096",
+            "4974 0185 0223 1158",
+            "4974 0185 0223 5290",
+            "4974 0185 0223 1851",
+            "4974 0185 0223 1869",
+            "4974 0185 0223 5365",
+            "4974 0185 0223 2271",
+            "4974 0185 0223 4889",
+            "4974 0185 0223 5258",
+            "4974 0185 0223 8914",
+            "4974 0185 0223 9375"};
+        //public List<int> listCarte = new List<int> {};
+
         public HashSet<int> listCarteTest = new HashSet<int> {};
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -39,29 +71,29 @@ namespace Projet.BDD
                 "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=dbProjetConsole;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
         }
-        protected void GenerationCarteBancaire()
+       /* protected void GenerationCarteBancaire()
         {
 
             for (int i = 0; i < 10000; i++)
             {
                 this.listCarte.Add(i);
             }
-        }
-        protected int RandomCarteBancaire()
+        }*/
+        protected string RandomCarteBancaire()
         {
             if (this.listCarte.Count > 0) // Vérifier que la liste n'est pas vide
             {
                 //Random random = new Random();
                 //int index = random.Next(this.listCarte.Count); // Sélection aléatoire d'un index
-                int index = 1; // Sélection aléatoire d'un index
-                int valeurSupprimee = this.listCarte[index];  // Récupérer la valeur avant suppression
+                int index = 0; // Sélection aléatoire d'un index
+                string valeurSupprimee = this.listCarte[index];  // Récupérer la valeur avant suppression
 
                 this.listCarte.RemoveAt(index); // Supprimer l'élément
                 return valeurSupprimee;
             }
             else
             {
-                return 0;
+                return null;
             }
         }
 
@@ -87,7 +119,8 @@ namespace Projet.BDD
             string dateO = dateOuverture.ToString("yyyy MMdd");
             string ID = idClient.ToString("D4").Substring(0, 4);
             string newNumero = $"HNTB {ID} {dateO} {CP.ToString().Substring(0,4)}";
-            int numCarte = 0;
+            //int numCarte = 0;
+            string numCarteValide;
             modelBuilder.Entity<CompteBancaire>()
                   .HasData(new CompteBancaire
                   {
@@ -98,11 +131,13 @@ namespace Projet.BDD
                   });
             for (int i = 0; i < nbCarte; i++)
             {
-                numCarte = RandomCarteBancaire();
+                //numCarte = RandomCarteBancaire();
+                numCarteValide = RandomCarteBancaire();
                 modelBuilder.Entity<CarteBancaire>()
                       .HasData(new CarteBancaire
                       {
-                          Numero = $"4974 0185 0223 {numCarte.ToString("D4")}",
+                          //Numero = $"4974 0185 0223 {numCarte.ToString("D4")}",
+                          Numero = numCarteValide,
                           CompteCarteId = newNumero,
 
                       });
@@ -414,7 +449,7 @@ namespace Projet.BDD
             //**************************************
             //* Clients Particulier
             //**************************************
-            GenerationCarteBancaire();
+            //GenerationCarteBancaire();
 
             modelBuilder.Entity<ClientParticulier>()
                   .HasData(new ClientParticulier
