@@ -233,7 +233,7 @@ public class Program
                     double NouveauSolde = montant * (Signe ? 1 : -1);
                     //Console.WriteLine("test1");
                     NumeroCompteGlobal.numeroCompte = carteInfo.CompteCarteId;
-                    GetCompteByNumero(carteInfo.CompteCarteId);
+                    //GetCompteByNumero(carteInfo.CompteCarteId);
                     //Console.WriteLine("test2");
                     PutCompteByNumeroAndMontant(carteInfo.CompteCarteId, NouveauSolde);
                     
@@ -290,20 +290,25 @@ public class Program
     }
     static async Task PutCompteByNumeroAndMontant(string numero_, double montant_)
     {
-        string url = $"http://localhost:5187/api/ComptesBancaire/{numero_},{montant_}";
-        //string url = $"http://localhost:5187/api/ComptesBancaire/";
+        //string url = $"http://localhost:5187/api/ComptesBancaire/{numero_}";
+        //string url = $"http://localhost:5187/api/ComptesBancaire/{numero_},{montant_}";
+        string url = $"http://localhost:5187/api/ComptesBancaire/{numero_}";
 
         using (HttpClient client = new HttpClient())
         {
+            
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             var testDT = new
             {
                 numero = numero_,
                 montant = montant_
             };
-            string jsonData = JsonSerializer.Serialize(testDT);
+            //string jsonData = JsonSerializer.Serialize(testDT);
+            string jsonData = JsonSerializer.Serialize(montant_);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
+            Console.WriteLine($"+++ {Environment.NewLine}{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}");
+            GetCompteByNumero(numero_);
+            Console.WriteLine($"+++ {Environment.NewLine}{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}");
             try
             {
                 Console.WriteLine(">>> Put Compte Bancaire par Carte");

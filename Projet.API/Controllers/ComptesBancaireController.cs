@@ -38,9 +38,11 @@ namespace Projet.API.Controllers
 
         }
 
-        [HttpPut("{numero},{montant}")]
-        public async Task<ActionResult<int>> SetMontant(string numero, double montant)
+        //[HttpPut("{numero},{montant}")]
+        [HttpPut("{numero}")]
+        public async Task<ActionResult<int>> SetMontant( string numero, [FromBody] double montant)
         {
+            
             if(await compteBancaireService.MajSolde(numero, montant)>0)
             {
                 return Ok("Solde modifié avec succès");
