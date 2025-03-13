@@ -37,14 +37,7 @@ namespace Projet.BDD.Repositories.Console
                                     .SingleOrDefaultAsync<TransactionsHistorique>();
             return transactionsHistorique;
         }
-        public async Task<TransactionsHistorique?> GetbyNumCompte(string numeroCompte)
-        {
-            using var context = new MyDbContextConsole();
-            var transactionsHistorique = await context.TransactionsHistoriques
-                            .Where<TransactionsHistorique>(e => e.CompteCarteId == numeroCompte)
-                            .SingleOrDefaultAsync<TransactionsHistorique>();
-            return transactionsHistorique;
-        }
+        
         public async Task<TransactionsHistorique?> GetbyNumCarte(string numeroCarte)
         {
             using var context = new MyDbContextConsole();
@@ -73,7 +66,14 @@ namespace Projet.BDD.Repositories.Console
                                     .ToListAsync();
             return transactionsHistoriques;
         }
-
+        public async Task<List<TransactionsHistorique?>> GetbyNumCompteBetween(string numeroCompte, DateTime debut, DateTime fin)
+        {
+            using var context = new MyDbContextConsole();
+            var transactionsHistorique = await context.TransactionsHistoriques
+                            .Where<TransactionsHistorique>(e => e.CompteCarteId == numeroCompte && e.DateOperation.Date >= debut.Date && e.DateOperation.Date <= fin.Date)
+                            .ToListAsync<TransactionsHistorique>();
+            return transactionsHistorique;
+        }
         public async Task<List<TransactionsHistorique?>> GetByDateBetweenByNumCB(DateTime debut, DateTime fin, string NumeroCarteBancaire)
         {
             //DateTime date1 = DateTime.Parse("2001-01-01", CultureInfo.InvariantCulture);

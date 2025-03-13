@@ -36,16 +36,29 @@ namespace Projet.API.Controllers
         [HttpGet("/{debut}/{fin}/{numCB}")]
         public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetweenByNumCB(DateTime debut, DateTime fin, string numCB)
         {
-
-            if(debut < fin)
+            if (debut < fin)
             {
                 return Ok(await transactionHistoriqueService.GetByDateBetweenByNumCB(debut, fin, numCB));
             }
             else
             {
-                return BadRequest("La date de fin ne peut pas précéder la date de fin");
+                return BadRequest("La date de fin ne peut pas précéder la date de début");
             }
                
+        }
+
+        [HttpGet("{numCB}/{debut}/{fin}/")]
+        public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetweenByNumCompteBancaire(string numCB, DateTime debut, DateTime fin)
+        {
+            if (debut < fin)
+            {
+                return Ok(await transactionHistoriqueService.GetbyNumCompteBetween(debut, fin, numCB));
+            }
+            else
+            {
+                return BadRequest("La date de fin ne peut pas précéder la date de début");
+            }
+
         }
 
         [HttpPost("/{transaction}")]
