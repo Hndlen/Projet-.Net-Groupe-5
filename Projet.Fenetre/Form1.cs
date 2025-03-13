@@ -112,6 +112,37 @@ namespace Projet.Fenetre
             }
         }
 
+        static async void GetAllCartes(DataGridView dataGridViewCartes)
+        {
+            //string url = "http://localhost:5155/api/Products/";
+            string url = "http://localhost:5187/api/Cartes/all/";
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(url);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.GetAsync($"{url}").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonInfo = response.Content.ReadAsStringAsync().Result;
+                    // Console.WriteLine(jsonInfo);
+                    var objInfo = JsonSerializer.Deserialize<List<CarteBancaireJSON>>(jsonInfo);
+                    foreach (var o in objInfo)
+                    {
+                        dataGridViewCartes.Rows.Add(o);
+                        //Console.WriteLine($"{o.Id} {o.Nom} {o.AdresseClientId} {o.AdresseClient} {o.Mail} {o.Type} {o.CompteBancaire}");
+                    }
+
+                }
+                else
+                {
+                    // Console.WriteLine($"Err not found");
+                }
+            }
+        }
+
         static async Task GetClientById(int id)
         {
             string url = $"http://localhost:5187/{id}";
@@ -493,7 +524,7 @@ namespace Projet.Fenetre
 
         private void buttonListeCartes_Click(object sender, EventArgs e)
         {
-
+            GetAllCartes(dataGridViewCartes);
         }
     }
 }
