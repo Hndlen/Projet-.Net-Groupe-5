@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using Projet.BDD.Entities.Console;
+using System.Windows.Forms;
 
 namespace Projet.Fenetre
 {
@@ -176,14 +177,14 @@ namespace Projet.Fenetre
             // 
             dataGridViewCartes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCartes.Columns.AddRange(new DataGridViewColumn[] { Compte_Bancaire, Carte_Bancaire });
-            dataGridViewCartes.Location = new Point(12, 19);
+            dataGridViewCartes.Location = new Point(12, 4);
             dataGridViewCartes.Name = "dataGridViewCartes";
-            dataGridViewCartes.Size = new Size(508, 374);
+            dataGridViewCartes.Size = new Size(326, 374);
             dataGridViewCartes.TabIndex = 0;
             // 
             // Compte_Bancaire
             // 
-            Compte_Bancaire.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Compte_Bancaire.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Compte_Bancaire.FillWeight = 250F;
             Compte_Bancaire.HeaderText = "Compte Bancaire";
             Compte_Bancaire.Name = "Compte_Bancaire";
@@ -191,7 +192,7 @@ namespace Projet.Fenetre
             // 
             // Carte_Bancaire
             // 
-            Carte_Bancaire.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Carte_Bancaire.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Carte_Bancaire.FillWeight = 250F;
             Carte_Bancaire.HeaderText = "Carte Bancaire";
             Carte_Bancaire.Name = "Carte_Bancaire";

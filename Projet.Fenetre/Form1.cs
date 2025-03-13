@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System;
 
 namespace Projet.Fenetre
 {
@@ -115,8 +116,8 @@ namespace Projet.Fenetre
         static async void GetAllCartes(DataGridView dataGridViewCartes)
         {
             //string url = "http://localhost:5155/api/Products/";
-            string url = "http://localhost:5187/api/Cartes/all/";
-
+            string url = "http://localhost:5187/api/CartesBancaire/all/";
+            string[] listeCarte = new string[] { "" };
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(url);
@@ -131,7 +132,12 @@ namespace Projet.Fenetre
                     var objInfo = JsonSerializer.Deserialize<List<CarteBancaireJSON>>(jsonInfo);
                     foreach (var o in objInfo)
                     {
-                        dataGridViewCartes.Rows.Add(o);
+                        listeCarte = new string[]
+                        {
+                            o.CompteCarteId,
+                            o.Numero
+                        };
+                        dataGridViewCartes.Rows.Add(listeCarte);
                         //Console.WriteLine($"{o.Id} {o.Nom} {o.AdresseClientId} {o.AdresseClient} {o.Mail} {o.Type} {o.CompteBancaire}");
                     }
 
@@ -305,8 +311,9 @@ namespace Projet.Fenetre
 
         static async Task GetTransactionByPeriode(string numero, string dateDebut, string dateFin)
         {
-            string url = $"http://localhost:5187/{dateDebut}/{dateFin}/{numero}";
+            //string url = $"http://localhost:5187/{dateDebut}/{dateFin}/{numero}";
             //string url = $"http://localhost:5187/{dateDebut}/{dateFin}";
+            string url = $"http://localhost:5187/api/TransactionsHistorique/{numero}/{dateDebut}/{dateFin}";
 
             using (HttpClient client = new HttpClient())
             {
@@ -317,7 +324,7 @@ namespace Projet.Fenetre
                 {
 
                     HttpResponseMessage response = client.GetAsync($"{url}").Result;
-
+                    MessageBox.Show(response.ToString());
                     if (response.IsSuccessStatusCode)
                     {
 
