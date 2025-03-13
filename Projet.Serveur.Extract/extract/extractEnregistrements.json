@@ -155,6 +155,15 @@
     },
     {
       "Id": 19,
+      "NumeroCarteBancaire": "4974 0185 0223 0895",
+      "MontantOperation": 1732.88,
+      "TypeOperation": 1,
+      "DateOperation": "2025-03-12T10:58:45.6424629",
+      "Devise": "USD",
+      "tauxConvertion": 1.09
+    },
+    {
+      "Id": 20,
       "NumeroCarteBancaire": "4974 0185 0223 9144",
       "MontantOperation": -2950.21,
       "TypeOperation": 0,
