@@ -21,6 +21,7 @@ namespace Projet.Console.Authentification
         {
             // Vérifie si l'utilisateur existe et que le mot de passe est correct
             return utilisateurs.ContainsKey(username) && utilisateurs[username] == password;
+            
         }
 
         /*static string LireMotDePasse()

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Projet.BDD.Migrations
+namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
 {
     /// <inheritdoc />
     public partial class InitServeur : Migration

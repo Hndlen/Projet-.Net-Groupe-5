@@ -196,10 +196,10 @@ namespace Projet.BDD
             //DateTime dateOuverture = new DateTime(2000, 11, 12);
             //string test = GenererNumeroCompte(dateOuverture);
 
-           /* byte[] randomBytes = new byte[4];
-            RandomNumberGenerator.Fill(randomBytes);
-            int randomNumber = BitConverter.ToInt32(randomBytes, 0) & int.MaxValue; // Valeur positive
-            randomNumber = randomNumber % 10000;*/
+            /* byte[] randomBytes = new byte[4];
+             RandomNumberGenerator.Fill(randomBytes);
+             int randomNumber = BitConverter.ToInt32(randomBytes, 0) & int.MaxValue; // Valeur positive
+             randomNumber = randomNumber % 10000;*/
             //string randomNumber = "HNTB 0000";
 
             /*modelBuilder.Entity<CompteBancaire>()
@@ -278,6 +278,38 @@ namespace Projet.BDD
                   {
                       
                   });*/
+
+            //LOG
+            modelBuilder.Entity<CompteAdmin>()
+                .HasData(new CompteAdmin
+                {
+                    Identifiant = "a",
+                    Mdp = "a"
+                });
+            modelBuilder.Entity<CompteAdmin>()
+                .HasData(new CompteAdmin
+                {
+                    Identifiant = "admin",
+                    Mdp = "password"
+                });
+            modelBuilder.Entity<CompteAdmin>()
+                .HasData(new CompteAdmin
+                {
+                    Identifiant = "steeve",
+                    Mdp = "assous"
+                });
+            modelBuilder.Entity<CompteAdmin>()
+                .HasData(new CompteAdmin
+                {
+                    Identifiant = "thierry",
+                    Mdp = "bossou"
+                });
+            modelBuilder.Entity<CompteAdmin>()
+                .HasData(new CompteAdmin
+                {
+                    Identifiant = "nathaniel",
+                    Mdp = "handalena"
+                });
 
 
             //**************************************

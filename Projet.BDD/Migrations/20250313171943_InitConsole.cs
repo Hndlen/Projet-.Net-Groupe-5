@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
+namespace Projet.BDD.Migrations
 {
     /// <inheritdoc />
     public partial class InitConsole : Migration
@@ -147,6 +147,18 @@ namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
                     { 12, 92060, "", "10, esplanade de la Défense", "LA DEFENSE" },
                     { 13, 92060, "Tour Franklin", "24, esplanade de la Défense", "LA DEFENSE" },
                     { 14, 75008, "", "10, rue de la Paix", "PARIS" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ComptesAdmins",
+                columns: new[] { "Identifiant", "Mdp" },
+                values: new object[,]
+                {
+                    { "a", "a" },
+                    { "admin", "password" },
+                    { "nathaniel", "handalena" },
+                    { "steeve", "assous" },
+                    { "thierry", "bossou" }
                 });
 
             migrationBuilder.InsertData(

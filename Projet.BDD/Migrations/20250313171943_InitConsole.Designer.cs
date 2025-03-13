@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projet.BDD;
 
 #nullable disable
 
-namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
+namespace Projet.BDD.Migrations
 {
     [DbContext(typeof(MyDbContextConsole))]
-    partial class MyDbContextConsoleModelSnapshot : ModelSnapshot
+    [Migration("20250313171943_InitConsole")]
+    partial class InitConsole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -313,6 +316,33 @@ namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
                     b.HasKey("Identifiant");
 
                     b.ToTable("ComptesAdmins");
+
+                    b.HasData(
+                        new
+                        {
+                            Identifiant = "a",
+                            Mdp = "a"
+                        },
+                        new
+                        {
+                            Identifiant = "admin",
+                            Mdp = "password"
+                        },
+                        new
+                        {
+                            Identifiant = "steeve",
+                            Mdp = "assous"
+                        },
+                        new
+                        {
+                            Identifiant = "thierry",
+                            Mdp = "bossou"
+                        },
+                        new
+                        {
+                            Identifiant = "nathaniel",
+                            Mdp = "handalena"
+                        });
                 });
 
             modelBuilder.Entity("Projet.BDD.Entities.Console.CompteBancaire", b =>

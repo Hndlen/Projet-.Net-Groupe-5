@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projet.BDD;
 
 #nullable disable
 
-namespace Projet.BDD.Migrations
+namespace Projet.BDD.Migrations.MyDbContextServeurMigrations
 {
     [DbContext(typeof(MyDbContextServeur))]
-    [Migration("20250313133703_InitServeur")]
-    partial class InitServeur
+    partial class MyDbContextServeurModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

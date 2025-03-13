@@ -12,6 +12,7 @@ using System;
 using static System.Net.WebRequestMethods;
 using Projet.Business.Dto.Console;
 using File = System.IO.File;
+using System.Reflection.Metadata;
 
 namespace Projet.Fenetre
 {
@@ -33,6 +34,55 @@ namespace Projet.Fenetre
         static class RecapPDF
         {
             public static string recapPDF = "";
+        }
+        static class IsLog
+        {
+            public static bool isLog = false;
+        }
+
+        static async Task GetLog(string id, string mdp)
+        {
+            string url = $"http://localhost:5187/api/ComptesAdmins/{id}/{mdp}";
+            // Console.WriteLine("test1");
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                try
+                {
+                    //Console.WriteLine("test2");
+                    HttpResponseMessage response = client.GetAsync($"{url}").Result;
+                    
+                    if (response.IsSuccessStatusCode)
+                    {
+                        //MessageBox.Show("true ?" + response.ToString());
+                        // Console.WriteLine("test3");
+                        string jsonInfo = response.Content.ReadAsStringAsync().Result;
+                        IsLog.isLog = true;
+                        //MessageBox.Show(jsonInfo);
+                        //Console.WriteLine(jsonInfo);
+                        //var clientInfo = JsonSerializer.Deserialize<Client>(jsonInfo, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        //var clientInfo = JsonSerializer.Deserialize<ClientJSON>(jsonInfo);
+                        //IsLog.isLog=
+                        //Console.WriteLine($"ID: {clientInfo.Id}");
+                        //Console.WriteLine($"Nom: {clientInfo.Nom}");
+                        //Console.WriteLine($"Email: {clientInfo.Email}");
+                        //Console.WriteLine($"Téléphone: {clientInfo.Telephone}");
+                    }
+                    else
+                    {
+                        IsLog.isLog = false;
+                        //MessageBox.Show("fasle ?" + response.ToString());
+                        // Console.WriteLine($"❌ Erreur : Client avec ID {id} non trouvé.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Console.WriteLine($"❌ Erreur lors de la récupération : {ex.Message}");
+                }
+                //Console.WriteLine("test4");
+            }
+            //Console.WriteLine("test5");
         }
         static async void LectureJSON()
         {
@@ -61,17 +111,17 @@ namespace Projet.Fenetre
 
                             GetCartesByNumero(enregistrement.NumeroCarteBancaire, enregistrement.MontantOperation, Signe);
 
-                            if (enregistrement.tauxConvertion != 1)
-                            {
-                                montantConvert = enregistrement.MontantOperation * enregistrement.tauxConvertion;
+                            //if (enregistrement.tauxConvertion != 1)
+                           // {
+                                montantConvert = enregistrement.MontantOperation / enregistrement.tauxConvertion;
                                 montantConvert = Math.Truncate(montantConvert * 100) / 100;
-                            }
+                           /* }
                             else
                             {
                                 montantConvert = enregistrement.MontantOperation;
-                            }
-                            Transactions(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, montantConvert, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
-                            //PutTransaction(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, montantConvert, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
+                            }*/
+                            //Transactions(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, montantConvert, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
+                            PutTransaction(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, montantConvert, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
                             
                             // Console.WriteLine("__________________________________________________________");
                         }
@@ -221,9 +271,10 @@ namespace Projet.Fenetre
                         double NouveauSolde = montant * (Signe ? 1 : -1);
                         //Console.WriteLine("test1");
                         NumeroCompteGlobal.numeroCompte = carteInfo.CompteCarteId;
-                        GetCompteByNumero(carteInfo.CompteCarteId);
+                        
                         //Console.WriteLine("test2");
                         PutCompteByNumeroAndMontant(carteInfo.CompteCarteId, NouveauSolde);
+                        GetCompteByNumero(carteInfo.CompteCarteId);
 
                     }
                     else
@@ -255,10 +306,11 @@ namespace Projet.Fenetre
 
                     if (response.IsSuccessStatusCode)
                     {
+                        
                         //Console.WriteLine(">>> Get Compte Bancaire par Carte");
                         string jsonInfo = response.Content.ReadAsStringAsync().Result;
                         var compteInfo = JsonSerializer.Deserialize<CompteBancaireJSON>(jsonInfo);
-
+                        //MessageBox.Show("test " + compteInfo.Numero + " " + compteInfo.Solde);
                         //Console.WriteLine($"ID: {compteInfo.Numero}");
                         //Console.WriteLine($"Montant: {compteInfo.Solde}");
 
@@ -285,7 +337,8 @@ namespace Projet.Fenetre
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 var testDT = new
                 {
-                    CompteCarteId = numero,
+                    //CompteCarteId = numero+"_",
+                    CompteCarteId = "4",
                     Montant = montant
                 };
                 string jsonData = JsonSerializer.Serialize(testDT);
@@ -296,6 +349,9 @@ namespace Projet.Fenetre
                     //Console.WriteLine(">>> Put Compte Bancaire par Carte");
                     //HttpResponseMessage response = client.GetAsync($"{url}").Result;
                     HttpResponseMessage response = client.PutAsync(url, content).Result;
+                    //MessageBox.Show("test " + numero +" "+ montant);
+                    MessageBox.Show(jsonData.ToString());
+                    MessageBox.Show(response.ToString());
                     if (response.IsSuccessStatusCode)
                     {
                         //Console.WriteLine($"Mise à jour réussie pour la carte {numero} avec un montant de {montant}");
@@ -331,7 +387,7 @@ namespace Projet.Fenetre
                 {
 
                     HttpResponseMessage response = client.GetAsync($"{url}").Result;
-                    MessageBox.Show(url);
+                    //MessageBox.Show(url);
                     //MessageBox.Show(response.ToString());
                     if (response.IsSuccessStatusCode)
                     {
@@ -395,21 +451,32 @@ namespace Projet.Fenetre
             RecapJSON.recapJSON += recap;
         }
 
-        static async Task PutTransaction(string NumeroCompte, string numeroCarteBancaire, double montantOperation, int typeOperation, string dateOperation, string devise)
+        static async Task PutTransaction(string NumeroCompte, string numeroCarteBancaire_, double montantOperation_, int typeOperation_, string dateOperation_, string devise_)
         {
             //string url = $"http://localhost:5187/{dateDebut}/{dateFin}/{numero}";
             //string url = $"http://localhost:5187/{dateDebut}/{dateFin}";
             //string url = $"http://localhost:5187/api/TransactionsHistorique/{numero}/{dateDebut}/{dateFin}";
-            DateTime dateTime = DateTime.Parse(dateOperation);
+            DateTime dateTime = DateTime.Parse(dateOperation_);
             DateTime date = DateTime.ParseExact(dateTime.ToString("yyyy/MM/dd"), "yyyy/MM/dd", CultureInfo.InvariantCulture);
-            TransactionHistoriqueDto transaction = new TransactionHistoriqueDto(1, NumeroCompte, numeroCarteBancaire, montantOperation, typeOperation.ToString(), date, devise);
-            string url = $"http://localhost:5187/";
+            //TransactionHistoriqueDto transaction = new TransactionHistoriqueDto(1, NumeroCompte, numeroCarteBancaire, montantOperation, typeOperation.ToString(), date, devise);
+            string url = $"http://localhost:5187/api/TransactionsHistorique/transaction";
+            var transaction = new
+            {
+                compteCarteId = NumeroCompte,
+                numeroCarteBancaire = numeroCarteBancaire_,
+                montantOperation = montantOperation_,
+                typeOperation = typeOperation_.ToString(),
+                dateOperation = dateOperation_,
+                devise = devise_
+
+            };
+
 
             //string url = $"http://localhost:5187/{numero}/{dateDebut}/{dateFin}";
             string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(transaction);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            MessageBox.Show(url);
-            MessageBox.Show(jsonData);
+            //MessageBox.Show(url);
+            //MessageBox.Show(jsonData);
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
@@ -428,7 +495,7 @@ namespace Projet.Fenetre
                         string jsonInfo = response.Content.ReadAsStringAsync().Result;
                         //var objInfo = JsonSerializer.Deserialize<List<TransactionJSON>>(jsonInfo);
                         
-                        MessageBox.Show(jsonInfo);
+                        //MessageBox.Show(jsonInfo);
                     }
                     else
                     {
@@ -442,7 +509,8 @@ namespace Projet.Fenetre
                 }
 
             }
-
+            string recap = $"NumCompte:{NumeroCompte} NumCarte:{numeroCarteBancaire_} MontantOp:{montantOperation_} TypeOp:{typeOperation_} DateOp:{dateOperation_} Devise:{devise_}\r\n";
+            RecapJSON.recapJSON += recap;
         }
 
         /* public void majRecapJSON(string recap)
@@ -489,6 +557,34 @@ namespace Projet.Fenetre
         private void buttonConnexion_Click(object sender, EventArgs e)
         {
             Connexion co = new Connexion();
+            if (IsLog.isLog == false)
+            {
+                GetLog(textBoxIdentifiant.Text, textBoxMotDePasse.Text);
+                if(IsLog.isLog)
+                {
+                    //Console.WriteLine("\nConnexion réussie !");
+                    labelAuthentification.Visible = true;
+                    labelAuthentification.Text = "Connexion réussie !";
+                    mAJJsonToolStripMenuItem.Enabled = true;
+                    listeDesMouvementsPDFToolStripMenuItem.Enabled = true;
+                    listeToolStripMenuItemListeCartes.Enabled = true;
+                    //recapitulationDesOpérationsXMLToolStripMenuItem.Enabled = true;
+                    textBoxIdentifiant.Enabled = false;
+                    textBoxMotDePasse.Enabled = false;
+                    logginToolStripMenuItem.Enabled = false;
+                }
+                else
+                {
+                    labelAuthentification.Visible = true;
+                    labelAuthentification.Text = "Identifiants incorrects !";
+                    textBoxIdentifiant.Text = "";
+                    textBoxMotDePasse.Text = "";
+                    // Console.WriteLine("\nIdentifiants incorrects !");
+                }
+            }
+
+
+            /*
             bool estAuthentifie = false;
             if (estAuthentifie == false)
             {
@@ -518,7 +614,7 @@ namespace Projet.Fenetre
                 // UserControl =
                 //textBoxIdentifiant.Text = "test";
                 //textBoxMotDePasse.Text = textBoxIdentifiant.Text;
-            }
+            }*/
         }
 
         private void mAJJsonToolStripMenuItem_Click(object sender, EventArgs e)
@@ -535,6 +631,7 @@ namespace Projet.Fenetre
             textBoxRecapMajJSON.Text = "lecture en cours...";
             LectureJSON();
             textBoxRecapMajJSON.Text = RecapJSON.recapJSON;
+            //MessageBox.Show(RecapJSON.recapJSON);
             labelMajJSON.Text = " Lecture fini, mise à jour de la balance";
             mAJJsonToolStripMenuItem.Enabled = false;
             buttonMajJSON.Enabled = false;

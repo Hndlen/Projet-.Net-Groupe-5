@@ -110,7 +110,7 @@ public class Program
 
                         if (enregistrement.tauxConvertion != 1)
                         {
-                            montantConvert = enregistrement.MontantOperation * enregistrement.tauxConvertion;
+                            montantConvert = enregistrement.MontantOperation / enregistrement.tauxConvertion;
                             montantConvert = Math.Truncate(montantConvert * 100) / 100;
 
                         }
@@ -120,6 +120,7 @@ public class Program
                         }
 
                             Transactions(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, montantConvert, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
+                        
                         Console.WriteLine("__________________________________________________________");
                     }
                 }
@@ -307,6 +308,7 @@ public class Program
                 Console.WriteLine(">>> Put Compte Bancaire par Carte");
                 //HttpResponseMessage response = client.GetAsync($"{url}").Result;
                 HttpResponseMessage response =  client.PutAsync(url, content).Result;
+                //Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}{response.ToString()}{Environment.NewLine}{Environment.NewLine}");
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine($"Mise à jour réussie pour la carte {numero} avec un montant de {montant}");
@@ -443,7 +445,7 @@ public class Program
 
         //Authentification();
 
-        //LectureJSON();
+        LectureJSON();
         /*
         string filePath = "C:\\Users\\lhand\\Source\\Repos\\Projet-.Net-Groupe-5\\Projet.Console\\ExtractionsXML\\personnes.xml"; // Chemin du fichier XML
         ExtractionXML.CreerXml(filePath);
@@ -460,9 +462,9 @@ public class Program
         Console.WriteLine(date);
         Console.WriteLine(Debut);
         Console.WriteLine(Fin);*/
-        string Debut = "2000-10-10";
-        string Fin = "2030-10-10";
-        GetTransactionByPeriode("4974 0185 0223 4053",Debut,Fin );
+        //string Debut = "2000-10-10";
+       // string Fin = "2030-10-10";
+        //GetTransactionByPeriode("4974 0185 0223 4053",Debut,Fin );
 
         Console.WriteLine("__");
         //GetCartesByNumero("4974 0185 0223 0007");

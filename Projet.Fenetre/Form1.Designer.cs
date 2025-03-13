@@ -83,8 +83,8 @@ namespace Projet.Fenetre
             // logginToolStripMenuItem
             // 
             logginToolStripMenuItem.Name = "logginToolStripMenuItem";
-            logginToolStripMenuItem.Size = new Size(56, 20);
-            logginToolStripMenuItem.Text = "Loggin";
+            logginToolStripMenuItem.Size = new Size(49, 20);
+            logginToolStripMenuItem.Text = "Login";
             logginToolStripMenuItem.Click += logginToolStripMenuItem_Click;
             // 
             // mAJJsonToolStripMenuItem
