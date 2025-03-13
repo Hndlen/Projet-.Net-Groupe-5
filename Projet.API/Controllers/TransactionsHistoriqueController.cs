@@ -51,7 +51,7 @@ namespace Projet.API.Controllers
         public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetweenByNumCompteBancaire(string numCompte, DateTime debut, DateTime fin)
         {
             if (debut < fin)
-            {//t
+            {
                 return Ok(await transactionHistoriqueService.GetbyNumCompteBetween(debut, fin, numCompte));
             }
             else
@@ -61,7 +61,7 @@ namespace Projet.API.Controllers
 
         }
 
-        [HttpPost("/{transaction}")]
+        [HttpPost("transaction")]
         public async Task<ActionResult<int>> PostTransaction(TransactionHistoriqueDto transaction)
         {
             return await transactionHistoriqueService.Add(transaction);

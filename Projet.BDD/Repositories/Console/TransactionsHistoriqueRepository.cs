@@ -87,11 +87,11 @@ namespace Projet.BDD.Repositories.Console
         }
 
 
-        public async Task<int> Add(TransactionsHistorique catEntity)
+        public int Add(TransactionsHistorique catEntity)
         {
             using var context = new MyDbContextConsole();
-            context.TransactionsHistoriques.Add(catEntity);
-            var enrSaved = await context.SaveChangesAsync();
+            var ok = context.TransactionsHistoriques.Add(catEntity);
+            var enrSaved = context.SaveChanges();
             return enrSaved;
 
         }

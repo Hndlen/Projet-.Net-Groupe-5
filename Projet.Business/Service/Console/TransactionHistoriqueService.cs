@@ -54,7 +54,7 @@ namespace Projet.Business.Service.Console
         public async Task<int> Add(TransactionHistoriqueDto addDto)
         {
             var addEntity = _mapper.Map<TransactionsHistorique>(addDto);
-            var addSaved = await _repo.Add(addEntity);
+            var addSaved = _repo.Add(addEntity);
             return addSaved;
         }
     }
