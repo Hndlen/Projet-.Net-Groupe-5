@@ -19,6 +19,7 @@ namespace Projet.BDD.Entities.Serveur
         public DateTime? DateOperation { get; set; }
         public string? Devise { get; set; }
         public double? tauxConvertion { get; set; }
+        [Required]
         public string Erreur { get; set; }
     }
 }

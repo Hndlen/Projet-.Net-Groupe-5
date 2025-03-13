@@ -13,11 +13,23 @@ namespace Projet.BDD.Entities.Serveur
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        
+        [Required]
         public string NumeroCarteBancaire { get; set; }
+        
+        [Required]
         public double MontantOperation { get; set; }
+
+        [Required]
         public EnumOperation TypeOperation { get; set; }
+
+        [Required]
         public DateTime DateOperation { get; set; }
+
+        [Required]
         public string Devise { get; set; }
-        public double? tauxConvertion { get; set; }
+
+        [Required]
+        public double tauxConvertion { get; set; }
     }
 }

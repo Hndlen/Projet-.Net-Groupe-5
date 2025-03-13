@@ -17,10 +17,15 @@ namespace Projet.BDD.Entities.Console
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string CompteCarteId { get; set; }
+        [Required]
         public string NumeroCarteBancaire { get; set; }
+        [Required]
         public double MontantOperation { get; set; }
+        [Required]
         public string TypeOperation { get; set; }
+        [Required]
         public DateTime DateOperation { get; set; }
+        [Required]
         public string Devise { get; set; }
     }
 }

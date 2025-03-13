@@ -43,7 +43,7 @@ namespace Projet.Serveur.Generation
             SetMontant();
             Date = DateTime.Now;  // Date d'aujourd'hui
             SetDevise();
-            SetTauxConvertion();
+            SetTauxConversion();
         }
 
         //  choisi un numéro de carte bancaire aléatoirement
@@ -51,22 +51,36 @@ namespace Projet.Serveur.Generation
         {
             //string numeroCB = "4000 0000 0000 1091";
             String[] numsCB = {
-                "4974 0185 0223 4053",
-                "4974 0185 0223 4120",
-                "4974 0185 0223 4061",
-                "4974 0185 0223 4070",
-                "4974 0185 0223 4139",
-                "4974 0185 0223 4147",
-                "4974 0185 0223 4088",
-                "4974 0185 0223 4096",
-                "4974 0185 0223 4155",
-                "4974 0185 0223 4163",
-                "4974 0185 0223 4104",
-                "4974 0185 0223 4171",
-                "4974 0185 0223 4180",
-                "4974 0185 0223 4112",
-                "4974 0185 0223 4189",
-                "4974 0185 0223 4197",
+                "4974 0185 0223 9888",
+                "4974 0185 0223 0457",
+                "4974 0185 0223 0952",
+                "4974 0185 0223 8476",
+                "4974 0185 0223 8666",
+                "4974 0185 0223 7411",
+                "4974 0185 0223 4814",
+                "4974 0185 0223 7320",
+                "4974 0185 0223 5142",
+                "4974 0185 0223 7874",
+                "4974 0185 0223 6090",
+                "4974 0185 0223 3469",
+                "4974 0185 0223 5720",
+                "4974 0185 0223 2842",
+                "4974 0185 0223 9763",
+                "4974 0185 0223 4871",
+                "4974 0185 0223 6215",
+                "4974 0185 0223 0150",
+                "4974 0185 0223 2198",
+                "4974 0185 0223 8096",
+                "4974 0185 0223 1158",
+                "4974 0185 0223 5290",
+                "4974 0185 0223 1851",
+                "4974 0185 0223 1869",
+                "4974 0185 0223 5365",
+                "4974 0185 0223 2271",
+                "4974 0185 0223 4889",
+                "4974 0185 0223 5258",
+                "4974 0185 0223 8914",
+                "4974 0185 0223 9375",
                 "4974 0185 0223 4555",  // Mauvais dernier chiffre
                 "4974 0185 0223 9144",  // Mauvais dernier chiffre
                 "4974 0185 0223 2370",  // Mauvais dernier chiffre
@@ -108,8 +122,8 @@ namespace Projet.Serveur.Generation
             this.Type = (EnumOperation)types.GetValue(random.Next(types.Length));
         }
 
-        //récupère le taux de convertion et l'affecte à l'attribut TauxConversion
-        public  void SetTauxConvertion()
+        //récupère le taux de conversion et l'affecte à l'attribut TauxConversion
+        public  void SetTauxConversion()
         {
             string url = "https://api.exchangerate-api.com/v4/latest/EUR";
             using (HttpClient client = new HttpClient())

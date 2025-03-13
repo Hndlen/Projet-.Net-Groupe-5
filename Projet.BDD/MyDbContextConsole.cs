@@ -21,6 +21,8 @@ namespace Projet.BDD
         public DbSet<CompteBancaire> ComptesBancaire { get; set; }
         public DbSet<CarteBancaire> CartesBancaire { get; set; }
 
+        public DbSet<CompteAdmin> ComptesAdmins { get; set; }
+
         public DbSet<TransactionsHistorique> TransactionsHistoriques { get; set; }
         //public DbSet<Anomalie> Anomalies { get; set; }
 

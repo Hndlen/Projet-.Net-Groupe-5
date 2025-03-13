@@ -9,13 +9,17 @@ namespace Projet.BDD.Entities.Console
 {
     public class ClientParticulier : Client
     {
+        [Required]
         public DateTime DateNaissance { get; set; }
 
+        [Required]
         [StringLength(50, MinimumLength = 1)]
         public string Prenom { get; set; }
 
+        [Required]
         public EnumSexe Sexe { get; set; }
 
+        [Required]
         public override string Type => "Particulier";
     }
 }
