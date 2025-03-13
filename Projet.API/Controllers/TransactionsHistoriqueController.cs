@@ -48,7 +48,7 @@ namespace Projet.API.Controllers
         }
         //récupère les transactions d'un compte sur une période
         [HttpGet("{numCompte}/{debut}/{fin}/")]
-        public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetweenByNumCompteBancaire(string numCB, DateTime debut, DateTime fin)
+        public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> GetTransactionHistoriqueBetweenByNumCompteBancaire(string numCompte, DateTime debut, DateTime fin)
         {
             if (debut < fin)
             {
