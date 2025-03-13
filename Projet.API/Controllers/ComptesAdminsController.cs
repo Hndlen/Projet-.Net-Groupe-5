@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Projet.BDD.Entities.Console;
 using Projet.Business.Dto;
 using Projet.Business.Dto.Console;
 using Projet.Business.Service.Console;
@@ -20,10 +21,17 @@ namespace Projet.API.Controllers
         }
 
 
-        [HttpGet("/{id}/{fin}")]
-        public async Task<ActionResult<IEnumerable<TransactionHistoriqueDto>>> Connexion(string id, string mdp)
+        [HttpGet("{id}/{mdp}")]
+        public async Task<ActionResult<CompteAdminDto>> Connexion(string id, string mdp)
         {
-            return Ok(await compteAdminService.Coonexion(id, mdp));
+            if(await compteAdminService.Coonexion(id, mdp) == true)
+            {
+                return Ok("Connexion réussie");
+            }
+            else
+            {
+                return Unauthorized("Admin non reconnu");
+            }
         }
         // GET: ClientssController
 
