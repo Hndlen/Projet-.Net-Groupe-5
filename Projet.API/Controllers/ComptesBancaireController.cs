@@ -41,9 +41,16 @@ namespace Projet.API.Controllers
         [HttpPut("{numero},{montant}")]
         public async Task<ActionResult<int>> SetMontant(string numero, double montant)
         {
-            return await compteBancaireService.MajSolde(numero, montant);
+            if(await compteBancaireService.MajSolde(numero, montant)>0)
+            {
+                return Ok("Solde modifié avec succès");
+            }
+            else
+            {
+                return NotFound("Ce numéro de compte bancaire n'existe pas");
+            }
+
         }
-        // GET: ComptesBancaireController
 
     }
 }
