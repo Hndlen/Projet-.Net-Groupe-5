@@ -15,5 +15,17 @@ namespace Projet.Business.Dto.Console
         public string TypeOperation { get; set; }
         public DateTime DateOperation { get; set; }
         public string Devise { get; set; }
+
+        public TransactionHistoriqueDto(int id,string compteCarteId, string numeroCarteBancaire, double montantOperation,string typeOperation, DateTime dateOperation,string devise)
+        {
+            //this.Id = id;
+            this.CompteCarteId = compteCarteId;
+            this.NumeroCarteBancaire = numeroCarteBancaire;
+            this.MontantOperation = montantOperation;
+            this.TypeOperation = typeOperation;
+            this.DateOperation = dateOperation;
+            this.Devise = devise;
+            
+        }
     }
 }

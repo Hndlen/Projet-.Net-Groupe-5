@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Projet.BDD.Migrations
+namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
 {
     /// <inheritdoc />
     public partial class InitConsole : Migration
@@ -19,14 +19,26 @@ namespace Projet.BDD.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Libelle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Complement = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Libelle = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Complement = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CodePostal = table.Column<int>(type: "int", nullable: false),
-                    Ville = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Ville = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Adresses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ComptesAdmins",
+                columns: table => new
+                {
+                    Identifiant = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Mdp = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ComptesAdmins", x => x.Identifiant);
                 });
 
             migrationBuilder.CreateTable(
@@ -259,6 +271,9 @@ namespace Projet.BDD.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CartesBancaire");
+
+            migrationBuilder.DropTable(
+                name: "ComptesAdmins");
 
             migrationBuilder.DropTable(
                 name: "TransactionsHistoriques");

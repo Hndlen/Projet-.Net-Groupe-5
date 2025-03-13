@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System;
+using static System.Net.WebRequestMethods;
+using Projet.Business.Dto.Console;
+using File = System.IO.File;
 
 namespace Projet.Fenetre
 {
@@ -68,6 +71,8 @@ namespace Projet.Fenetre
                                 montantConvert = enregistrement.MontantOperation;
                             }
                             Transactions(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, montantConvert, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
+                            //PutTransaction(NumeroCompteGlobal.numeroCompte, enregistrement.NumeroCarteBancaire, montantConvert, enregistrement.TypeOperation, enregistrement.DateOperation, enregistrement.Devise);
+                            
                             // Console.WriteLine("__________________________________________________________");
                         }
                     }
@@ -315,6 +320,8 @@ namespace Projet.Fenetre
             //string url = $"http://localhost:5187/{dateDebut}/{dateFin}";
             string url = $"http://localhost:5187/api/TransactionsHistorique/{numero}/{dateDebut}/{dateFin}";
 
+            //string url = $"http://localhost:5187/{numero}/{dateDebut}/{dateFin}";
+
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
@@ -324,7 +331,8 @@ namespace Projet.Fenetre
                 {
 
                     HttpResponseMessage response = client.GetAsync($"{url}").Result;
-                    MessageBox.Show(response.ToString());
+                    MessageBox.Show(url);
+                    //MessageBox.Show(response.ToString());
                     if (response.IsSuccessStatusCode)
                     {
 
@@ -380,14 +388,61 @@ namespace Projet.Fenetre
 
                 });
 
-
-
                 // Sauvegarder les modifications dans la base de données
                 context.SaveChanges();
             }
-
             string recap = $"NumCompte:{NumeroCompte} NumCarte:{numeroCarteBancaire} MontantOp:{montantOperation} TypeOp:{typeOperation} DateOp:{dateOperation} Devise:{devise}\r\n";
             RecapJSON.recapJSON += recap;
+        }
+
+        static async Task PutTransaction(string NumeroCompte, string numeroCarteBancaire, double montantOperation, int typeOperation, string dateOperation, string devise)
+        {
+            //string url = $"http://localhost:5187/{dateDebut}/{dateFin}/{numero}";
+            //string url = $"http://localhost:5187/{dateDebut}/{dateFin}";
+            //string url = $"http://localhost:5187/api/TransactionsHistorique/{numero}/{dateDebut}/{dateFin}";
+            DateTime dateTime = DateTime.Parse(dateOperation);
+            DateTime date = DateTime.ParseExact(dateTime.ToString("yyyy/MM/dd"), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            TransactionHistoriqueDto transaction = new TransactionHistoriqueDto(1, NumeroCompte, numeroCarteBancaire, montantOperation, typeOperation.ToString(), date, devise);
+            string url = $"http://localhost:5187/";
+
+            //string url = $"http://localhost:5187/{numero}/{dateDebut}/{dateFin}";
+            string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(transaction);
+            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            MessageBox.Show(url);
+            MessageBox.Show(jsonData);
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+               
+                try
+                {
+
+                    //HttpResponseMessage response = client.GetAsync($"{url}").Result;
+                    HttpResponseMessage response =  client.PostAsync(url, content).Result;
+                    //MessageBox.Show(response.ToString());
+                    //MessageBox.Show(url);
+                    //MessageBox.Show(response.ToString());
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        string jsonInfo = response.Content.ReadAsStringAsync().Result;
+                        //var objInfo = JsonSerializer.Deserialize<List<TransactionJSON>>(jsonInfo);
+                        
+                        MessageBox.Show(jsonInfo);
+                    }
+                    else
+                    {
+                        //Console.WriteLine(response);
+                        //Console.WriteLine($"Erreur : Client avec ID {numero} non trouvé.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Console.WriteLine($"Erreur lors de la récupération : {ex.Message}");
+                }
+
+            }
+
         }
 
         /* public void majRecapJSON(string recap)
@@ -401,6 +456,7 @@ namespace Projet.Fenetre
             labelAuthentification.Visible = false;
             panelPDF.Visible = true;
             //panel1.Visible = false;
+            panelCarteListe.Visible = false;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -446,7 +502,7 @@ namespace Projet.Fenetre
                     mAJJsonToolStripMenuItem.Enabled = true;
                     listeDesMouvementsPDFToolStripMenuItem.Enabled = true;
                     listeToolStripMenuItemListeCartes.Enabled = true;
-                    recapitulationDesOpérationsXMLToolStripMenuItem.Enabled = true;
+                    //recapitulationDesOpérationsXMLToolStripMenuItem.Enabled = true;
                     textBoxIdentifiant.Enabled = false;
                     textBoxMotDePasse.Enabled = false;
                     logginToolStripMenuItem.Enabled = false;
@@ -471,6 +527,7 @@ namespace Projet.Fenetre
             labelAuthentification.Visible = false;
             panelMajJSON.Visible = true;
             panelPDF.Visible = false;
+            panelCarteListe.Visible = false;
         }
 
         private void buttonMajJSON_Click(object sender, EventArgs e)
@@ -532,6 +589,7 @@ namespace Projet.Fenetre
         private void buttonListeCartes_Click(object sender, EventArgs e)
         {
             GetAllCartes(dataGridViewCartes);
+            buttonListeCartes.Enabled = false;
         }
     }
 }

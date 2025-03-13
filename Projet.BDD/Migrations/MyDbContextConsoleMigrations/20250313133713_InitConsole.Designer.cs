@@ -9,10 +9,10 @@ using Projet.BDD;
 
 #nullable disable
 
-namespace Projet.BDD.Migrations
+namespace Projet.BDD.Migrations.MyDbContextConsoleMigrations
 {
     [DbContext(typeof(MyDbContextConsole))]
-    [Migration("20250313092405_InitConsole")]
+    [Migration("20250313133713_InitConsole")]
     partial class InitConsole
     {
         /// <inheritdoc />
@@ -37,16 +37,18 @@ namespace Projet.BDD.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Complement")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Libelle")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Ville")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -298,6 +300,22 @@ namespace Projet.BDD.Migrations
                     b.HasDiscriminator().HasValue("Client");
 
                     b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Projet.BDD.Entities.Console.CompteAdmin", b =>
+                {
+                    b.Property<string>("Identifiant")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Mdp")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Identifiant");
+
+                    b.ToTable("ComptesAdmins");
                 });
 
             modelBuilder.Entity("Projet.BDD.Entities.Console.CompteBancaire", b =>
